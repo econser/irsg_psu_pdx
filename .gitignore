@@ -1,4 +1,6 @@
+.#*
 code_bak/
+annotations_cache/
 elkhorn_code/
 finetuning/
 frcn_test/

@@ -1,4 +1,0 @@
-data for fullneg, hardneg
-viz for top class - change stash permissions
-check stanford dog set
-

@@ -1,3 +1,0 @@
-check overlap on pos handshake
-check NMS IOU for boxes
-viz the IRSG boxes for all datasets

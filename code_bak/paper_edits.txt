@@ -1,6 +1,0 @@
-p2: 'along with set of coordinates specifying' -> 'along with a set of'
-p6: 'IRSG uses set of' -> 'IRSG uses a set of'
-p7: 'We will investigates the' -> 'We will investigate the'
-    'visiable' -> 'visible'
-    'occulded' -> 'occluded'
-p8: 'protogype' -> 'prototype'

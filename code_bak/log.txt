@@ -1,9 +1,0 @@
-TODO:
-generate dog walking boxes for stanford set
-generate boxes for original IRSG dataset
- - dog walking
- - ping pong
- - handshake
-try alternative queries
- - dog walking
- - handshake
