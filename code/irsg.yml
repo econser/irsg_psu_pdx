@@ -1,0 +1,236 @@
+#===============================================================================
+# DOG WALKING CONFIGS (RUN BATCH)
+#===============================================================================
+
+DW_FULLPOS_BATCHONLY:
+  query_string : 'dog_walker holding leash attached_to dog'
+  query_function : 'two_rel_chain'
+  #
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : '/home/econser/School/research/data/'
+  #
+  imageset_file: 'dwpos_lowest_energy.txt'
+  image_dir : '/home/econser/School/research/images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : '/home/econser/School/research/run_results/dw_fullpos/'
+  class_file : '/home/econser/School/research/data/dog_walking_classes.txt'
+  #
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'xxx_dw_chain_fullpos_energy.csv'
+  #viz_output_dir : '/home/econser/School/research/output/situations/dw_cycle_fullpos_viz'
+  #viz_file_format : 'viz_{}.jpg'
+
+DW_ORIGNEG_BATCHONLY:
+  query_string : 'dog_walker holding leash attached_to dog'
+  query_function : 'two_rel_chain'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : '/home/econser/School/research/data/'
+  #
+  imageset_file: 'dwneg_lowest_energy.txt'
+  precalc_dir : '/home/econser/School/research/run_results/dw_origneg/'
+  image_dir : '/home/econser/School/research/images/psu_dw/orig_negatives/'
+  class_file : '/home/econser/School/research/data/dog_walking_classes.txt'
+  #
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'xxx_dw_chain_origneg_energy.csv'
+  #viz_output_dir : '/home/econser/School/research/output/situations/dw_cycle_origneg_viz'
+  #viz_file_format : 'viz_{}.jpg'
+
+#-------------------------------------------------------------------------------
+# dog walking on precalculated boxes
+# energy & viz
+#
+DW_POSTEST:
+  query_string : 'dog_walker holding leash attached_to dog'
+  query_function : 'two_rel_chain'
+  gmm_filename : 'dw_gmms_revised.pkl'
+  #gmm_filename : 'dw_gmms_n3_log.pkl'
+  data_dir : '/home/econser/School/research/data/'
+  precalc_dir : '/home/econser/School/research/run_results/dogwalking, positive, portland test/'
+  class_file : '/home/econser/School/research/data/dog_walking_classes.txt'
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'dw_cycle_sit_pos.csv'
+  image_dir : '/home/econser/School/research/images/psu_dw/PortlandSimpleDogWalking/'
+  viz_output_dir : '/home/econser/School/research/output/situations/dwhl_viz'
+  viz_file_format : 'viz_{}.jpg'
+
+DW_OLDNEG:
+  query_string : 'dog_walker holding leash attached_to dog'
+  query_function : 'two_rel_chain'
+  gmm_filename : 'dw_gmms_revised.pkl'
+  #gmm_filename : 'dw_gmms_n3_log.pkl'
+  data_dir : '/home/econser/School/research/data/'
+  precalc_dir : '/home/econser/School/research/run_results/dogwalking, fullneg/'
+  class_file : '/home/econser/School/research/data/dog_walking_classes.txt'
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'dw_cycle_sit_neg.csv'
+  #image_dir : '/home/econser/School/research/images/psu_dw/PortlandSimpleDogWalking/'
+  #viz_output_dir : '/home/econser/School/research/output/situations/dwhl_viz'
+  #viz_file_format : 'viz_{}.jpg'
+
+
+
+#-------------------------------------------------------------------------------
+# dog walking - test images
+# energy and viz
+#
+DW_TEST_IMAGES:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  data_dir : '/home/econser/School/research/data/'
+  gmm_filename : 'dw_gmms_n3_log.pkl'
+  imageset_file : 'dogwalkingtest_fnames_test.txt'
+  #
+  image_dir : '/home/econser/School/research/images/psu_dw/PortlandSimpleDogWalking'
+  model_file : '/home/econser/School/research/models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/School/research/models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
+  class_file : '/home/econser/School/research/data/dog_walking_classes.txt'
+  #
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'dw_cycle_test_energy.csv'
+  viz_output_dir : '/home/econser/School/research/output/situations/dw_cycle_test_viz'
+  viz_file_format : 'viz_{}.jpg'
+
+
+#-------------------------------------------------------------------------------
+# dog walking - negative images (gen csv, energy, viz)
+#
+DW_FULLNEG_IMAGES:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  gmm_filename : 'dw_gmms_n3_log.pkl'
+  data_dir : '/home/econser/School/research/data/'
+  image_dir : '/home/econser/School/research/images/psu_dw/PortlandSimpleDogWalking'
+  model_file : '/home/econser/School/research/models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/School/research/models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
+  class_file : '/home/econser/School/research/data/dog_walking_classes.txt'
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'dwhl_energy.csv'
+  viz_output_dir : '/home/econser/School/research/output/situations/dwhl_viz'
+  viz_file_format : 'viz_{}.jpg'
+
+# dog walking - hard neg images (gen csv, energy, viz)
+
+# pingpong - pos full images (gen csv, energy, viz)
+# pingpong - negative images (gen csv, energy, viz)
+# pingpong - hard neg images (gen csv, energy, viz)
+
+
+
+#===============================================================================
+#-------------------------------------------------------------------------------
+# pingpong - test images
+# energy and viz
+#
+PP_TEST_GEOMEAN:
+  query_string : 'player, player, table, net; 0 playing_pingpong_with 1, 0 at 2, 1 at 2, 3 on 2'
+  query_function : 'split_spec'
+  #
+  data_dir : '/home/econser/School/research/data/'
+  gmm_filename : 'pingpong_gmms.pkl'
+  imageset_file : 'pingpong_fnames_test.txt'
+  #
+  precalc_dir : '/home/econser/School/research/run_results/pingpong'
+  class_file : '/home/econser/School/research/data/pingpong_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'pingpong_test_geomean_energy.csv'
+  image_dir : '/home/econser/School/research/data/PingPong/'
+  viz_output_dir : '/home/econser/School/research/output/situations/pingpong_geomean_viz/'
+  viz_file_format : 'viz_{}.jpg'
+
+
+#-------------------------------------------------------------------------------
+# pingpong - test images
+# energy and viz
+#
+PP_TEST_IMAGES:
+  query_string : 'player, player, table, net; 0 playing_pingpong_with 1, 0 at 2, 1 at 2, 3 on 2'
+  query_function : 'split_spec'
+  #
+  data_dir : '/home/econser/School/research/data/'
+  gmm_filename : 'pingpong_gmms.pkl'
+  imageset_file : 'pingpong_fnames_test.txt'
+  #
+  image_dir : '/home/econser/School/research/data/PingPong/'
+  model_file : '/home/econser/School/research/models/model_definitions/pingpong/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/School/research/models/model_weights/pingpong_frcn_50k.caffemodel'
+  class_file : '/home/econser/School/research/data/pingpong_classes.txt'
+  #
+  box_and_score_output_dir : '/home/econser/School/research/run_results/pingpong/'
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'pingpong_test_energy.csv'
+  viz_output_dir : '/home/econser/School/research/output/situations/pingpong_viz/'
+  viz_file_format : 'viz_{}.jpg'
+
+
+
+#===============================================================================
+
+#-------------------------------------------------------------------------------
+# Dog Walking on mini set of images for testing
+#
+DW_IMAGE_MINIDIR:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  gmm_filename : 'dw_gmms_n3_log.pkl'
+  data_dir : '/home/econser/School/research/data/'
+  image_dir : '/home/econser/School/research/images/psu_dw/dog_walking_mini/'
+  model_file : '/home/econser/School/research/models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/School/research/models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
+  class_file : '/home/econser/School/research/data/dog_walking_classes.txt'
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'dwhl_energy.csv'
+  box_and_score_output_dir : '/home/econser/School/research/output/situations/minidir_pregen/'
+  viz_output_dir : '/home/econser/School/research/output/situations/dw_cycle_viz'
+  viz_file_format : 'viz_{}.jpg'
+
+DW_RELTEST:
+  query_string : 'dog_walker holding leash attached_to dog'
+  query_function : 'two_rel_chain'
+  gmm_filename : 'dw_gmms_l1.pkl'
+  imageset_file : 'dogwalkingtest_fnames_test.txt'
+  data_dir : '/home/econser/School/research/data/'
+  precalc_dir : '/home/econser/School/research/run_results/dogwalking, positive, portland test/'
+  class_file : '/home/econser/School/research/data/dog_walking_classes.txt'
+  energy_output_dir : '/home/econser/School/research/output/situations/'
+  energy_filename : 'dw_cycle_reltest.csv'
+  top_rel_filefmt : 'dw_cycle_{}.csv'
+  image_dir : '/home/econser/School/research/images/psu_dw/PortlandSimpleDogWalking/'
+
+HS_HARDNEG_GEO_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'handshake_gmms.pkl'
+  data_dir : '/home/econser/School/research/data/'
+  #
+  precalc_dir : '/home/econser/School/research/run_results/hs_hardneg/'
+  image_dir : '/home/econser/School/research/images/HandshakeHardNeg'
+  class_file : '/home/econser/School/research/data/handshake_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : '/home/econser/School/research/output/full_runs/handshake/'
+  energy_filename : 'handshake_hardneg_pgm_energy.csv'
+  top_rel_filefmt : 'handshake_hardneg_pgm_{}.csv'
+
+PP_POSTEST_PGM_VIZ:
+  query_string : 'player, player, table, net; 0 playing_pingpong_with 1, 0 at 2, 1 at 2, 3 on 2'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'pingpong_gmms_new_neg.pkl'
+  data_dir : '/home/econser/School/research/data/'
+  #
+  image_dir : '/home/econser/School/research/data/PingPong/'
+  precalc_dir : '/home/econser/School/research/run_results/pingpong/'
+  imageset_file: 'pingpong_fnames_test.txt'
+  class_file : '/home/econser/School/research/data/pingpong_classes.txt'
+  #
+  energy_method : 'max_rel'
+  max_rel_dir : '/home/econser/School/research/output/rel_results/pingpong/'
+  energy_output_dir : '/home/econser/School/research/output/full_runs/pingpong_test/'
+  energy_filename : 'pingpong_postest_pgm_energy.csv'
+  viz_output_dir : '/home/econser/School/research/output/full_runs/pingpong_test/viz_postest_pgm_test/'
+  viz_file_format : '{}.jpg' 

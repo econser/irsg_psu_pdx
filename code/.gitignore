@@ -1,0 +1,4 @@
+*.pyc
+caffe
+opengm
+fast_rcnn
