@@ -1,3 +1,14 @@
 finetuning scripts (/scripts/ft_*.sh) need to be updated to reflect new directory structure
 finish basic function description comments
 update secondary .py files to get rid of hardcoded paths
+    dog_walking_gmm.py   
+    gen_perfect_relation_data.py
+    gmm_viz.py
+    irsg_dw.py
+    irsg.py
+    irsg_querygen.py
+    irsg_utils.py
+    plot_utils.py
+    relation_check.py
+    train_handshake_gmms.py
+    train_pingpong_gmm.py
