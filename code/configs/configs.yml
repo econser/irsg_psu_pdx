@@ -22,15 +22,15 @@ DW_POSTEST_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data'
   #
-  image_dir : '/home/econser/research/images/psu_dw/PortlandSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/dw_fullpos/'
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
   imageset_file : 'dogwalkingtest_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking/'
+  energy_output_dir : './output/full_runs/dog_walking/'
   energy_filename : 'dw_cycle_postest_pgm_energy.csv'
   top_rel_filefmt : 'dw_cycle_postest_pgm_{}.csv'
 
@@ -38,14 +38,14 @@ DW_HARDNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_hardneg/'
-  image_dir : '/home/econser/research/images/DogWalkingHardNeg/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking/'
+  energy_output_dir : './output/full_runs/dog_walking/'
   energy_filename : 'dw_cycle_hardneg_pgm_energy.csv'
   top_rel_filefmt : 'dw_cycle_hardneg_pgm_{}.csv'
 
@@ -53,14 +53,14 @@ DW_FULLNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking/'
+  energy_output_dir : './output/full_runs/dog_walking/'
   energy_filename : 'dw_cycle_fullneg_pgm_energy.csv'
   top_rel_filefmt : 'dw_cycle_fullneg_pgm_{}.csv'
 
@@ -68,14 +68,14 @@ DW_ORIGNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_origneg/'
-  image_dir : '/home/econser/research/images/psu_dw/orig_negatives/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking/'
+  energy_output_dir : './output/full_runs/dog_walking/'
   energy_filename : 'dw_cycle_origneg_pgm_energy.csv'
   top_rel_filefmt : 'dw_cycle_origneg_pgm_{}.csv'
 
@@ -83,57 +83,57 @@ DW_POSTEST_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/psu_dw/PortlandSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/dw_fullpos/'
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
   imageset_file : 'dogwalkingtest_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking/viz_postest_pgm/'
+  viz_output_dir : './output/full_runs/dog_walking/viz_postest_pgm/'
   viz_file_format : '{}.jpg'
 
 DW_HARDNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_hardneg/'
-  image_dir : '/home/econser/research/images/DogWalkingHardNeg/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking/viz_hardneg_pgm/'
+  viz_output_dir : './output/full_runs/dog_walking/viz_hardneg_pgm/'
   viz_file_format : '{}.jpg'
 
 DW_FULLNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking/viz_fullneg_pgm/'
+  viz_output_dir : './output/full_runs/dog_walking/viz_fullneg_pgm/'
   viz_file_format : '{}.jpg'
 
 DW_ORIGNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_origneg/'
-  image_dir : '/home/econser/research/images/psu_dw/orig_negatives/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking/viz_origneg_pgm/'
+  viz_output_dir : './output/full_runs/dog_walking/viz_origneg_pgm/'
   viz_file_format : '{}.jpg'
 
 
@@ -146,122 +146,122 @@ DW_POSTEST_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/psu_dw/PortlandSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/dw_fullpos/'
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
   imageset_file : 'dogwalkingtest_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking/'
+  energy_output_dir : './output/full_runs/dog_walking/'
   energy_filename : 'dw_cycle_postest_geo_energy.csv'
 
 DW_HARDNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_hardneg/'
-  image_dir : '/home/econser/research/images/DogWalkingHardNeg/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking/'
+  energy_output_dir : './output/full_runs/dog_walking/'
   energy_filename : 'dw_cycle_hardneg_geo_energy.csv'
 
 DW_FULLNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking/'
+  energy_output_dir : './output/full_runs/dog_walking/'
   energy_filename : 'dw_cycle_fullneg_geo_energy.csv'
 
 DW_ORIGNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_origneg/'
-  image_dir : '/home/econser/research/images/psu_dw/orig_negatives/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking/'
+  energy_output_dir : './output/full_runs/dog_walking/'
   energy_filename : 'dw_cycle_origneg_geo_energy.csv'
 
 DW_POSTEST_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/psu_dw/PortlandSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/dw_fullpos/'
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
   imageset_file : 'dogwalkingtest_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking/viz_postest_geo/'
+  viz_output_dir : './output/full_runs/dog_walking/viz_postest_geo/'
   viz_file_format : '{}.jpg'
 
 DW_HARDNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_hardneg/'
-  image_dir : '/home/econser/research/images/DogWalkingHardNeg/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking/viz_hardneg_geo/'
+  viz_output_dir : './output/full_runs/dog_walking/viz_hardneg_geo/'
   viz_file_format : '{}.jpg'
 
 DW_FULLNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking/viz_fullneg_geo/'
+  viz_output_dir : './output/full_runs/dog_walking/viz_fullneg_geo/'
   viz_file_format : '{}.jpg'
 
 DW_ORIGNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_origneg/'
-  image_dir : '/home/econser/research/images/psu_dw/orig_negatives/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking/viz_origneg_geo/'
+  viz_output_dir : './output/full_runs/dog_walking/viz_origneg_geo/'
   viz_file_format : '{}.jpg'
 
 
@@ -274,15 +274,15 @@ STAN_DW_POSTEST_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/StanfordSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/stanford_dog_walking/'
+  image_dir : './images/StanfordSimpleDogWalking/'
+  precalc_dir : './run_results/stanford_dog_walking/'
   imageset_file : 'stanford_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
   energy_filename : 'stanford_dw_cycle_postest_pgm_energy.csv'
   top_rel_filefmt : 'stanford_dw_cycle_postest_pgm_{}.csv'
 
@@ -290,14 +290,14 @@ STAN_DW_HARDNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_hardneg/'
-  image_dir : '/home/econser/research/images/DogWalkingHardNeg/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
   energy_filename : 'stanford_dw_cycle_hardneg_pgm_energy.csv'
   top_rel_filefmt : 'stanford_dw_cycle_hardneg_pgm_{}.csv'
 
@@ -305,14 +305,14 @@ STAN_DW_FULLNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
   energy_filename : 'stanford_dw_cycle_fullneg_pgm_energy.csv'
   top_rel_filefmt : 'stanford_dw_cycle_fullneg_pgm_{}.csv'
 
@@ -320,14 +320,14 @@ STAN_DW_ORIGNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_origneg/'
-  image_dir : '/home/econser/research/images/psu_dw/orig_negatives/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
   energy_filename : 'stanford_dw_cycle_origneg_pgm_energy.csv'
   top_rel_filefmt : 'stanford_dw_cycle_origneg_pgm_{}.csv'
 
@@ -335,57 +335,57 @@ STAN_DW_POSTEST_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/StanfordSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/stanford_dog_walking/'
+  image_dir : './images/StanfordSimpleDogWalking/'
+  precalc_dir : './run_results/stanford_dog_walking/'
   imageset_file : 'stanford_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/viz_postest_pgm/'
+  viz_output_dir : './output/full_runs/stanford_dog_walking/viz_postest_pgm/'
   viz_file_format : '{}.jpg'
 
 STAN_DW_HARDNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_hardneg/'
-  image_dir : '/home/econser/research/images/DogWalkingHardNeg/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/viz_hardneg_pgm/'
+  viz_output_dir : './output/full_runs/stanford_dog_walking/viz_hardneg_pgm/'
   viz_file_format : '{}.jpg'
 
 STAN_DW_FULLNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/viz_fullneg_pgm/'
+  viz_output_dir : './output/full_runs/stanford_dog_walking/viz_fullneg_pgm/'
   viz_file_format : '{}.jpg'
 
 STAN_DW_ORIGNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_origneg/'
-  image_dir : '/home/econser/research/images/psu_dw/orig_negatives/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/viz_origneg_pgm/'
+  viz_output_dir : './output/full_runs/stanford_dog_walking/viz_origneg_pgm/'
   viz_file_format : '{}.jpg'
 
 
@@ -398,122 +398,122 @@ STAN_DW_POSTEST_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/StanfordSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/stanford_dog_walking/'
+  image_dir : './images/StanfordSimpleDogWalking/'
+  precalc_dir : './run_results/stanford_dog_walking/'
   imageset_file : 'stanford_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
   energy_filename : 'stanford_dw_cycle_postest_geo_energy.csv'
 
 STAN_DW_HARDNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_hardneg/'
-  image_dir : '/home/econser/research/images/DogWalkingHardNeg/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
   energy_filename : 'stanford_dw_cycle_hardneg_geo_energy.csv'
 
 STAN_DW_FULLNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
   energy_filename : 'stanford_dw_cycle_fullneg_geo_energy.csv'
 
 STAN_DW_ORIGNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_origneg/'
-  image_dir : '/home/econser/research/images/psu_dw/orig_negatives/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
   energy_filename : 'stanford_dw_cycle_origneg_geo_energy.csv'
 
 STAN_DW_POSTEST_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/StanfordSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/stanford_dog_walking/'
+  image_dir : './images/StanfordSimpleDogWalking/'
+  precalc_dir : './run_results/stanford_dog_walking/'
   imageset_file : 'stanford_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/viz_postest_geo/'
+  viz_output_dir : './output/full_runs/stanford_dog_walking/viz_postest_geo/'
   viz_file_format : '{}.jpg'
 
 STAN_DW_HARDNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_hardneg/'
-  image_dir : '/home/econser/research/images/DogWalkingHardNeg/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/viz_hardneg_geo/'
+  viz_output_dir : './output/full_runs/stanford_dog_walking/viz_hardneg_geo/'
   viz_file_format : '{}.jpg'
 
 STAN_DW_FULLNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/viz_fullneg_geo/'
+  viz_output_dir : './output/full_runs/stanford_dog_walking/viz_fullneg_geo/'
   viz_file_format : '{}.jpg'
 
 STAN_DW_ORIGNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  gmm_filename : 'dw_gmms_unlog.pkl'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/dw_origneg/'
-  image_dir : '/home/econser/research/images/psu_dw/orig_negatives/'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking/viz_origneg_geo/'
+  viz_output_dir : './output/full_runs/stanford_dog_walking/viz_origneg_geo/'
   viz_file_format : '{}.jpg'
 
 
@@ -527,14 +527,14 @@ PP_POSTEST_PGM_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/data/PingPong/'
-  precalc_dir : '/home/econser/research/run_results/pingpong/'
+  image_dir : './data/PingPong/'
+  precalc_dir : './run_results/pingpong/'
   imageset_file: 'pingpong_fnames_test.txt'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  class_file : './data/pingpong_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/pingpong/'
+  energy_output_dir : './output/full_runs/pingpong/'
   energy_filename : 'pingpong_postest_pgm_energy.csv'
   top_rel_filefmt : 'pingpong_postest_pgm_{}.csv'
 
@@ -543,13 +543,13 @@ PP_FULLNEG_PGM_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/pingpong_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  precalc_dir : './run_results/pingpong_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/pingpong_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/pingpong/'
+  energy_output_dir : './output/full_runs/pingpong/'
   energy_filename : 'pingpong_fullneg_pgm_energy.csv'
   top_rel_filefmt : 'pingpong_fullneg_pgm_{}.csv'
 
@@ -558,13 +558,13 @@ PP_HARDNEG_PGM_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/pingpong_hardneg/'
-  image_dir : '/home/econser/research/images/PingPongHardNeg'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  precalc_dir : './run_results/pingpong_hardneg/'
+  image_dir : './images/PingPongHardNeg'
+  class_file : './data/pingpong_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/pingpong/'
+  energy_output_dir : './output/full_runs/pingpong/'
   energy_filename : 'pingpong_hardneg_pgm_energy.csv'
   top_rel_filefmt : 'pingpong_hardneg_pgm_{}.csv'
 
@@ -573,14 +573,14 @@ PP_POSTEST_PGM_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/data/PingPong/'
-  precalc_dir : '/home/econser/research/run_results/pingpong/'
+  image_dir : './data/PingPong/'
+  precalc_dir : './run_results/pingpong/'
   imageset_file: 'pingpong_fnames_test.txt'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  class_file : './data/pingpong_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/pingpong/viz_postest_pgm/'
+  viz_output_dir : './output/full_runs/pingpong/viz_postest_pgm/'
   viz_file_format : '{}.jpg'
 
 PP_FULLNEG_PGM_VIZ:
@@ -588,13 +588,13 @@ PP_FULLNEG_PGM_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/pingpong_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  precalc_dir : './run_results/pingpong_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/pingpong_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/pingpong/viz_fullneg_pgm/'
+  viz_output_dir : './output/full_runs/pingpong/viz_fullneg_pgm/'
   viz_file_format : '{}.jpg'
 
 PP_HARDNEG_PGM_VIZ:
@@ -602,13 +602,13 @@ PP_HARDNEG_PGM_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/pingpong_hardneg/'
-  image_dir : '/home/econser/research/images/PingPongHardNeg'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  precalc_dir : './run_results/pingpong_hardneg/'
+  image_dir : './images/PingPongHardNeg'
+  class_file : './data/pingpong_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/pingpong/viz_hardneg_pgm/'
+  viz_output_dir : './output/full_runs/pingpong/viz_hardneg_pgm/'
   viz_file_format : '{}.jpg'
 
 
@@ -622,15 +622,15 @@ PP_POSTEST_GEO_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/data/PingPong/'
-  precalc_dir : '/home/econser/research/run_results/pingpong/'
+  image_dir : './data/PingPong/'
+  precalc_dir : './run_results/pingpong/'
   imageset_file: 'pingpong_fnames_test.txt'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  class_file : './data/pingpong_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/pingpong/'
+  energy_output_dir : './output/full_runs/pingpong/'
   energy_filename : 'pingpong_postest_geo_energy.csv'
 
 PP_FULLNEG_GEO_ENERGY:
@@ -638,14 +638,14 @@ PP_FULLNEG_GEO_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/pingpong_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  precalc_dir : './run_results/pingpong_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/pingpong_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/pingpong/'
+  energy_output_dir : './output/full_runs/pingpong/'
   energy_filename : 'pingpong_fullneg_geo_energy.csv'
 
 PP_HARDNEG_GEO_ENERGY:
@@ -653,14 +653,14 @@ PP_HARDNEG_GEO_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/pingpong_hardneg/'
-  image_dir : '/home/econser/research/images/PingPongHardNeg'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  precalc_dir : './run_results/pingpong_hardneg/'
+  image_dir : './images/PingPongHardNeg'
+  class_file : './data/pingpong_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/pingpong/'
+  energy_output_dir : './output/full_runs/pingpong/'
   energy_filename : 'pingpong_hardneg_geo_energy.csv'
 
 PP_POSTEST_GEO_VIZ:
@@ -668,15 +668,15 @@ PP_POSTEST_GEO_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/data/PingPong/'
-  precalc_dir : '/home/econser/research/run_results/pingpong/'
+  image_dir : './data/PingPong/'
+  precalc_dir : './run_results/pingpong/'
   imageset_file: 'pingpong_fnames_test.txt'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  class_file : './data/pingpong_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/pingpong/viz_postest_geo/'
+  viz_output_dir : './output/full_runs/pingpong/viz_postest_geo/'
   viz_file_format : '{}.jpg'
 
 PP_FULLNEG_GEO_VIZ:
@@ -684,14 +684,14 @@ PP_FULLNEG_GEO_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/pingpong_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  precalc_dir : './run_results/pingpong_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/pingpong_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/pingpong/viz_fullneg_geo/'
+  viz_output_dir : './output/full_runs/pingpong/viz_fullneg_geo/'
   viz_file_format : '{}.jpg'
 
 PP_HARDNEG_GEO_VIZ:
@@ -699,14 +699,14 @@ PP_HARDNEG_GEO_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/pingpong_hardneg/'
-  image_dir : '/home/econser/research/images/PingPongHardNeg'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  precalc_dir : './run_results/pingpong_hardneg/'
+  image_dir : './images/PingPongHardNeg'
+  class_file : './data/pingpong_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/pingpong/viz_hardneg_geo/'
+  viz_output_dir : './output/full_runs/pingpong/viz_hardneg_geo/'
   viz_file_format : '{}.jpg'
 
 
@@ -719,14 +719,14 @@ HS_POSTEST_PGM_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullpos/'
-  image_dir : '/home/econser/research/data/Handshake'
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
   imageset_file : 'handshake_fnames_test.txt'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  class_file : './data/handshake_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/handshake/'
+  energy_output_dir : './output/full_runs/handshake/'
   energy_filename : 'handshake_postest_pgm_energy.csv'
   top_rel_filefmt : 'handshake_postest_pgm_{}.csv'
 
@@ -735,13 +735,13 @@ HS_FULLNEG_PGM_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  precalc_dir : './run_results/hs_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/handshake_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/handshake/'
+  energy_output_dir : './output/full_runs/handshake/'
   energy_filename : 'handshake_fullneg_pgm_energy.csv'
   top_rel_filefmt : 'handshake_fullneg_pgm_{}.csv'
 
@@ -750,13 +750,13 @@ HS_HARDNEG_PGM_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_hardneg/'
-  image_dir : '/home/econser/research/images/HandshakeHardNeg'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  precalc_dir : './run_results/hs_hardneg/'
+  image_dir : './images/HandshakeHardNeg'
+  class_file : './data/handshake_classes.txt'
   #
-  energy_output_dir : '/home/econser/research/output/full_runs/handshake/'
+  energy_output_dir : './output/full_runs/handshake/'
   energy_filename : 'handshake_hardneg_pgm_energy.csv'
   top_rel_filefmt : 'handshake_hardneg_pgm_{}.csv'
 
@@ -765,14 +765,14 @@ HS_POSTEST_PGM_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullpos/'
-  image_dir : '/home/econser/research/data/Handshake'
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
   imageset_file : 'handshake_fnames_test.txt'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  class_file : './data/handshake_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/handshake/viz_postest_pgm/'
+  viz_output_dir : './output/full_runs/handshake/viz_postest_pgm/'
   viz_file_format : '{}.jpg'
 
 HS_FULLNEG_PGM_VIZ:
@@ -780,13 +780,13 @@ HS_FULLNEG_PGM_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  precalc_dir : './run_results/hs_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/handshake_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/handshake/viz_fullneg_pgm/'
+  viz_output_dir : './output/full_runs/handshake/viz_fullneg_pgm/'
   viz_file_format : '{}.jpg'
 
 HS_HARDNEG_PGM_VIZ:
@@ -794,13 +794,13 @@ HS_HARDNEG_PGM_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_hardneg/'
-  image_dir : '/home/econser/research/images/HandshakeHardNeg'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  precalc_dir : './run_results/hs_hardneg/'
+  image_dir : './images/HandshakeHardNeg'
+  class_file : './data/handshake_classes.txt'
   #
-  viz_output_dir : '/home/econser/research/output/full_runs/handshake/viz_hardneg_pgm/'
+  viz_output_dir : './output/full_runs/handshake/viz_hardneg_pgm/'
   viz_file_format : '{}.jpg'
 
 
@@ -814,15 +814,15 @@ HS_POSTEST_GEO_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullpos/'
-  image_dir : '/home/econser/research/data/Handshake'
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
   imageset_file : 'handshake_fnames_test.txt'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  class_file : './data/handshake_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/handshake/'
+  energy_output_dir : './output/full_runs/handshake/'
   energy_filename : 'handshake_postest_geo_energy.csv'
 
 HS_FULLNEG_GEO_ENERGY:
@@ -830,14 +830,14 @@ HS_FULLNEG_GEO_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  precalc_dir : './run_results/hs_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/handshake_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/handshake/'
+  energy_output_dir : './output/full_runs/handshake/'
   energy_filename : 'handshake_fullneg_geo_energy.csv'
 
 HS_HARDNEG_GEO_ENERGY:
@@ -845,14 +845,14 @@ HS_HARDNEG_GEO_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_hardneg/'
-  image_dir : '/home/econser/research/images/HandshakeHardNeg'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  precalc_dir : './run_results/hs_hardneg/'
+  image_dir : './images/HandshakeHardNeg'
+  class_file : './data/handshake_classes.txt'
   #
   energy_method : 'geo_mean'
-  energy_output_dir : '/home/econser/research/output/full_runs/handshake/'
+  energy_output_dir : './output/full_runs/handshake/'
   energy_filename : 'handshake_hardneg_geo_energy.csv'
 
 HS_POSTEST_GEO_VIZ:
@@ -860,15 +860,15 @@ HS_POSTEST_GEO_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullpos/'
-  image_dir : '/home/econser/research/data/Handshake'
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
   imageset_file : 'handshake_fnames_test.txt'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  class_file : './data/handshake_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/handshake/viz_postest_geo'
+  viz_output_dir : './output/full_runs/handshake/viz_postest_geo'
   viz_file_format : '{}.jpg'
 
 HS_FULLNEG_GEO_VIZ:
@@ -876,14 +876,14 @@ HS_FULLNEG_GEO_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullneg/'
-  image_dir : '/home/econser/research/images/Negatives'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  precalc_dir : './run_results/hs_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/handshake_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/handshake/viz_fullneg_geo'
+  viz_output_dir : './output/full_runs/handshake/viz_fullneg_geo'
   viz_file_format : '{}.jpg'
 
 HS_HARDNEG_GEO_VIZ:
@@ -891,12 +891,12 @@ HS_HARDNEG_GEO_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_hardneg/'
-  image_dir : '/home/econser/research/images/HandshakeHardNeg'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  precalc_dir : './run_results/hs_hardneg/'
+  image_dir : './images/HandshakeHardNeg'
+  class_file : './data/handshake_classes.txt'
   #
   energy_method : 'geo_mean'
-  viz_output_dir : '/home/econser/research/output/full_runs/handshake/viz_hardneg_geo'
+  viz_output_dir : './output/full_runs/handshake/viz_hardneg_geo'
   viz_file_format : '{}.jpg'

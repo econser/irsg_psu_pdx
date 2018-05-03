@@ -23,16 +23,16 @@ DW_POSTEST_PGM_ENERGY:
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/psu_dw/PortlandSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/dw_fullpos/'
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
   imageset_file : 'dogwalkingtest_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'max_rel'
-  max_rel_dir : '/home/econser/research/rel_results/dog_walking/'
-  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking_maxrel/'
+  max_rel_dir : './rel_results/dog_walking/'
+  energy_output_dir : './output/full_runs/dog_walking_maxrel/'
   energy_filename : 'dw_cycle_postest_maxrel_energy.csv'
 
 DW_POSTEST_PGM_VIZ:
@@ -40,16 +40,16 @@ DW_POSTEST_PGM_VIZ:
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/psu_dw/PortlandSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/dw_fullpos/'
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
   imageset_file : 'dogwalkingtest_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'max_rel'
-  max_rel_dir : '/home/econser/research/rel_results/dog_walking/'
-  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking_maxrel/viz_postest_pgm/'
+  max_rel_dir : './rel_results/dog_walking/'
+  viz_output_dir : './output/full_runs/dog_walking_maxrel/viz_postest_pgm/'
   viz_file_format : '{}.jpg'
 
 
@@ -63,16 +63,16 @@ STAN_DW_POSTEST_PGM_ENERGY:
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/StanfordSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/stanford_dog_walking/'
+  image_dir : './images/StanfordSimpleDogWalking/'
+  precalc_dir : './run_results/stanford_dog_walking/'
   imageset_file : 'stanford_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'max_rel'
-  max_rel_dir : '/home/econser/research/rel_results/stanford_dog_walking/'
-  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking_maxrel/'
+  max_rel_dir : './rel_results/stanford_dog_walking/'
+  energy_output_dir : './output/full_runs/stanford_dog_walking_maxrel/'
   energy_filename : 'stanford_dw_cycle_postest_maxrel_energy.csv'
 
 STAN_DW_POSTEST_PGM_VIZ:
@@ -80,16 +80,16 @@ STAN_DW_POSTEST_PGM_VIZ:
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'dw_gmms_revised.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/images/StanfordSimpleDogWalking/'
-  precalc_dir : '/home/econser/research/run_results/stanford_dog_walking/'
+  image_dir : './images/StanfordSimpleDogWalking/'
+  precalc_dir : './run_results/stanford_dog_walking/'
   imageset_file : 'stanford_fnames_test.txt'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  class_file : './data/dog_walking_classes.txt'
   #
   energy_method : 'max_rel'
-  max_rel_dir : '/home/econser/research/rel_results/stanford_dog_walking/'
-  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking_maxrel/viz_postest_pgm/'
+  max_rel_dir : './rel_results/stanford_dog_walking/'
+  viz_output_dir : './output/full_runs/stanford_dog_walking_maxrel/viz_postest_pgm/'
   viz_file_format : '{}.jpg'
 
 
@@ -103,16 +103,16 @@ PP_POSTEST_PGM_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/data/PingPong/'
-  precalc_dir : '/home/econser/research/run_results/pingpong/'
+  image_dir : './data/PingPong/'
+  precalc_dir : './run_results/pingpong/'
   imageset_file: 'pingpong_fnames_test.txt'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  class_file : './data/pingpong_classes.txt'
   #
   energy_method : 'max_rel'
-  max_rel_dir : '/home/econser/research/rel_results/pingpong/'
-  energy_output_dir : '/home/econser/research/output/full_runs/pingpong_maxrel/'
+  max_rel_dir : './rel_results/pingpong/'
+  energy_output_dir : './output/full_runs/pingpong_maxrel/'
   energy_filename : 'pingpong_postest_maxrel_energy.csv'
 
 PP_POSTEST_PGM_VIZ:
@@ -120,16 +120,16 @@ PP_POSTEST_PGM_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'pingpong_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  image_dir : '/home/econser/research/data/PingPong/'
-  precalc_dir : '/home/econser/research/run_results/pingpong/'
+  image_dir : './data/PingPong/'
+  precalc_dir : './run_results/pingpong/'
   imageset_file: 'pingpong_fnames_test.txt'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  class_file : './data/pingpong_classes.txt'
   #
   energy_method : 'max_rel'
-  max_rel_dir : '/home/econser/research/rel_results/pingpong/'
-  viz_output_dir : '/home/econser/research/output/full_runs/pingpong_maxrel/viz_postest_pgm/'
+  max_rel_dir : './rel_results/pingpong/'
+  viz_output_dir : './output/full_runs/pingpong_maxrel/viz_postest_pgm/'
   viz_file_format : '{}.jpg'
 
 
@@ -143,16 +143,16 @@ HS_POSTEST_PGM_ENERGY:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullpos/'
-  image_dir : '/home/econser/research/data/Handshake'
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
   imageset_file : 'handshake_fnames_test.txt'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  class_file : './data/handshake_classes.txt'
   #
   energy_method : 'max_rel'
-  max_rel_dir : '/home/econser/research/rel_results/handshake/'
-  energy_output_dir : '/home/econser/research/output/full_runs/handshake_maxrel/'
+  max_rel_dir : './rel_results/handshake/'
+  energy_output_dir : './output/full_runs/handshake_maxrel/'
   energy_filename : 'handshake_postest_maxrel_energy.csv'
 
 HS_POSTEST_PGM_VIZ:
@@ -160,14 +160,14 @@ HS_POSTEST_PGM_VIZ:
   query_function : 'split_spec'
   #
   gmm_filename : 'handshake_gmms.pkl'
-  data_dir : '/home/econser/research/data/'
+  data_dir : './data/'
   #
-  precalc_dir : '/home/econser/research/run_results/hs_fullpos/'
-  image_dir : '/home/econser/research/data/Handshake'
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
   imageset_file : 'handshake_fnames_test.txt'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
+  class_file : './data/handshake_classes.txt'
   #
   energy_method : 'max_rel'
-  max_rel_dir : '/home/econser/research/rel_results/handshake/'
-  viz_output_dir : '/home/econser/research/output/full_runs/handshake_maxrel/viz_postest_pgm/'
+  max_rel_dir : './rel_results/handshake/'
+  viz_output_dir : './output/full_runs/handshake_maxrel/viz_postest_pgm/'
   viz_file_format : '{}.jpg'

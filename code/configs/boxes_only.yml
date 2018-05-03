@@ -18,36 +18,36 @@
 #===============================================================================
 
 DW_FULLPOS:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/images/psu_dw/PortlandSimpleDogWalking/'
-  model_file : '/home/econser/research/models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/dw_fullpos/'
+  data_dir : './data/'
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  model_file : './models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
+  class_file : './data/dog_walking_classes.txt'
+  box_and_score_output_dir : './run_results/dw_fullpos/'
 
 DW_ORIGNEG:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/images/psu_dw/orig_negatives/'
-  model_file : '/home/econser/research/models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/dw_origneg/'
+  data_dir : './data/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  model_file : './models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
+  class_file : './data/dog_walking_classes.txt'
+  box_and_score_output_dir : './run_results/dw_origneg/'
 
 DW_HARDNEG:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/images/DogWalkingHardNeg/'
-  model_file : '/home/econser/research/models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/dw_hardneg/'
+  data_dir : './data/'
+  image_dir : './images/DogWalkingHardNeg/'
+  model_file : './models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
+  class_file : './data/dog_walking_classes.txt'
+  box_and_score_output_dir : './run_results/dw_hardneg/'
 
 DW_FULLNEG:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/images/Negatives'
-  model_file : '/home/econser/research/models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/dw_fullneg/'
+  data_dir : './data/'
+  image_dir : './images/Negatives'
+  model_file : './models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
+  class_file : './data/dog_walking_classes.txt'
+  box_and_score_output_dir : './run_results/dw_fullneg/'
 
 
 
@@ -56,12 +56,12 @@ DW_FULLNEG:
 #===============================================================================
 
 STAN_DW_FULLPOS:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/images/StanfordSimpleDogWalking/'
-  model_file : '/home/econser/research/models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
-  class_file : '/home/econser/research/data/dog_walking_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/stanford_dog_walking/'
+  data_dir : './data/'
+  image_dir : './images/StanfordSimpleDogWalking/'
+  model_file : './models/model_definitions/dog_walking/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/dog_walking_faster_rcnn_final.caffemodel'
+  class_file : './data/dog_walking_classes.txt'
+  box_and_score_output_dir : './run_results/stanford_dog_walking/'
 
 
 
@@ -69,28 +69,28 @@ STAN_DW_FULLPOS:
 # PING PONG CONFIGS (BOXES ONLY)
 #===============================================================================
 PP_POS:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/data/PingPong/'
-  model_file : '/home/econser/research/models/model_definitions/pingpong/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/pingpong_frcn_50k.caffemodel'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/pingpong/'
+  data_dir : './data/'
+  image_dir : './data/PingPong/'
+  model_file : './models/model_definitions/pingpong/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/pingpong_frcn_50k.caffemodel'
+  class_file : './data/pingpong_classes.txt'
+  box_and_score_output_dir : './run_results/pingpong/'
 
 PP_FULLNEG:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/images/Negatives'
-  model_file : '/home/econser/research/models/model_definitions/pingpong/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/pingpong_frcn_50k.caffemodel'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/pingpong_fullneg/'
+  data_dir : './data/'
+  image_dir : './images/Negatives'
+  model_file : './models/model_definitions/pingpong/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/pingpong_frcn_50k.caffemodel'
+  class_file : './data/pingpong_classes.txt'
+  box_and_score_output_dir : './run_results/pingpong_fullneg/'
 
 PP_HARDNEG:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/images/PingPongHardNeg'
-  model_file : '/home/econser/research/models/model_definitions/pingpong/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/pingpong_frcn_50k.caffemodel'
-  class_file : '/home/econser/research/data/pingpong_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/pingpong_hardneg/'
+  data_dir : './data/'
+  image_dir : './images/PingPongHardNeg'
+  model_file : './models/model_definitions/pingpong/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/pingpong_frcn_50k.caffemodel'
+  class_file : './data/pingpong_classes.txt'
+  box_and_score_output_dir : './run_results/pingpong_hardneg/'
 
 
 
@@ -99,25 +99,25 @@ PP_HARDNEG:
 #===============================================================================
 
 HS_FULLPOS:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/data/Handshake/'
-  model_file : '/home/econser/research/models/model_definitions/handshake/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/handshake_50k.caffemodel'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/hs_fullpos/'
+  data_dir : './data/'
+  image_dir : './data/Handshake/'
+  model_file : './models/model_definitions/handshake/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/handshake_50k.caffemodel'
+  class_file : './data/handshake_classes.txt'
+  box_and_score_output_dir : './run_results/hs_fullpos/'
 
 HS_HARDNEG:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/images/HandshakeHardNeg/'
-  model_file : '/home/econser/research/models/model_definitions/handshake/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/handshake_50k.caffemodel'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/hs_hardneg/'
+  data_dir : './data/'
+  image_dir : './images/HandshakeHardNeg/'
+  model_file : './models/model_definitions/handshake/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/handshake_50k.caffemodel'
+  class_file : './data/handshake_classes.txt'
+  box_and_score_output_dir : './run_results/hs_hardneg/'
 
 HS_FULLNEG:
-  data_dir : '/home/econser/research/data/'
-  image_dir : '/home/econser/research/images/Negatives'
-  model_file : '/home/econser/research/models/model_definitions/handshake/faster_rcnn_end2end/test.prototxt'
-  weights : '/home/econser/research/models/model_weights/handshake_50k.caffemodel'
-  class_file : '/home/econser/research/data/handshake_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/run_results/hs_fullneg/'
+  data_dir : './data/'
+  image_dir : './images/Negatives'
+  model_file : './models/model_definitions/handshake/faster_rcnn_end2end/test.prototxt'
+  weights : './models/model_weights/handshake_50k.caffemodel'
+  class_file : './data/handshake_classes.txt'
+  box_and_score_output_dir : './run_results/hs_fullneg/'

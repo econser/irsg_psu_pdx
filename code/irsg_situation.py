@@ -13,6 +13,11 @@ import irsg_utils as iutl
 #===============================================================================
 ENERGY_METHODS = ['pgm', 'geo_mean', 'max_rel']
 
+import os
+BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.join(BASE_DIR, os.pardir)
+BASE_DIR = os.path.abspath(BASE_DIR)
+
 
 
 #===============================================================================
@@ -615,7 +620,6 @@ def gen_factor_graph(query, model_components, objects_per_class, verbose=False, 
             if verbose: print('{}no relationship models for "{}" or "{}", skipping relationship'.format(verbose_tab, specific_rel, wildcard_rel))
             continue
         
-        import pdb; pdb.set_trace()
         bin_fns = None
         if max_rels is not None:
             bin_fns = max_rels[relationship_key][rc.image_filename]
@@ -834,19 +838,33 @@ def check_cfg(cfg):
     
     gmm_filename = cfg.get('gmm_filename')
     data_dir = cfg.get('data_dir')
+    if data_dir is not None:
+        data_dir = os.path.join(BASE_DIR, data_dir)
     
     precalc_dir = cfg.get('precalc_dir')
+    if precalc_dir is not None:
+        precalc_dir = os.path.join(BASE_DIR, precalc_dir)
+        
     image_dir = cfg.get('image_dir')
+    if image_dir is not None:
+        image_dir = os.path.join(BASE_DIR, image_dir)
+        
     image_set_file = cfg.get('image_set_file')
     model_file = cfg.get('model_file')
     weights = cfg.get('weights')
     class_file = cfg.get('class_file')
     
     energy_output_dir = cfg.get('energy_output_dir')
+    if energy_output_dir is not None:
+        energy_output_dir = os.path.join(BASE_DIR, energy_output_dir)
+    
     energy_filename = cfg.get('energy_filename')
     rel_filefmt = cfg.get('top_rel_filefmt')
     
     viz_output_dir = cfg.get('viz_output_dir')
+    if viz_output_dir is not None:
+        viz_output_dir = os.path.join(BASE_DIR, viz_output_dir)
+    
     viz_file_format = cfg.get('viz_file_format')
     
     misconfig = False
@@ -927,15 +945,27 @@ if __name__ == '__main__':
     
     # pull data dir
     data_dir = cfg.get('data_dir')
+    if data_dir is not None:
+        data_dir = os.path.abspath(os.path.join(BASE_DIR, data_dir))
     
     # pull input dir
     precalc_dir = cfg.get('precalc_dir')
+    if precalc_dir is not None:
+        precalc_dir = os.path.join(BASE_DIR, precalc_dir)
+    
     image_dir = cfg.get('image_dir')
+    if image_dir is not None:
+        image_dir = os.path.join(BASE_DIR, image_dir)
+    
+    max_rel_dir = cfg.get('max_rel_dir')
+    if max_rel_dir is not None:
+        max_rel_dir = os.path.join(BASE_DIR, max_rel_dir)
+
     imageset_file = cfg.get('imageset_file')
     model_file = cfg.get('model_file')
     weights = cfg.get('weights')
     class_file = cfg.get('class_file')
-    max_rel_dir = cfg.get('max_rel_dir')
+    
     
     mode = ''
     class_list = []
@@ -985,6 +1015,9 @@ if __name__ == '__main__':
     
     # determine which outputs to generate
     energy_output_dir = cfg.get('energy_output_dir')
+    if energy_output_dir is not None:
+        energy_output_dir = os.path.join(BASE_DIR, energy_output_dir)
+    
     energy_filename = cfg.get('energy_filename')
     do_energy = False
     if energy_output_dir is not None and energy_filename is not None:
@@ -994,6 +1027,9 @@ if __name__ == '__main__':
     save_top_rel_scores = rel_filefmt is not None
     
     viz_output_dir = cfg.get('viz_output_dir')
+    if viz_output_dir is not None:
+        viz_output_dir = os.path.join(BASE_DIR, viz_output_dir)
+        
     viz_file_format = cfg.get('viz_file_format')
     do_viz = False
     if viz_output_dir is not None and viz_file_format is not None:
@@ -1002,6 +1038,8 @@ if __name__ == '__main__':
             os.makedirs(viz_output_dir)
     
     box_and_score_savedir = cfg.get('box_and_score_output_dir')
+    if box_and_score_savedir is not None:
+        box_and_score_savedir = os.path.join(BASE_DIR, box_and_score_savedir)
     
     # generate the bbox and scores for the images
     rc_list = []
@@ -1044,7 +1082,6 @@ if __name__ == '__main__':
         objects_per_class = get_objects_per_class(query, rc)
         if (energy_method == 'pgm') or (energy_method == 'max_rel'):
             max_rel_dict = None
-            import pdb; pdb.set_trace()
             if energy_method == 'max_rel':
                 max_rel_dict = get_max_rels(max_rel_dir)
             # generate factor graph and run inference
