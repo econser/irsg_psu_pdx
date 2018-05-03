@@ -1,0 +1,173 @@
+#===============================================================================
+# query_string : query as a string
+# query_function : function to convert query string to mat_struct
+#
+# data_dir : directory for finding GMMs
+# gmm_filename : GMM pkl file
+#
+# precalc_dir : root dir for precalculated data
+#
+# imageset_file : file with set of images to run
+# image_dir : directory for input images
+# model_file : fq path for caffe model
+# weights : fq path for model weights
+# class_file : classes in the model
+#===============================================================================
+
+#===============================================================================
+# DOG WALKING CONFIGS (PGM)
+#===============================================================================
+
+DW_POSTEST_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : '/home/econser/research/data/'
+  #
+  image_dir : '/home/econser/research/images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : '/home/econser/research/run_results/dw_fullpos/'
+  imageset_file : 'dogwalkingtest_fnames_test.txt'
+  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  #
+  energy_method : 'max_rel'
+  max_rel_dir : '/home/econser/research/rel_results/dog_walking/'
+  energy_output_dir : '/home/econser/research/output/full_runs/dog_walking_maxrel/'
+  energy_filename : 'dw_cycle_postest_maxrel_energy.csv'
+
+DW_POSTEST_PGM_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : '/home/econser/research/data/'
+  #
+  image_dir : '/home/econser/research/images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : '/home/econser/research/run_results/dw_fullpos/'
+  imageset_file : 'dogwalkingtest_fnames_test.txt'
+  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  #
+  energy_method : 'max_rel'
+  max_rel_dir : '/home/econser/research/rel_results/dog_walking/'
+  viz_output_dir : '/home/econser/research/output/full_runs/dog_walking_maxrel/viz_postest_pgm/'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# STANFORD DOG WALKING CONFIGS (PGM)
+#===============================================================================
+
+STAN_DW_POSTEST_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : '/home/econser/research/data/'
+  #
+  image_dir : '/home/econser/research/images/StanfordSimpleDogWalking/'
+  precalc_dir : '/home/econser/research/run_results/stanford_dog_walking/'
+  imageset_file : 'stanford_fnames_test.txt'
+  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  #
+  energy_method : 'max_rel'
+  max_rel_dir : '/home/econser/research/rel_results/stanford_dog_walking/'
+  energy_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking_maxrel/'
+  energy_filename : 'stanford_dw_cycle_postest_maxrel_energy.csv'
+
+STAN_DW_POSTEST_PGM_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : '/home/econser/research/data/'
+  #
+  image_dir : '/home/econser/research/images/StanfordSimpleDogWalking/'
+  precalc_dir : '/home/econser/research/run_results/stanford_dog_walking/'
+  imageset_file : 'stanford_fnames_test.txt'
+  class_file : '/home/econser/research/data/dog_walking_classes.txt'
+  #
+  energy_method : 'max_rel'
+  max_rel_dir : '/home/econser/research/rel_results/stanford_dog_walking/'
+  viz_output_dir : '/home/econser/research/output/full_runs/stanford_dog_walking_maxrel/viz_postest_pgm/'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# PING PONG (PGM)
+#===============================================================================
+
+PP_POSTEST_PGM_ENERGY:
+  query_string : 'player, player, table, net; 0 playing_pingpong_with 1, 0 at 2, 1 at 2, 3 on 2'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'pingpong_gmms.pkl'
+  data_dir : '/home/econser/research/data/'
+  #
+  image_dir : '/home/econser/research/data/PingPong/'
+  precalc_dir : '/home/econser/research/run_results/pingpong/'
+  imageset_file: 'pingpong_fnames_test.txt'
+  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  #
+  energy_method : 'max_rel'
+  max_rel_dir : '/home/econser/research/rel_results/pingpong/'
+  energy_output_dir : '/home/econser/research/output/full_runs/pingpong_maxrel/'
+  energy_filename : 'pingpong_postest_maxrel_energy.csv'
+
+PP_POSTEST_PGM_VIZ:
+  query_string : 'player, player, table, net; 0 playing_pingpong_with 1, 0 at 2, 1 at 2, 3 on 2'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'pingpong_gmms.pkl'
+  data_dir : '/home/econser/research/data/'
+  #
+  image_dir : '/home/econser/research/data/PingPong/'
+  precalc_dir : '/home/econser/research/run_results/pingpong/'
+  imageset_file: 'pingpong_fnames_test.txt'
+  class_file : '/home/econser/research/data/pingpong_classes.txt'
+  #
+  energy_method : 'max_rel'
+  max_rel_dir : '/home/econser/research/rel_results/pingpong/'
+  viz_output_dir : '/home/econser/research/output/full_runs/pingpong_maxrel/viz_postest_pgm/'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# HANDSHAKE (PGM)
+#===============================================================================
+
+HS_POSTEST_PGM_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'handshake_gmms.pkl'
+  data_dir : '/home/econser/research/data/'
+  #
+  precalc_dir : '/home/econser/research/run_results/hs_fullpos/'
+  image_dir : '/home/econser/research/data/Handshake'
+  imageset_file : 'handshake_fnames_test.txt'
+  class_file : '/home/econser/research/data/handshake_classes.txt'
+  #
+  energy_method : 'max_rel'
+  max_rel_dir : '/home/econser/research/rel_results/handshake/'
+  energy_output_dir : '/home/econser/research/output/full_runs/handshake_maxrel/'
+  energy_filename : 'handshake_postest_maxrel_energy.csv'
+
+HS_POSTEST_PGM_VIZ:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'handshake_gmms.pkl'
+  data_dir : '/home/econser/research/data/'
+  #
+  precalc_dir : '/home/econser/research/run_results/hs_fullpos/'
+  image_dir : '/home/econser/research/data/Handshake'
+  imageset_file : 'handshake_fnames_test.txt'
+  class_file : '/home/econser/research/data/handshake_classes.txt'
+  #
+  energy_method : 'max_rel'
+  max_rel_dir : '/home/econser/research/rel_results/handshake/'
+  viz_output_dir : '/home/econser/research/output/full_runs/handshake_maxrel/viz_postest_pgm/'
+  viz_file_format : '{}.jpg'
