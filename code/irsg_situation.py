@@ -1,5 +1,5 @@
 from __future__ import print_function
-#import matplotlib; matplotlib.use('agg') #when running remotely
+import matplotlib; matplotlib.use('agg') #when running remotely
 import opengm as ogm
 
 import sys

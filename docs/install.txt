@@ -1,0 +1,4 @@
+symlinks in ./code
+    ln -s (FASTER RCNN ROOT)/caffe-fast-rcnn/python/caffe/ (IRSG_PSU_PDX ROOT)/code/caffe
+    ln -s (FASTER RCNN ROOT)/lib/fast_rcnn/ (IRSG_PSU_PDX ROOT)/code/fast_rcnn
+    ln -s (OPENGM ROOT)/build/src/interfaces/python/opengm/ (IRSG_PSU_PDX ROOT)/code/opengm
