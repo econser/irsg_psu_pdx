@@ -1,0 +1,8 @@
+look at the probs of which boxes end up as the winning object and relationship boxes and how they would compare to geometric mean selection
+
+
+
+heatmap of relation scores for all boxes
+zero out relation scores that are below a threshold
+
+logistic regression on pos/neg relation features

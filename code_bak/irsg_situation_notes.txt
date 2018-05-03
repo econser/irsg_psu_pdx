@@ -1,0 +1,64 @@
+================================================================================
+irsg_utils: get boxes, gen PGM, run PGM
+   get_gmm_features: convert bbox pairs into 4d features for GMM input
+   get_dw_boxes: converts an annotation line into an object_name:coord_list dict
+   get_relationship_models: converts original IRSG mat files to strip out matlab extra blanks and pickles the result.  unused?
+   calc_iou: IoU of 2 bounding boxes
+   gmm_pdf: density of GMM at the X vector
+   get_pregen_components: generate a RelationComponents object for a given filename, assuming the pregen structure is in place (one dir for each class, bbox & confidence csvs in each dir)
+   get_boxes: pull the bboxes out out a RelationComponentc object by class name
+   get_dw_gmms: get the dogwalking gmms
+
+================================================================================
+dog_walking_gmm.py
+trains dogwalking GMMs
+
+gen_class_viz.py
+faster RCNN visualizations on a dataset.  Currently not parameterized, but ready to run on DW or PP models & data.  Doesn't yet allow cmdline specification of image(s) or modelset, but an easy update.
+
+irsg_dw.py
+irsg on dogwalking datasets with cycle and chain queries.  Badly needs to be split up into: factor graph gen and infer, energy batch/single, visuzlization batch/single, r@k batch, gui batch (?)
+
+irsg.py (this is the original IRSG)
+irsg on any image with caffe rcnn and GOP bboxes (calls to irsg_plot, combine them?)
+
+irsg_querygen.py
+query object generation, seems fine
+
+plot_utils.py
+used in irsg_dw for r@k plot gen and box viz
+   gen_ranks: rank file => indices where the positive examples would lie in the negative examples
+   get_recalls: rank structure and number of negatives => recall data
+   get_r_at_k: gives average recalls
+   calc_median_ratk: returns median and average r@k for an infile
+   r_at_k_plot: generates an r@k plot from an r@k structure
+   TODO: combine the gen_ranks -> get_r_at_k -> r_at_k_plot calls into one call
+
+   sample_rel_model: visualizes gmms
+   draw_best_pregen_boxes: generates visuzlizations from the csv pregen bboxes
+   draw_best_objects: takes an image dir, IRSGComponents object, the best bbox indices (obj->bbox_ix), energy and generates the viz plot
+      draw_image_box: does the nitty-gritty drawing
+
+prob_check.py
+probability histograms
+
+================================================================================
+IRSG_situation.py
+   energy calls
+   viz calls
+   r@k calls
+   object localization and classification
+   pregen intake calls
+   factor graph gen & infer
+
+multi_batch
+  full_batch
+    full_energy_batch
+	  energy_batch
+	    for each file
+		  get_pregen_components -> gen_factor_graph -> infer -> append (filename, energy) to results list
+    full_viz_plot_batch
+	  viz_plot_batch
+	    for each file, viz_plot
+		  get_pregen_components -> gen_factor_graph -> infer -> draw_best_objects
+	r@k (gen_ranks -> get_r_at_k -> r_at_k_plot)
