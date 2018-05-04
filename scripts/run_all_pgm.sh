@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/econser/research/code
+cd /home/econser/irsg_psu_pdx/research/code
 python irsg_situation.py --cfg ./configs/configs.yml --b DW_POSTEST_PGM_ENERGY
 python irsg_situation.py --cfg ./configs/configs.yml --b DW_HARDNEG_PGM_ENERGY
 python irsg_situation.py --cfg ./configs/configs.yml --b DW_FULLNEG_PGM_ENERGY

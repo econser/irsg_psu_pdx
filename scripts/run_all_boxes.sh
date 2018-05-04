@@ -1,5 +1,5 @@
 #!/bin/bash
-cd /home/econser/research/code
+cd /home/econser/research/irsg_psu_pdx/code
 python irsg_situation.py --cfg ./configs/boxes_only.yml --b DW_FULLPOS
 python irsg_situation.py --cfg ./configs/boxes_only.yml --b DW_HARDNEG
 python irsg_situation.py --cfg ./configs/boxes_only.yml --b DW_FULLNEG
