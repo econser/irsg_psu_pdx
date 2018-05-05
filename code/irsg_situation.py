@@ -307,7 +307,7 @@ def get_top_rel_scores(best_box_ixs, query_to_model_map, rc, gmm):
         subject_bbox = player1_bbox
         subject_score = player1_score
         object_bbox = table_bbox
-        oject_score = table_score
+        object_score = table_score
         g = gmm[rel_str]
         rel_dict[rel_str] = []
         rel_csv = get_relationship_csv(g, subject_bbox, subject_score, object_bbox, object_score)
@@ -366,7 +366,7 @@ def get_top_rel_scores(best_box_ixs, query_to_model_map, rc, gmm):
         object_score = person2_score
         g = gmm[rel_str]
         rel_dict[rel_str] = []
-        rel_csv = get_relationship_csv(g, subject_bbox, sbuject_score, object_bbox, object_score)
+        rel_csv = get_relationship_csv(g, subject_bbox, subject_score, object_bbox, object_score)
         rel_dict[rel_str].append(rel_csv)
     
     return rel_dict
@@ -924,6 +924,7 @@ if __name__ == '__main__':
     import irsg_querygen as iqg
     
     save_pgm_data = False # expermiental feature, needs to be parameterized
+    seve_bboxes = False # currently linked to energy generation, paramaterize?
     
     args = parse_args()
     
@@ -1022,6 +1023,7 @@ if __name__ == '__main__':
     do_energy = False
     if energy_output_dir is not None and energy_filename is not None:
         do_energy = True
+        save_bboxes = True
     
     rel_filefmt = cfg.get('top_rel_filefmt')
     save_top_rel_scores = rel_filefmt is not None
@@ -1068,7 +1070,15 @@ if __name__ == '__main__':
             os.makedirs(energy_output_dir)
         energy_file_handle = open(energy_pathname, 'wb')
         energy_file_handle.write('file, energy\n')
-    
+
+    bbox_file_handles = {}
+    if save_bboxes:
+        if not os.path.exists(energy_output_dir):
+            os.makedirs(energy_output_dir)
+        for cls_name in class_list:
+            bbox_filename = os.path.join(energy_output_dir, '{}_bboxes.csv'.format(cls_name))
+            bbox_file_handles[cls_name] = open(bbox_filename, 'wb')
+        
     if query is None:
         sys.exit(1)
     
@@ -1102,8 +1112,23 @@ if __name__ == '__main__':
             query_to_model_map = get_query_to_detection_map(query, rc)
             energy, best_box_ixs = get_geo_mean_energy_(query, rc, objects_per_class)
         energy_results.append((rc.image_filename, energy))
+        
         if do_energy:
             energy_file_handle.write('{}, {}\n'.format(rc.image_filename, energy))
+        
+        if save_bboxes:
+            for pgm_ix, bbox_ix in enumerate(best_box_ixs):
+                unary_ix = query_to_model_map[pgm_ix]
+                cls_unaries = rc.unary_components[unary_ix]
+                cls_name = cls_unaries.name
+                bbox = cls_unaries.boxes[bbox_ix]
+                format_str = '{}, {:d}, {:d}, {:d}, {:d}\n'
+                x = int(bbox[0])
+                y = int(bbox[1])
+                w = int(bbox[2])
+                h = int(bbox[3])
+                bbox_line = format_str.format(rc.image_filename, x, y, w, h)
+                bbox_file_handles[cls_name].write(bbox_line)
         
         # generate viz plot, if so configured
         if do_viz:
@@ -1140,6 +1165,10 @@ if __name__ == '__main__':
                 f.write('{}, {}\n'.format(line[0], line[1]))
             f.close()
     # generate the energy file, if so configured
+    if save_bboxes:
+        for cls_name in class_list:
+            bbox_file_handles[cls_name].close()
+    
     if do_energy:
         energy_file_handle.close()
 
