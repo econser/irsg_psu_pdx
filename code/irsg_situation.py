@@ -924,7 +924,7 @@ if __name__ == '__main__':
     import irsg_querygen as iqg
     
     save_pgm_data = False # expermiental feature, needs to be parameterized
-    seve_bboxes = False # currently linked to energy generation, paramaterize?
+    save_bboxes = False # currently linked to energy generation, paramaterize?
     
     args = parse_args()
     
