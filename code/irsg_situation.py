@@ -1076,7 +1076,7 @@ if __name__ == '__main__':
         if not os.path.exists(energy_output_dir):
             os.makedirs(energy_output_dir)
         for cls_name in class_list:
-            bbox_filename = os.path.join(energy_output_dir, '{}_bboxes.csv'.format(cls_name))
+            bbox_filename = os.path.join(energy_output_dir, '{}_{}_bboxes.csv'.format(cls_name, energy_method))
             bbox_file_handles[cls_name] = open(bbox_filename, 'wb')
         
     if query is None:

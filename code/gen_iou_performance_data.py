@@ -56,9 +56,11 @@ def get_cfg():
     import argparse
     parser = argparse.ArgumentParser(description='Binary Relation generation')
     parser.add_argument('--model', dest='model_type')
+    parser.add_argument('--method', dest='energy_method')
     args = parser.parse_args()
     
     model_type = args.model_type
+    energy_method = args.energy_method
     rcnn_bbox_dir = None
     output_dir = None
     anno_dir = None
@@ -93,7 +95,7 @@ def get_cfg():
     else:
         pass
     
-    return model_type, best_bbox_dir, output_dir, anno_dir, imageset_file, anno_fn, cls_names, cls_counts
+    return model_type, energy_method, best_bbox_dir, output_dir, anno_dir, imageset_file, anno_fn, cls_names, cls_counts
 
 
 
@@ -110,13 +112,14 @@ if __name__ == '__main__':
     # read config
     cfg = get_cfg()
     model_type = cfg[0]
-    best_bbox_dir = cfg[1]
-    output_dir = cfg[2]
-    anno_dir = cfg[3]
-    imageset_file = cfg[4]
-    anno_fn = cfg[5]
-    cls_names = cfg[6]
-    cls_counts = cfg[7]
+    energy_method = cfg[1]
+    best_bbox_dir = cfg[2]
+    output_dir = cfg[3]
+    anno_dir = cfg[4]
+    imageset_file = cfg[5]
+    anno_fn = cfg[6]
+    cls_names = cfg[7]
+    cls_counts = cfg[8]
     
     # create output dir, if necessary
     if not os.path.exists(output_dir):
@@ -151,7 +154,7 @@ if __name__ == '__main__':
     #   best_bboxes[object_class] => bbox_dict[image_filename] => bbox
     best_bboxes = {}
     for cls_name in cls_names:
-        fname = os.path.join(best_bbox_dir, '{}_bboxes.csv'.format(cls_name))
+        fname = os.path.join(best_bbox_dir, '{}_{}_bboxes.csv'.format(cls_name, energy_method))
         f = open(fname, 'rb')
         for line in f.readlines():
             line = line.rstrip('\n')
@@ -217,7 +220,7 @@ if __name__ == '__main__':
                     iou_results.append((image_fname, i))
         
         iou_results = np.array(iou_results, dtype=np.object)
-        iou_fname = os.path.join(output_dir, '{}_iou.csv'.format(cls_name))
+        iou_fname = os.path.join(output_dir, '{}_{}_iou.csv'.format(cls_name, energy_method))
         
         np.savetxt(iou_fname, iou_results, fmt='%s, %0.3f')
         iou_by_class[cls_name] = iou_results
@@ -235,7 +238,7 @@ if __name__ == '__main__':
             hit_rate = n_hits / (max_hits * 1.)
             detections.append((thresh_val, hit_rate))
         detections = np.array(detections)
-        detection_fname = os.path.join(output_dir, '{}_detections.csv'.format(cls_name))
+        detection_fname = os.path.join(output_dir, '{}_{}_detections.csv'.format(cls_name, energy_method))
         np.savetxt(detection_fname, detections, header='threshold, hit_rate', comments='', fmt='%0.2f, %0.3f')
     
     # plot the detections data
