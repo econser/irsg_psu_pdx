@@ -76,6 +76,14 @@ def get_cfg():
         anno_fn = anno_fn_map['dog_walking']
         cls_names = ['dog_walker', 'leash', 'dog']
         cls_counts = [1, 1, 1]
+    elif model_type == 'stanford_dw':
+        best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/stanford_dog_walking/')
+        output_dir = os.path.join(BASE_DIR, 'output/full_runs/stanford_dog_walking/')
+        anno_dir = os.path.join(BASE_DIR, 'data/StanfordSimpleDogWalking/')
+        imageset_file = os.path.join(BASE_DIR, 'data/stanford_fnames_test.txt')
+        anno_fn = anno_fn_map['dog_walking']
+        cls_names = ['dog_walker', 'leash', 'dog']
+        cls_counts = [1, 1, 1]
     elif model_type == 'pingpong':
         best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/pingpong/')
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/pingpong/')
