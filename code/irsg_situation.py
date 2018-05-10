@@ -1134,7 +1134,7 @@ if __name__ == '__main__':
         if do_viz:
             viz_data = []
             best_box_num = 0
-            
+
             for query_ix, unary_ix in enumerate(query_to_model_map):
                 cls_unaries = rc.unary_components[unary_ix]
                 best_ix = best_box_ixs[query_ix]
@@ -1149,6 +1149,8 @@ if __name__ == '__main__':
             viz_output_filename = '{:06.3f}_{}'.format(energy, viz_output_filename)
             viz_image_filepath = os.path.join(viz_output_dir, viz_output_filename)
             image_filepath = os.path.join(image_dir, rc.image_filename)
+            image_filepath = os.path.abspath(image_filepath)
+            
             if image_filepath.endswith('.csv'):
                 #TODO: parameterize the extension
                 image_filepath = image_filepath.split('.')[0] + '.jpg'
@@ -1171,6 +1173,3 @@ if __name__ == '__main__':
     
     if do_energy:
         energy_file_handle.close()
-
-
-

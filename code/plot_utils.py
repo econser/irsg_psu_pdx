@@ -29,13 +29,13 @@ class ResultLine (object):
 import plot_utils as pu; import numpy as np
 """
 def run_all_ratk():
-    csv_dir = '/home/econser/School/research/output/full_runs/'
-    data_dir = '/home/econser/School/research/data/'
-    od = '/home/econser/School/research/output/full_runs/plots/'
+    csv_dir = '/home/econser/research/irsg_psu_pdx/output/full_runs/'
+    data_dir = '/home/econser/research/irsg_psu_pdx/data/'
+    od = '/home/econser/research/irsg_psu_pdx/output/full_runs/plots/'
     
     pp_set = {}
     subdir = 'pingpong_maxrel/'
-    pp_set['max_postest'] = csv_dir + subdir + 'pingpong_postest_maxrel_energy.csv'
+    #pp_set['max_postest'] = csv_dir + subdir + 'pingpong_postest_maxrel_energy.csv'
     subdir = 'pingpong/'
     pp_set['pgm_postest'] = csv_dir + subdir + 'pingpong_postest_pgm_energy.csv'
     pp_set['pgm_fullneg'] = csv_dir + subdir + 'pingpong_fullneg_pgm_energy.csv'
@@ -46,7 +46,7 @@ def run_all_ratk():
     
     dw_set = {}
     subdir = 'dog_walking_maxrel/'
-    dw_set['max_postest'] = csv_dir + subdir + 'dw_cycle_postest_maxrel_energy.csv'
+    #dw_set['max_postest'] = csv_dir + subdir + 'dw_cycle_postest_maxrel_energy.csv'
     subdir = 'dog_walking/'
     dw_set['pgm_postest'] = csv_dir + subdir + 'dw_cycle_postest_pgm_energy.csv'
     dw_set['pgm_fullneg'] = csv_dir + subdir + 'dw_cycle_fullneg_pgm_energy.csv'
@@ -68,7 +68,7 @@ def run_all_ratk():
     
     hs_set = {}
     subdir = 'handshake_maxrel/'
-    hs_set['max_postest'] = csv_dir + subdir + 'handshake_postest_maxrel_energy.csv'
+    #hs_set['max_postest'] = csv_dir + subdir + 'handshake_postest_maxrel_energy.csv'
     subdir = 'handshake/'
     hs_set['pgm_postest'] = csv_dir + subdir + 'handshake_postest_pgm_energy.csv'
     hs_set['pgm_fullneg'] = csv_dir + subdir + 'handshake_fullneg_pgm_energy.csv'
@@ -100,12 +100,12 @@ def run_all_ratk():
     ratk['hs_geo_fullneg'] = r_at_k(hs_set['geo_postest'], hs_set['geo_fullneg'], hs_testset)
     ratk['hs_geo_hardneg'] = r_at_k(hs_set['geo_postest'], hs_set['geo_hardneg'], hs_testset)
     
-    ratk['pp_max_fullneg'] = r_at_k(pp_set['max_postest'], pp_set['pgm_fullneg'], pp_testset)
-    ratk['pp_max_hardneg'] = r_at_k(pp_set['max_postest'], pp_set['pgm_hardneg'], pp_testset)
-    ratk['dw_max_fullneg'] = r_at_k(dw_set['max_postest'], dw_set['pgm_fullneg'], dw_testset)
-    ratk['dw_max_hardneg'] = r_at_k(dw_set['max_postest'], dw_set['pgm_hardneg'], dw_testset)
-    ratk['hs_max_fullneg'] = r_at_k(hs_set['max_postest'], hs_set['pgm_fullneg'], hs_testset)
-    ratk['hs_max_hardneg'] = r_at_k(hs_set['max_postest'], hs_set['pgm_hardneg'], hs_testset)
+    #ratk['pp_max_fullneg'] = r_at_k(pp_set['max_postest'], pp_set['pgm_fullneg'], pp_testset)
+    #ratk['pp_max_hardneg'] = r_at_k(pp_set['max_postest'], pp_set['pgm_hardneg'], pp_testset)
+    #ratk['dw_max_fullneg'] = r_at_k(dw_set['max_postest'], dw_set['pgm_fullneg'], dw_testset)
+    #ratk['dw_max_hardneg'] = r_at_k(dw_set['max_postest'], dw_set['pgm_hardneg'], dw_testset)
+    #ratk['hs_max_fullneg'] = r_at_k(hs_set['max_postest'], hs_set['pgm_fullneg'], hs_testset)
+    #ratk['hs_max_hardneg'] = r_at_k(hs_set['max_postest'], hs_set['pgm_hardneg'], hs_testset)
     #ratk['st_max_fullneg'] = r_at_k(st_set['max_postest'], st_set['pgm_fullneg'], st_testset)
     #ratk['st_max_hardneg'] = r_at_k(st_set['max_postest'], st_set['pgm_hardneg'], st_testset)
     #-------------------------------------------------------------------------------
@@ -127,40 +127,34 @@ def run_all_ratk():
     np.savetxt(csv_dir+'handshake/'           +'handshake_fullneg_geo_ratk.csv', ratk['hs_geo_fullneg'], fmt='%d, %03f')
     np.savetxt(csv_dir+'handshake/'           +'handshake_hardneg_geo_ratk.csv', ratk['hs_geo_hardneg'], fmt='%d, %03f')
     
-    np.savetxt(csv_dir+'pingpong_maxrel/'     +'pingpong_fullneg_max_ratk.csv', ratk['pp_max_fullneg'], fmt='%d, %03f')
-    np.savetxt(csv_dir+'pingpong_maxrel/'     +'pingpong_hardneg_max_ratk.csv', ratk['pp_max_hardneg'], fmt='%d, %03f')
-    np.savetxt(csv_dir+'dog_walking_maxrel/'  +'dw_cycle_fullneg_max_ratk.csv', ratk['dw_max_fullneg'], fmt='%d, %03f')
-    np.savetxt(csv_dir+'dog_walking_maxrel/'  +'dw_cycle_hardneg_max_ratk.csv', ratk['dw_max_hardneg'], fmt='%d, %03f')
-    np.savetxt(csv_dir+'handshake_maxrel/'    +'handshake_fullneg_max_ratk.csv', ratk['hs_max_fullneg'], fmt='%d, %03f')
-    np.savetxt(csv_dir+'handshake_maxrel/'    +'handshake_hardneg_max_ratk.csv', ratk['hs_max_hardneg'], fmt='%d, %03f')
+    #np.savetxt(csv_dir+'pingpong_maxrel/'     +'pingpong_fullneg_max_ratk.csv', ratk['pp_max_fullneg'], fmt='%d, %03f')
+    #np.savetxt(csv_dir+'pingpong_maxrel/'     +'pingpong_hardneg_max_ratk.csv', ratk['pp_max_hardneg'], fmt='%d, %03f')
+    #np.savetxt(csv_dir+'dog_walking_maxrel/'  +'dw_cycle_fullneg_max_ratk.csv', ratk['dw_max_fullneg'], fmt='%d, %03f')
+    #np.savetxt(csv_dir+'dog_walking_maxrel/'  +'dw_cycle_hardneg_max_ratk.csv', ratk['dw_max_hardneg'], fmt='%d, %03f')
+    #np.savetxt(csv_dir+'handshake_maxrel/'    +'handshake_fullneg_max_ratk.csv', ratk['hs_max_fullneg'], fmt='%d, %03f')
+    #np.savetxt(csv_dir+'handshake_maxrel/'    +'handshake_hardneg_max_ratk.csv', ratk['hs_max_hardneg'], fmt='%d, %03f')
     #np.savetxt(csv_dir+'stanford_dog_walking_maxrel/'+'stanford_dw_cycle_fullneg_max_ratk.csv', ratk['st_max_fullneg'], fmt='%d, %03f')
     #np.savetxt(csv_dir+'stanford_dog_walking_maxrel/'+'stanford_dw_cycle_hardneg_max_ratk.csv', ratk['st_max_hardneg'], fmt='%d, %03f')
     
     #-------------------------------------------------------------------------------
     tab = [
         ('pp_pgm_fullneg', ratk['pp_pgm_fullneg']),
-        ('pp_geo_fullneg', ratk['pp_geo_fullneg']),
-        ('pp_max_fullneg', ratk['pp_max_fullneg']),
+        ('pp_geo_fullneg', ratk['pp_geo_fullneg']),#        ('pp_max_fullneg', ratk['pp_max_fullneg']),
         #
         ('pp_pgm_hardneg', ratk['pp_pgm_hardneg']),
-        ('pp_geo_hardneg', ratk['pp_geo_hardneg']),
-        ('pp_max_hardneg', ratk['pp_max_hardneg']),
+        ('pp_geo_hardneg', ratk['pp_geo_hardneg']),#        ('pp_max_hardneg', ratk['pp_max_hardneg']),
         #
         ('hs_pgm_fullneg', ratk['hs_pgm_fullneg']),
-        ('hs_geo_fullneg', ratk['hs_geo_fullneg']),
-        ('hs_max_fullneg', ratk['hs_max_fullneg']),
+        ('hs_geo_fullneg', ratk['hs_geo_fullneg']),#        ('hs_max_fullneg', ratk['hs_max_fullneg']),
         #
         ('hs_pgm_hardneg', ratk['hs_pgm_hardneg']),
-        ('hs_geo_hardneg', ratk['hs_geo_hardneg']),
-        ('hs_max_hardneg', ratk['hs_max_hardneg']),
+        ('hs_geo_hardneg', ratk['hs_geo_hardneg']),#        ('hs_max_hardneg', ratk['hs_max_hardneg']),
         #
         ('dw_pgm_fullneg', ratk['dw_pgm_fullneg']),
-        ('dw_geo_fullneg', ratk['dw_geo_fullneg']),
-        ('dw_max_fullneg', ratk['dw_max_fullneg']),
+        ('dw_geo_fullneg', ratk['dw_geo_fullneg']),#        ('dw_max_fullneg', ratk['dw_max_fullneg']),
         #
         ('dw_pgm_hardneg', ratk['dw_pgm_hardneg']),
-        ('dw_geo_hardneg', ratk['dw_geo_hardneg']),
-        ('dw_max_hardneg', ratk['dw_max_hardneg']),
+        ('dw_geo_hardneg', ratk['dw_geo_hardneg']),#        ('dw_max_hardneg', ratk['dw_max_hardneg']),
         #
         ('st_pgm_fullneg', ratk['st_pgm_fullneg']),
         ('st_geo_fullneg', ratk['st_geo_fullneg']),
@@ -205,64 +199,64 @@ def run_all_ratk():
         ('hard negative', ratk['hs_geo_hardneg'])
     ]
     
-    pp_max = [
-        ('full negative', ratk['pp_max_fullneg']),
-        ('hard negative', ratk['pp_max_hardneg'])
-    ]
-    dw_max = [
-        ('full negative', ratk['dw_max_fullneg']),
-        ('hard negative', ratk['dw_max_hardneg'])
-    ]
+    #pp_max = [
+    #    ('full negative', ratk['pp_max_fullneg']),
+    #    ('hard negative', ratk['pp_max_hardneg'])
+    #]
+    #dw_max = [
+    #    ('full negative', ratk['dw_max_fullneg']),
+    #    ('hard negative', ratk['dw_max_hardneg'])
+    #]
     #st_max = [
     #    ('full negative', ratk['st_max_fullneg']),
     #    ('hard negative', ratk['st_max_hardneg'])
     #]
-    hs_max = [
-        ('full negative', ratk['hs_max_fullneg']),
-        ('hard negative', ratk['hs_max_hardneg'])
-    ]
+    #hs_max = [
+    #    ('full negative', ratk['hs_max_fullneg']),
+    #    ('hard negative', ratk['hs_max_hardneg'])
+    #]
     
-    pp_hard_cmp = [
-        ('geo mean hard negative', ratk['pp_geo_hardneg']),
-        ('standard hard negative', ratk['pp_pgm_hardneg']),
-        ('max hard negative', ratk['pp_max_hardneg'])
-    ]
-    dw_hard_cmp = [
-        ('geo mean hard negative', ratk['dw_geo_hardneg']),
-        ('standard hard negative', ratk['dw_pgm_hardneg']),
-        ('max hard negative', ratk['dw_max_hardneg'])
-    ]
+    #pp_hard_cmp = [
+    #    ('geo mean hard negative', ratk['pp_geo_hardneg']),
+    #    ('standard hard negative', ratk['pp_pgm_hardneg']),
+    #    ('max hard negative', ratk['pp_max_hardneg'])
+    #]
+    #dw_hard_cmp = [
+    #    ('geo mean hard negative', ratk['dw_geo_hardneg']),
+    #    ('standard hard negative', ratk['dw_pgm_hardneg']),
+    #    ('max hard negative', ratk['dw_max_hardneg'])
+    #]
     #st_hard_cmp = [
     #    ('geo mean hard negative', ratk['st_geo_hardneg']),
     #    ('standard hard negative', ratk['st_pgm_hardneg']),
     #    ('max hard negative', ratk['st_max_hardneg'])
     #]
-    hs_hard_cmp = [
-        ('geo mean hard negative', ratk['hs_geo_hardneg']),
-        ('standard hard negative', ratk['hs_pgm_hardneg']),
-        ('max hard negative', ratk['hs_max_hardneg'])
-    ]
+    #hs_hard_cmp = [
+    #    ('geo mean hard negative', ratk['hs_geo_hardneg']),
+    #    ('standard hard negative', ratk['hs_pgm_hardneg']),
+    #    ('max hard negative', ratk['hs_max_hardneg'])
+    #]
     
-    pp_full_cmp = [
-        ('geo mean full negative', ratk['pp_geo_fullneg']),
-        ('standard full negative', ratk['pp_pgm_fullneg']),
-        ('max full negative', ratk['pp_max_fullneg'])
-    ]
-    dw_full_cmp = [
-        ('geo mean full negative', ratk['dw_geo_fullneg']),
-        ('standard full negative', ratk['dw_pgm_fullneg']),
-        ('max full negative', ratk['dw_max_fullneg'])
-    ]
+    #pp_full_cmp = [
+    #    ('geo mean full negative', ratk['pp_geo_fullneg']),
+    #    ('standard full negative', ratk['pp_pgm_fullneg']),
+    #    ('max full negative', ratk['pp_max_fullneg'])
+    #]
+    #dw_full_cmp = [
+    #    ('geo mean full negative', ratk['dw_geo_fullneg']),
+    #    ('standard full negative', ratk['dw_pgm_fullneg']),
+    #    ('max full negative', ratk['dw_max_fullneg'])
+    #]
     #st_full_cmp = [
     #    ('geo mean full negative', ratk['st_geo_fullneg']),
     #    ('standard full negative', ratk['st_pgm_fullneg']),
     #    ('max full negative', ratk['st_max_fullneg'])
     #]
-    hs_full_cmp = [
-        ('geo mean full negative', ratk['hs_geo_fullneg']),
-        ('standard full negative', ratk['hs_pgm_fullneg']),
-        ('max full negative', ratk['hs_max_fullneg'])
-    ]
+    #hs_full_cmp = [
+    #    ('geo mean full negative', ratk['hs_geo_fullneg']),
+    #    ('standard full negative', ratk['hs_pgm_fullneg']),
+    #    ('max full negative', ratk['hs_max_fullneg'])
+    #]
     
     r_at_k_plots(pp_pgm, filename=od+'pingpong_pgm_bothneg.png', x_limit=100)
     r_at_k_plot(ratk['pp_pgm_fullneg'][:,1], filename=od+'pingpong_pgm_fullneg_5k.png')
@@ -304,33 +298,33 @@ def run_all_ratk():
     r_at_k_plot(ratk['st_geo_fullneg'][:,1], filename=od+'stanford_dogwalking_geo_fullneg_100.png', x_limit=100)
     r_at_k_plot(ratk['st_geo_hardneg'][:,1], filename=od+'stanford_dogwalking_geo_hardneg.png')
 #-------------------------------------------------------------------------------
-    r_at_k_plots(pp_max, filename=od+'pingpong_max_bothneg.png', x_limit=100)
-    r_at_k_plot(ratk['pp_max_fullneg'][:,1], filename=od+'pingpong_max_fullneg_5k.png')
-    r_at_k_plot(ratk['pp_max_fullneg'][:,1], filename=od+'pingpong_max_fullneg_100.png', x_limit=100)
-    r_at_k_plot(ratk['pp_max_hardneg'][:,1], filename=od+'pingpong_max_hardneg.png')
+    #r_at_k_plots(pp_max, filename=od+'pingpong_max_bothneg.png', x_limit=100)
+    #r_at_k_plot(ratk['pp_max_fullneg'][:,1], filename=od+'pingpong_max_fullneg_5k.png')
+    #r_at_k_plot(ratk['pp_max_fullneg'][:,1], filename=od+'pingpong_max_fullneg_100.png', x_limit=100)
+    #r_at_k_plot(ratk['pp_max_hardneg'][:,1], filename=od+'pingpong_max_hardneg.png')
     
-    r_at_k_plots(hs_max, filename=od+'handshake_max_bothneg.png', x_limit=100)
-    r_at_k_plot(ratk['pp_max_fullneg'][:,1], filename=od+'pingpong_max_fullneg_5k.png')
-    r_at_k_plot(ratk['pp_max_fullneg'][:,1], filename=od+'pingpong_max_fullneg_100.png', x_limit=100)
-    r_at_k_plot(ratk['pp_max_hardneg'][:,1], filename=od+'pingpong_max_hardneg.png')
+    #r_at_k_plots(hs_max, filename=od+'handshake_max_bothneg.png', x_limit=100)
+    #r_at_k_plot(ratk['pp_max_fullneg'][:,1], filename=od+'pingpong_max_fullneg_5k.png')
+    #r_at_k_plot(ratk['pp_max_fullneg'][:,1], filename=od+'pingpong_max_fullneg_100.png', x_limit=100)
+    #r_at_k_plot(ratk['pp_max_hardneg'][:,1], filename=od+'pingpong_max_hardneg.png')
     
-    r_at_k_plots(dw_max, filename=od+'dogwalking_max_bothneg.png', x_limit=100)
-    r_at_k_plot(ratk['dw_max_fullneg'][:,1], filename=od+'dogwalking_max_fullneg_5k.png')
-    r_at_k_plot(ratk['dw_max_fullneg'][:,1], filename=od+'dogwalking_max_fullneg_100.png', x_limit=100)
-    r_at_k_plot(ratk['dw_max_hardneg'][:,1], filename=od+'dogwalking_max_hardneg.png')
+    #r_at_k_plots(dw_max, filename=od+'dogwalking_max_bothneg.png', x_limit=100)
+    #r_at_k_plot(ratk['dw_max_fullneg'][:,1], filename=od+'dogwalking_max_fullneg_5k.png')
+    #r_at_k_plot(ratk['dw_max_fullneg'][:,1], filename=od+'dogwalking_max_fullneg_100.png', x_limit=100)
+    #r_at_k_plot(ratk['dw_max_hardneg'][:,1], filename=od+'dogwalking_max_hardneg.png')
     
     #r_at_k_plots(st_max, filename=od+'stanford_dogwalking_max_bothneg.png', x_limit=100)
     #r_at_k_plot(ratk['st_max_fullneg'][:,1], filename=od+'stanford_dogwalking_max_fullneg_5k.png')
     #r_at_k_plot(ratk['st_max_fullneg'][:,1], filename=od+'stanford_dogwalking_max_fullneg_100.png', x_limit=100)
     #r_at_k_plot(ratk['st_max_hardneg'][:,1], filename=od+'stanford_dogwalking_max_hardneg.png')
 #-------------------------------------------------------------------------------
-    r_at_k_plots(pp_hard_cmp, filename=od+'pingpong_cmp_hard.png', x_limit=100)
-    r_at_k_plots(hs_hard_cmp, filename=od+'handshake_cmp_hard.png', x_limit=100)
-    r_at_k_plots(dw_hard_cmp, filename=od+'dogwalking_cmp_hard.png', x_limit=100)
+    #r_at_k_plots(pp_hard_cmp, filename=od+'pingpong_cmp_hard.png', x_limit=100)
+    #r_at_k_plots(hs_hard_cmp, filename=od+'handshake_cmp_hard.png', x_limit=100)
+    #r_at_k_plots(dw_hard_cmp, filename=od+'dogwalking_cmp_hard.png', x_limit=100)
     #r_at_k_plots(st_hard_cmp, filename=od+'stanford_dogwalking_cmp_hard.png', x_limit=100)
-    r_at_k_plots(pp_full_cmp, filename=od+'pingpong_cmp_full.png', x_limit=100)
-    r_at_k_plots(hs_full_cmp, filename=od+'handshake_cmp_full.png', x_limit=100)
-    r_at_k_plots(dw_full_cmp, filename=od+'dogwalking_cmp_full.png', x_limit=100)
+    #r_at_k_plots(pp_full_cmp, filename=od+'pingpong_cmp_full.png', x_limit=100)
+    #r_at_k_plots(hs_full_cmp, filename=od+'handshake_cmp_full.png', x_limit=100)
+    #r_at_k_plots(dw_full_cmp, filename=od+'dogwalking_cmp_full.png', x_limit=100)
     #r_at_k_plots(st_full_cmp, filename=od+'stanford_dogwalking_cmp_full.png', x_limit=100)
 
 
