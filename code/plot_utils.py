@@ -1,4 +1,5 @@
 from __future__ import print_function
+import matplotlib; matplotlib.use('agg') #when running remotely
 import numpy as np
 
 

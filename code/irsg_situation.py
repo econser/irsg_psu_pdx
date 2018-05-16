@@ -1148,6 +1148,7 @@ if __name__ == '__main__':
             viz_output_filename = viz_file_format.format(image_prefix)
             viz_output_filename = '{:06.3f}_{}'.format(energy, viz_output_filename)
             viz_image_filepath = os.path.join(viz_output_dir, viz_output_filename)
+            viz_image_filepath = os.path.abspath(viz_image_filepath)
             image_filepath = os.path.join(image_dir, rc.image_filename)
             image_filepath = os.path.abspath(image_filepath)
             

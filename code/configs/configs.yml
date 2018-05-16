@@ -22,7 +22,7 @@ DW_POSTEST_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data'
   #
   image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
@@ -38,7 +38,7 @@ DW_HARDNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_hardneg/'
@@ -53,7 +53,7 @@ DW_FULLNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_fullneg/'
@@ -68,7 +68,7 @@ DW_ORIGNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_origneg/'
@@ -83,7 +83,7 @@ DW_POSTEST_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
@@ -98,7 +98,7 @@ DW_HARDNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_hardneg/'
@@ -112,7 +112,7 @@ DW_FULLNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_fullneg/'
@@ -126,7 +126,7 @@ DW_ORIGNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_origneg/'
@@ -146,7 +146,7 @@ DW_POSTEST_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
@@ -162,7 +162,7 @@ DW_HARDNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_hardneg/'
@@ -177,7 +177,7 @@ DW_FULLNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_fullneg/'
@@ -192,7 +192,7 @@ DW_ORIGNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_origneg/'
@@ -207,7 +207,7 @@ DW_POSTEST_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
@@ -223,7 +223,7 @@ DW_HARDNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_hardneg/'
@@ -238,7 +238,7 @@ DW_FULLNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_fullneg/'
@@ -253,7 +253,7 @@ DW_ORIGNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_origneg/'
@@ -274,7 +274,7 @@ STAN_DW_POSTEST_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   image_dir : './images/StanfordSimpleDogWalking/'
@@ -290,7 +290,7 @@ STAN_DW_HARDNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_hardneg/'
@@ -305,7 +305,7 @@ STAN_DW_FULLNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_fullneg/'
@@ -320,7 +320,7 @@ STAN_DW_ORIGNEG_PGM_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_origneg/'
@@ -335,7 +335,7 @@ STAN_DW_POSTEST_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   image_dir : './images/StanfordSimpleDogWalking/'
@@ -350,7 +350,7 @@ STAN_DW_HARDNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_hardneg/'
@@ -364,7 +364,7 @@ STAN_DW_FULLNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_fullneg/'
@@ -378,7 +378,7 @@ STAN_DW_ORIGNEG_PGM_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_origneg/'
@@ -398,7 +398,7 @@ STAN_DW_POSTEST_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   image_dir : './images/StanfordSimpleDogWalking/'
@@ -414,7 +414,7 @@ STAN_DW_HARDNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_hardneg/'
@@ -429,7 +429,7 @@ STAN_DW_FULLNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_fullneg/'
@@ -444,7 +444,7 @@ STAN_DW_ORIGNEG_GEO_ENERGY:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_origneg/'
@@ -459,7 +459,7 @@ STAN_DW_POSTEST_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   image_dir : './images/StanfordSimpleDogWalking/'
@@ -475,7 +475,7 @@ STAN_DW_HARDNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_hardneg/'
@@ -490,7 +490,7 @@ STAN_DW_FULLNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_fullneg/'
@@ -505,7 +505,7 @@ STAN_DW_ORIGNEG_GEO_VIZ:
   query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
   query_function : 'two_rel_loop'
   #
-  gmm_filename : 'dw_gmms_unlog.pkl'
+  gmm_filename : 'dw_gmms_revised.pkl'
   data_dir : './data/'
   #
   precalc_dir : './run_results/dw_origneg/'
