@@ -713,6 +713,43 @@ def do_inference(gm, n_steps=120, damping=0., convergence_bound=0.001, verbose=F
 
 
 
+def get_exhaustive_energies(query, model_components, objects_per_class, verbose=False):
+    # generate all unary ix combinations
+    unary_objects = model_components.unary_components
+    query_objects = query.objects
+    
+    bbox_counts = []
+    for query_ix, query_object in enumerate(query_objects):
+        for unary_ix, unary_object in unary_objects:
+            bbox_counts.append(len(unary_object.boxes))
+
+    bbox_ix_list = []
+    for count in bbox_counts:
+        bbox_ix_list = np.arange(count)
+
+    n_objects = len(bbox_ix_list)
+    bbox_ix_combinations = np.array(np.meshgrid(bbox_ix_list)).T.reshape(-1, n_objects)
+
+    # discard bad configurations
+    # get all unary probs
+    u_probs = None
+    bic = bbox_ix_combinations
+    if n_objects == 3:
+        u_probs = np.array(np.meshgrid(bic[:,0], bic[:,1], bic[:,2])).T.reshape(-1,3)
+    elif n_objects == 4:
+        u_probs = np.array(np.meshgrid(bic[:,0], bic[:,1], bic[:,2], bic[:,3])).T.reshape(-1,4)
+    else:
+        return None
+    
+    # get all binary boxes
+    # calc binary probs
+    # calc probabilities
+    # calc energies
+    
+    return None
+
+
+
 #===============================================================================
 def save_all_binary_probs(query, query_to_model_map, best_box_ixs, rc, csv_prefix):
     # get the unaries
