@@ -548,6 +548,8 @@ def gen_factor_graph(query, model_components, objects_per_class, verbose=False, 
     fg_to_sg = []
     sg_to_unary = []
     fg_functions = []
+
+    zero_slices = []
     
     #---------------------------------------------------------------------------
     # GENERATE UNARY FUNCTIONS
@@ -562,6 +564,7 @@ def gen_factor_graph(query, model_components, objects_per_class, verbose=False, 
         n_vars.append(n_labels)
         fg_to_sg.append(sg_obj_ix)
         sg_to_unary.append(img_obj_ix)
+        zero_slices.append(None)
     gm = ogm.gm(n_vars, operator='adder')
     
     # add unary functions to gm
@@ -570,9 +573,11 @@ def gen_factor_graph(query, model_components, objects_per_class, verbose=False, 
         unary_ix = sg_to_unary[ix]
         scores = np.copy(unary_obj_descriptors[unary_ix].scores)
         
-        if unary_fn_count[unary_ix] > 0:
-            for zero_ix in range(0, unary_fn_count[unary_ix]):
-                scores[zero_ix] = 0.0
+        if objects_per_class[unary_ix] > 1:
+            zero_ix = (unary_fn_count[unary_ix]+1) % objects_per_class[unary_ix]
+            zero_slices[ix] = np.index_exp[zero_ix:zero_ix+1]
+        if zero_slices[ix] is not None:
+            scores[zero_slices[ix]] = 0.0
         unary_fn_count[unary_ix] += 1
         
         if do_unary_xform:
@@ -645,6 +650,13 @@ def gen_factor_graph(query, model_components, objects_per_class, verbose=False, 
                 scores = -np.log(scores)
             
             bin_fns = np.reshape(scores, (n_sub_boxes, n_obj_boxes))
+            if zero_slices[rel.subject] is not None:
+                zero_slice = zero_slices[rel.subject][0]
+                bin_fns[zero_slice, :] = -np.log(np.finfo(np.float).eps)
+            if zero_slices[rel.object] is not None:
+                zero_slice = zero_slices[rel.object][0]
+                bin_fns[:, zero_slice] = -np.log(np.finfo(np.float).eps)
+
         
         sub_var_ix = fg_to_sg[rel.subject]
         obj_var_ix = fg_to_sg[rel.object]
@@ -1076,7 +1088,8 @@ if __name__ == '__main__':
         if not os.path.exists(energy_output_dir):
             os.makedirs(energy_output_dir)
         for cls_name in class_list:
-            bbox_filename = os.path.join(energy_output_dir, '{}_{}_bboxes.csv'.format(cls_name, energy_method))
+            fname = energy_filename.replace('energy', '{}_bboxes'.format(cls_name))
+            bbox_filename = os.path.join(energy_output_dir, fname)
             bbox_file_handles[cls_name] = open(bbox_filename, 'wb')
         
     if query is None:
@@ -1129,6 +1142,7 @@ if __name__ == '__main__':
                 h = int(bbox[3])
                 bbox_line = format_str.format(rc.image_filename, x, y, w, h)
                 bbox_file_handles[cls_name].write(bbox_line)
+                bbox_file_handles[cls_name].flush()
         
         # generate viz plot, if so configured
         if do_viz:
