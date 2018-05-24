@@ -1,6 +1,7 @@
 from __future__ import print_function
-import matplotlib; matplotlib.use('agg') #when running remotely
+#import matplotlib; matplotlib.use('agg') #when running remotely
 import numpy as np
+
 
 
 
@@ -23,6 +24,58 @@ class ResultLine (object):
         
         self.filename = filename
         self.energy = energy
+
+
+
+def bnw():
+    import csv
+    import os.path
+    import matplotlib.pyplot as plt
+    
+    base_dir = '/home/econser/research/irsg_psu_pdx/output/full_runs/dog_walking'
+    pos_data_fname = 'dog_walking_postest_factors.csv'
+    pos_color = 'lightgreen'
+    neg_data_fname = 'dog_walking_hardneg_factors.csv'
+    neg_color = 'tomato'
+    
+    # read in the header
+    f = open(os.path.join(base_dir, pos_data_fname), 'rb')
+    r = csv.reader(f)
+    header = r.next()
+    f.close()
+    
+    # read in the np arrays
+    neg_data = np.genfromtxt(os.path.join(base_dir, neg_data_fname), delimiter=', ', dtype=np.object, skip_header=True)
+    
+    pos_data = np.genfromtxt(os.path.join(base_dir, pos_data_fname), delimiter=', ', dtype=np.object, skip_header=True)
+    
+    # interleave the pos and neg columns
+    data = []
+    labels = []
+    colors = []
+    for col_ix in range(0, len(pos_data[0])):
+        if col_ix == 0:
+            continue
+        
+        data.append(np.array(pos_data[:, col_ix], dtype=np.float))
+        labels.append('pos_{}'.format(header[col_ix]))
+        colors.append(pos_color)
+        
+        data.append(np.array(neg_data[:, col_ix], dtype=np.float))
+        labels.append('neg_{}'.format(header[col_ix]))
+        colors.append(neg_color)
+    
+    # start plot
+    fix, ax = plt.subplots()
+    ax.yaxis.grid(True, linestyle='-', which='major', color='lightgrey', alpha=0.5)
+    
+    # plot and show/save
+    boxplots = ax.boxplot(data, patch_artist=True)
+    for patch, color in zip(boxplots['boxes'], colors):
+        patch.set_facecolor(color)
+    ax.set_xticklabels(labels, rotation=45)
+    
+    plt.show()
 
 
 

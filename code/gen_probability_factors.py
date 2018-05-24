@@ -25,12 +25,17 @@ BASE_DIR = os.path.abspath(BASE_DIR)
 #===============================================================================
 class BinaryRelation (object):
     def __init__(self, sub_bboxes, obj_bboxes, gmm):
-        self.box_pairs = np.array([x for x in it.product(sub_bboxes, obj_bboxes)])
-        self.box_vec = iu.get_gmm_features(self.box_pairs, in_format='xywh')
-        self.density = iu.gmm_pdf(self.box_vec, gmm.gmm_weights, gmm.gmm_mu, gmm.gmm_sigma)
-        self.density = np.reshape(self.density, (len(sub_bboxes), len(obj_bboxes)))
-        self.prob = 1. / (1. + np.exp(-(gmm.platt_a * self.density + gmm.platt_b)))
-        self.sort_ixs = np.argsort(self.prob)[::-1]
+        box_pairs = np.array([x for x in it.product(sub_bboxes, obj_bboxes)])
+        box_vec = iu.get_gmm_features(box_pairs, in_format='xywh')
+        density = iu.gmm_pdf(box_vec, gmm.gmm_weights, gmm.gmm_mu, gmm.gmm_sigma)
+        density = np.reshape(density, (len(sub_bboxes), len(obj_bboxes)))
+        self.prob = 1. / (1. + np.exp(-(gmm.platt_a * density + gmm.platt_b)))
+        #self.box_pairs = np.array([x for x in it.product(sub_bboxes, obj_bboxes)])
+        #self.box_vec = iu.get_gmm_features(self.box_pairs, in_format='xywh')
+        #self.density = iu.gmm_pdf(self.box_vec, gmm.gmm_weights, gmm.gmm_mu, gmm.gmm_sigma)
+        #self.density = np.reshape(self.density, (len(sub_bboxes), len(obj_bboxes)))
+        #self.prob = 1. / (1. + np.exp(-(gmm.platt_a * self.density + gmm.platt_b)))
+        #self.sort_ixs = np.argsort(self.prob)[::-1]
 
 
 
@@ -68,7 +73,7 @@ def get_cfg():
     import argparse
     parser = argparse.ArgumentParser(description='Binary Relation generation')
     parser.add_argument('--model', dest='model_type', choices=['dog_walking', 'stanford_dw', 'pingpong', 'handshake'])
-    parser.add_argument('--dataset', dest='dataset', choices=['pos', 'hard_neg', 'full_neg'])
+    parser.add_argument('--dataset', dest='dataset', choices=['postest', 'hardneg', 'fullneg'])
     parser.add_argument('--gmm', dest='gmm_fname')
     args = parser.parse_args()
     
@@ -86,21 +91,25 @@ def get_cfg():
     
     if model_type == 'dog_walking':
         csv_dir_map = {
-            'pos' : os.path.join(BASE_DIR, 'run_results/dw_fullpos/'),
-            'hard_neg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/'),
-            'full_neg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/')
+            'postest' : os.path.join(BASE_DIR, 'run_results/dw_fullpos/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/')
         }
         image_dir_map = {
-            'pos' : os.path.join(BASE_DIR, 'data/dog_walking'),
-            'hard_neg' : os.path.join(BASE_DIR, ''),
-            'full_neg' : os.path.join(BASE_DIR, '')
+            'postest' : os.path.join(BASE_DIR, 'run_results/dw_fullpos/dog/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/dog/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/dog/')
         }
-        best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/dog_walking/')
+        best_bbox_map = {
+            'postest' : os.path.join(BASE_DIR, 'output/full_runs/dog_walking/dw_cycle_postest_pgm_{}_bboxes.csv'),
+            'hardneg': os.path.join(BASE_DIR, 'output/full_runs/dog_walking/dw_cycle_hardneg_pgm_{}_bboxes.csv'),
+            'fullneg': os.path.join(BASE_DIR, 'output/full_runs/dog_walking/dw_cycle_fullneg_pgm_{}_bboxes.csv')
+        }
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/dog_walking/')
         imageset_files = {
-            'pos': os.path.join(BASE_DIR, 'data/dogwalkingtest_fnames_test.txt'),
-            'hard_neg': None,
-            'full_neg': None
+            'postest': os.path.join(BASE_DIR, 'data/dogwalkingtest_fnames_test.txt'),
+            'hardneg': None,
+            'fullneg': None
         }
         cls_names = ['dog_walker', 'leash', 'dog']
         cls_counts = [1, 1, 1]
@@ -111,21 +120,25 @@ def get_cfg():
         }
     elif model_type == 'stanford_dw':
         csv_dir_map = {
-            'pos' : os.path.join(BASE_DIR, 'run_results/stanford_dog_walking/'),
-            'hard_neg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/'),
-            'full_neg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/')
+            'postest' : os.path.join(BASE_DIR, 'run_results/stanford_dog_walking/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/')
         }
         image_dir_map = {
-            'pos' : os.path.join(BASE_DIR, ''),
-            'hard_neg' : os.path.join(BASE_DIR, ''),
-            'full_neg' : os.path.join(BASE_DIR, '')
+            'postest' : os.path.join(BASE_DIR, 'run_results/stanford_dog_walking/dog/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/dog/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/dog/')
         }
-        best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/stanford_dog_walking/')
+        best_bbox_map = {
+            'postest' : os.path.join(BASE_DIR, 'full_runs/stanford_dog_walking/dw_cycle_postest_pgm_{}_bboxes.csv'),
+            'hardneg': os.path_join(BASE_DIR, 'full_runs/stanford_dog_walking/dw_cycle_hardneg_pgm_{}_bboxes.csv'),
+            'fullneg': os.path_join(BASE_DIR, 'full_runs/stanford_dog_walking/dw_cycle_fullneg_pgm_{}_bboxes.csv')
+        }
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/stanford_dog_walking/')
         imageset_files = {
-            'pos': os.path.join(BASE_DIR, 'data/stanford_fnames_test.txt'),
-            'hard_neg': None,
-            'full_neg': None
+            'postest': os.path.join(BASE_DIR, 'data/stanford_fnames_test.txt'),
+            'hardneg': None,
+            'fullneg': None
         }
         cls_names = ['dog_walker', 'leash', 'dog']
         cls_counts = [1, 1, 1]
@@ -137,21 +150,25 @@ def get_cfg():
         }
     elif model_type == 'pingpong':
         csv_dir_map = {
-            'pos' : os.path.join(BASE_DIR, 'run_results/pingpong/'),
-            'hard_neg' : os.path.join(BASE_DIR, 'run_results/pingpong_hardneg/'),
-            'full_neg' : os.path.join(BASE_DIR, 'run_results/pingpong_fullneg/')
+            'postest' : os.path.join(BASE_DIR, 'run_results/pingpong/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/pingpong_hardneg/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/pingpong_fullneg/')
         }
         image_dir_map = {
-            'pos' : os.path.join(BASE_DIR, ''),
-            'hard_neg' : os.path.join(BASE_DIR, ''),
-            'full_neg' : os.path.join(BASE_DIR, '')
+            'postest' : os.path.join(BASE_DIR, 'run_results/pingpong/player/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/pingpong_hardneg/player/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/pingpong_fullneg/player/')
         }
-        best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/pingpong/')
+        best_bbox_map = {
+            'postest' : os.path.join(BASE_DIR, 'full_runs/pingpong/pingpong_postest_pgm_{}_bboxes.csv'),
+            'hardneg': os.path_join(BASE_DIR, 'full_runs/pingpong/pingpong_hardneg_pgm_{}_bboxes.csv'),
+            'fullneg': os.path_join(BASE_DIR, 'full_runs/pingpong/pingpong_fullneg_pgm_{}_bboxes.csv')
+        }
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/pingpong/')
         imageset_files = {
-            'pos': os.path.join(BASE_DIR, 'data/pingpong_fnames_test.txt'),
-            'hard_neg': None,
-            'full_neg': None
+            'postest': os.path.join(BASE_DIR, 'data/pingpong_fnames_test.txt'),
+            'hardneg': None,
+            'fullneg': None
         }
         cls_names = ['player', 'net', 'table']
         cls_counts = [2, 1, 1]
@@ -162,21 +179,25 @@ def get_cfg():
         }
     elif model_type == 'handshake':
         csv_dir_map = {
-            'pos' : os.path.join(BASE_DIR, 'run_results/hs_fullpos/'),
-            'hard_neg' : os.path.join(BASE_DIR, 'run_results/hs_hardneg/'),
-            'full_neg' : os.path.join(BASE_DIR, 'run_results/hs_fullneg/')
+            'postest' : os.path.join(BASE_DIR, 'run_results/hs_fullpos/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/hs_hardneg/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/hs_fullneg/')
         }
         image_dir_map = {
-            'pos' : os.path.join(BASE_DIR, ''),
-            'hard_neg' : os.path.join(BASE_DIR, ''),
-            'full_neg' : os.path.join(BASE_DIR, '')
+            'postest' : os.path.join(BASE_DIR, 'run_results/hs_fullpos/person/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/hs_hardneg/person/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/hs_fullneg/person/')
         }
-        best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/handshake/')
+        best_bbox_map = {
+            'postest' : os.path.join(BASE_DIR, 'full_runs/handshake/handshake_postest_pgm_{}_bboxes.csv'),
+            'hardneg': os.path_join(BASE_DIR, 'full_runs/handshake/handshake_hardneg_pgm_{}_bboxes.csv'),
+            'fullneg': os.path_join(BASE_DIR, 'full_runs/handshake/handshake_fullneg_pgm_{}_bboxes.csv')
+        }
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/handshake/')
         imageset_files = {
-            'pos': os.path.join(BASE_DIR, 'data/handshake_fnames_test.txt'),
-            'hard_neg': None,
-            'full_neg': None
+            'postest': os.path.join(BASE_DIR, 'data/handshake_fnames_test.txt'),
+            'hardneg': None,
+            'fullneg': None
         }
         cls_names = ['person', 'handshake']
         cls_counts = [2, 1]
@@ -187,7 +208,7 @@ def get_cfg():
     else:
         pass
     
-    return model_type, gmm_fname, csv_dir_map[dataset], image_dir_map[dataset], best_bbox_dir, output_dir, imageset_files[dataset], rel_map, cls_names, cls_counts
+    return model_type, gmm_fname, csv_dir_map[dataset], image_dir_map[dataset], best_bbox_map[dataset], output_dir, imageset_files[dataset], rel_map, cls_names, cls_counts, dataset
 
 
 
@@ -195,7 +216,7 @@ def get_cfg():
     model: which model to process
     gmm: the .pkl gmm for sampling
 
-python gen_probability_factors.py --model dog_walking --dataset pos --gmm dw_gmms_unlog.pkl
+python gen_probability_factors.py --model dog_walking --dataset postest --gmm dw_gmms_revised.pkl
 python gen_probability_factors.py --model handshake --dataset pos --gmm handshake_gmms.pkl
 python gen_probability_factors.py --model pingpong --dataset pos --gmm pingpong_gmms.pkl
 """
@@ -203,22 +224,23 @@ if __name__ == '__main__':
     # read config
     cfg = get_cfg()
     
-    model_type    = cfg[0]
-    gmm_fname     = cfg[1]
-    csv_dir       = cfg[2]
-    image_dir     = cfg[3]
-    best_bbox_dir = cfg[4]
-    output_dir    = cfg[5]
-    imageset_file = cfg[6]
-    rel_map       = cfg[7]
-    cls_names     = cfg[8]
-    cls_counts    = cfg[9]
+    model_type     = cfg[0]
+    gmm_fname      = cfg[1]
+    csv_dir        = cfg[2]
+    image_dir      = cfg[3]
+    best_bbox_file = cfg[4]
+    output_dir     = cfg[5]
+    imageset_file  = cfg[6]
+    rel_map        = cfg[7]
+    cls_names      = cfg[8]
+    cls_counts     = cfg[9]
+    dataset        = cfg[10]
     
     # create output dir, if necessary
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     
-    # prep the imageset (imageXXX.jpg\r\n -> imageXXX)
+    # prep the imageset
     imageset = []
     if imageset_file is not None:
         f = open(imageset_file)
@@ -228,10 +250,10 @@ if __name__ == '__main__':
         imageset = [fname.rstrip('\r') for fname in imageset]
     else:
         imageset = os.listdir(image_dir)
-        imageset = filter(lambda x: '.labl' in x, imageset)
+        imageset = filter(lambda x: '.csv' in x, imageset)
     imageset = [fname.split('.')[0] for fname in imageset]
     #imageset = ['dog-walking394']
-    imageset = ['5462007065_b94d86008a_b']
+    #imageset = ['5462007065_b94d86008a_b']
     n_images = len(imageset)
     
     # get the gmms
@@ -240,15 +262,15 @@ if __name__ == '__main__':
     relations = gmms.keys()
     
     # process each best_bbox csv file
-    #   best_bboxes[object_class] => bbox_dict[image_filename] => bbox
+    #   best_bboxes[image_filename] => bbox_dict[class_name] => [bbox]
     best_bboxes = {}
     for cls_name in cls_names:
-        fname = os.path.join(best_bbox_dir, '{}_pgm_bboxes.csv'.format(cls_name))
-        f = open(fname, 'rb')
+        f = open(best_bbox_file.format(cls_name), 'rb')
         for line in f.readlines():
             line = line.rstrip('\n')
             csv = line.split(', ')
             src_fname = csv[0].split('.')[0]
+            
             x = int(csv[1])
             y = int(csv[2])
             w = int(csv[3])
@@ -262,6 +284,7 @@ if __name__ == '__main__':
                 best_bboxes[src_fname][cls_name] = []
             
             best_bboxes[src_fname][cls_name].append(bbox)
+        f.close()
     
     # read in image class data
     image_data = {}
@@ -332,7 +355,8 @@ if __name__ == '__main__':
                 np_fmt_str += ', '
         
         result_array = np.array(results, dtype=np.object)
-        np.savetxt(os.path.join(output_dir, 'temp.csv'), result_array, header=header_str, fmt=np_fmt_str, comments='')
+        output_fname = '{}_{}_factors.csv'.format(model_type, dataset)
+        np.savetxt(os.path.join(output_dir, output_fname), result_array, header=header_str, fmt=np_fmt_str, comments='')
 
 """
       filename, dog_walker, leash,   dog, attached_to, walked_by, holding, -ln(P), C

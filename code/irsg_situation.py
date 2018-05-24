@@ -1,3 +1,4 @@
+
 from __future__ import print_function
 import matplotlib; matplotlib.use('agg') #when running remotely
 import opengm as ogm
@@ -656,7 +657,6 @@ def gen_factor_graph(query, model_components, objects_per_class, verbose=False, 
             if zero_slices[rel.object] is not None:
                 zero_slice = zero_slices[rel.object][0]
                 bin_fns[:, zero_slice] = -np.log(np.finfo(np.float).eps)
-
         
         sub_var_ix = fg_to_sg[rel.subject]
         obj_var_ix = fg_to_sg[rel.object]
@@ -715,37 +715,79 @@ def do_inference(gm, n_steps=120, damping=0., convergence_bound=0.001, verbose=F
 
 def get_exhaustive_energies(query, model_components, objects_per_class, verbose=False):
     # generate all unary ix combinations
+    import pdb; pdb.set_trace()
     unary_objects = model_components.unary_components
     query_objects = query.objects
     
     bbox_counts = []
+    query_to_unary = {}
     for query_ix, query_object in enumerate(query_objects):
-        for unary_ix, unary_object in unary_objects:
-            bbox_counts.append(len(unary_object.boxes))
-
+        for unary_ix, unary_object in enumerate(unary_objects):
+            if unary_object.name == query_object.names:
+                bbox_counts.append(len(unary_object.boxes))
+                query_to_unary[query_ix] = unary_ix
+                break
+    
     bbox_ix_list = []
     for count in bbox_counts:
-        bbox_ix_list = np.arange(count)
-
+        bbox_ix_list.append(np.arange(count))
+    
     n_objects = len(bbox_ix_list)
-    bbox_ix_combinations = np.array(np.meshgrid(bbox_ix_list)).T.reshape(-1, n_objects)
-
-    # discard bad configurations
-    # get all unary probs
-    u_probs = None
-    bic = bbox_ix_combinations
+    b = bbox_ix_list
+    bbox_ix_combos = None
     if n_objects == 3:
-        u_probs = np.array(np.meshgrid(bic[:,0], bic[:,1], bic[:,2])).T.reshape(-1,3)
+        bbox_ix_combos = np.array(np.meshgrid(b[0], b[1], b[2])).T.reshape(-1,3)
     elif n_objects == 4:
-        u_probs = np.array(np.meshgrid(bic[:,0], bic[:,1], bic[:,2], bic[:,3])).T.reshape(-1,4)
+        bbox_ix_combos = np.array(np.meshgrid(b[0], b[1], b[2], b[3])).T.reshape(-1,4)
     else:
         return None
     
-    # get all binary boxes
-    # calc binary probs
-    # calc probabilities
-    # calc energies
+    # TODO: discard bad configurations
+    # bad_ixs = np.where(bbox_ix_combos[:,0] == bbox_ix_combos[:,1])
+    # good_ixs = not(bad_ixs)
+    # bbox_ix_combos = bbox_ix_combos[good_ixs]
     
+    # get all unary probs
+    u_probs = np.zeros_like(bbox_ix_combos, dtype=np.float)
+    for col_ix, col in enumerate(bbox_ix_combos.T):
+        unary_ix = query_to_unary[col_ix]
+        u_probs.T[col_ix] = unary_objects[unary_ix].scores[col]
+    
+    # get all binary scores
+    query_to_unary_map = []
+    for i in range(0, n_objects):
+        query_to_unary_map.append(query_to_unary[i])
+    bin_score_tuples = get_binary_scores(query, query_to_unary_map, rc)
+    
+    # calc binary probs
+    bin_relations = query.binary_triples
+    relationships = []
+    if isinstance(bin_relations, np.ndarray):
+        for rel in bin_relations:
+            relationships.append(rel)
+    else:
+        relationships.append(bin_relations)
+    
+    for rel in relationships:
+        for bin_score_tup in bin_score_tuples:
+            subject_ix = bin_score_tup[0]
+            object_ix = bin_score_tup[2]
+            
+            rel_subject_ix = query_to_unary[rel.subject]
+            rel_object_ix = query_to_unary[rel.object]
+            
+            if rel_subject_ix == subject_ix and rel_object_ix == object_ix:
+                scores = bin_score_tup[5]
+                import pdb; pdb.set_trace()
+                sub_config_ixs = bbox_ix_combos[:,rel.subject]
+                obj_config_ixs = bbox_ix_combos[:,rel.object]
+                bin_probs = scores[sub_config_ixs][obj_config_ixs]
+            break
+    
+    # calc config probabilities
+    # calc config energies
+    
+    import pdb; pdb.set_trace()
     return None
 
 
@@ -821,10 +863,10 @@ def get_binary_scores(query, qry_to_model_map, model_components):
         
         # run the features through the relationship model
         scores = iutl.gmm_pdf(gmm_features, params.gmm_weights, params.gmm_mu, params.gmm_sigma)
-        if do_binary_xform:
-            scores += np.finfo(np.float).eps # float epsilon so that we don't try ln(0)
-            if use_scaling and params.platt_a is not None and params.platt_b is not None:
-                scores = 1. / (1. + np.exp(-(params.platt_a * scores + params.platt_b)))
+        if params.platt_a is not None and params.platt_b is not None:
+            scores = 1. / (1. + np.exp(-(params.platt_a * scores + params.platt_b)))
+        scores += np.finfo(np.float).eps # float epsilon so that we don't try ln(0)
+        scores = -np.log(scores)
         
         bin_fns = np.reshape(scores, (n_sub_boxes, n_obj_boxes))
         
@@ -838,11 +880,12 @@ def get_binary_scores(query, qry_to_model_map, model_components):
         
         bin_fn_list.append((sub_var_ix, subject_name, obj_var_ix, object_name, relationship_key, bin_fns))
     
-    bf = bin_fn_list[0][5]
-    box_ixs = np.unravel_index(np.argmax(bf), bf.shape)
-    bin_results = get_rel_data(model_components, (2,2), bf)
+    #bf = bin_fn_list[0][5]
+    #box_ixs = np.unravel_index(np.argmax(bf), bf.shape)
+    #bin_results = get_rel_data(model_components, (2,2), bf)
+    #return bin_results
     
-    return bin_results
+    return bin_fn_list
 
 
 
@@ -1119,7 +1162,7 @@ if __name__ == '__main__':
             os.makedirs(energy_output_dir)
         energy_file_handle = open(energy_pathname, 'wb')
         energy_file_handle.write('file, energy\n')
-
+    
     bbox_file_handles = {}
     if save_bboxes:
         if not os.path.exists(energy_output_dir):
@@ -1145,6 +1188,7 @@ if __name__ == '__main__':
             if energy_method == 'max_rel':
                 max_rel_dict = get_max_rels(max_rel_dir)
             # generate factor graph and run inference
+            x = get_exhaustive_energies(query, rc, objects_per_class)
             pgm, query_to_model_map = gen_factor_graph(query, rc, objects_per_class, max_rels=max_rel_dict)
             energy, best_box_ixs, marginals = do_inference(pgm)
             
