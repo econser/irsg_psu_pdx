@@ -1251,12 +1251,13 @@ if __name__ == '__main__':
                 cls_unaries = rc.unary_components[unary_ix]
                 cls_name = cls_unaries.name
                 bbox = cls_unaries.boxes[bbox_ix]
-                format_str = '{}, {:d}, {:d}, {:d}, {:d}\n'
+                score = cls_unaries.scores[bbox_ix]
+                format_str = '{}, {:0.3f}, {:d}, {:d}, {:d}, {:d}\n'
                 x = int(bbox[0])
                 y = int(bbox[1])
                 w = int(bbox[2])
                 h = int(bbox[3])
-                bbox_line = format_str.format(rc.image_filename, x, y, w, h)
+                bbox_line = format_str.format(rc.image_filename, score, x, y, w, h)
                 bbox_file_handles[cls_name].write(bbox_line)
                 bbox_file_handles[cls_name].flush()
         

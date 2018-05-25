@@ -27,6 +27,10 @@ class ResultLine (object):
 
 
 
+"""
+    This is a (terribly named) box-and-whisker plot generator
+    The name will be fixed soon!
+"""
 def bnw():
     import csv
     import os.path
@@ -573,6 +577,68 @@ def r_at_k_table(k_vals, row_tups):
 #-------------------------------------------------------------------------------
 # VIZ PLOT SECTION
 #
+"""
+p.viz_top_boxes('/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong/pingpong_postest_brute_energy.csv', '/home/econser/research/irsg_psu_pdx/data/PingPong', '/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong/pingpong_postest_brute_{}_bboxes.csv', '/home/econser/research/irsg_psu_pdx/data/pingpong_classes.txt', '/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong/viz_postest_brute/{:06.3f}_{}.jpg')
+"""
+def viz_top_boxes(energy_csv, image_dir, bbox_csv_fmt, object_class_file, output_fmt):
+    import csv
+    # get fname,energy pairs
+    in_files = []
+    with open(energy_csv, 'rb') as f:
+        csv_reader = csv.reader(f)
+        for row_ix, row in enumerate(csv_reader):
+            # ignore header
+            if row_ix == 0:
+                continue
+            # trim off extension?
+            fname = row[0].split('.')[0]
+            energy = float(row[1])
+            in_files.append((fname, energy))
+    
+    # get object classes
+    class_list = []
+    with open(object_class_file, 'rb') as f:
+        class_list = f.readlines()
+        class_list = [cls.rstrip('\n') for cls in class_list]
+    
+    # read in the bbox csv files
+    bbox_data = {}
+    for cls in class_list:
+        box_fname = bbox_csv_fmt.format(cls)
+        with open(box_fname, 'rb') as f:
+            csv_reader = csv.reader(f)
+            for row in csv_reader:
+                fname = row[0]
+                fname = fname.split('.')[0]
+                p = float(row[1])
+                x = int(row[2])
+                y = int(row[3])
+                w = int(row[4])
+                h = int(row[5])
+                
+                if fname not in bbox_data:
+                    bbox_data[fname] = {}
+                if cls not in bbox_data[fname]:
+                    bbox_data[fname][cls] = []
+                
+                bbox_tup = (x, y, w, h, p)
+                bbox_data[fname][cls].append(bbox_tup)
+    
+    # viz each file
+    for row in in_files:
+        # gen out fname
+        energy = row[1]
+        img_name = row[0]
+        out_fname = output_fmt.format(energy, img_name)
+        
+        # prep plot
+        # gen and save the viz
+    
+    import pdb; pdb.set_trace()
+    return bbox_data
+
+
+
 def draw_best_objects(image_dir, comps, best_box_ixs, energy, out_dir="", out_filename="", image_size=[]):
     import randomcolor
     
