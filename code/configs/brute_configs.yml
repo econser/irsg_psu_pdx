@@ -1,0 +1,232 @@
+#===============================================================================
+# query_string : query as a string
+# query_function : function to convert query string to mat_struct
+#
+# data_dir : directory for finding GMMs
+# gmm_filename : GMM pkl file
+#
+# precalc_dir : root dir for precalculated data
+#
+# imageset_file : file with set of images to run
+# image_dir : directory for input images
+# model_file : fq path for caffe model
+# weights : fq path for model weights
+# class_file : classes in the model
+#===============================================================================
+
+#===============================================================================
+# DOG WALKING CONFIGS (PGM)
+#===============================================================================
+
+DW_POSTEST_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : './data'
+  #
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
+  imageset_file : 'dogwalkingtest_fnames_test.txt'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/dog_walking/'
+  energy_filename : 'dw_cycle_postest_brute_energy.csv'
+  top_rel_filefmt : 'dw_cycle_postest_brute_{}.csv'
+
+DW_HARDNEG_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/dog_walking/'
+  energy_filename : 'dw_cycle_hardneg_brute_energy.csv'
+  top_rel_filefmt : 'dw_cycle_hardneg_brute_{}.csv'
+
+DW_FULLNEG_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/dog_walking/'
+  energy_filename : 'dw_cycle_fullneg_brute_energy.csv'
+  top_rel_filefmt : 'dw_cycle_fullneg_brute_{}.csv'
+
+
+
+#===============================================================================
+# STANFORD DOG WALKING CONFIGS (PGM)
+#===============================================================================
+
+STAN_DW_POSTEST_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : './data/'
+  #
+  image_dir : './images/StanfordSimpleDogWalking/'
+  precalc_dir : './run_results/stanford_dog_walking/'
+  imageset_file : 'stanford_fnames_test.txt'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
+  energy_filename : 'stanford_dw_cycle_postest_brute_energy.csv'
+  top_rel_filefmt : 'stanford_dw_cycle_postest_brute_{}.csv'
+
+STAN_DW_HARDNEG_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
+  energy_filename : 'stanford_dw_cycle_hardneg_brute_energy.csv'
+  top_rel_filefmt : 'stanford_dw_cycle_hardneg_brute_{}.csv'
+
+STAN_DW_FULLNEG_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_gmms_revised.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/stanford_dog_walking/'
+  energy_filename : 'stanford_dw_cycle_fullneg_brute_energy.csv'
+  top_rel_filefmt : 'stanford_dw_cycle_fullneg_brute_{}.csv'
+
+
+
+#===============================================================================
+# PING PONG (PGM)
+#===============================================================================
+
+PP_POSTEST_PGM_ENERGY:
+  query_string : 'player, player, table, net; 0 playing_pingpong_with 1, 0 at 2, 1 at 2, 3 on 2'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'pingpong_gmms.pkl'
+  data_dir : './data/'
+  #
+  image_dir : './data/PingPong/'
+  precalc_dir : './run_results/pingpong/'
+  imageset_file: 'pingpong_fnames_test.txt'
+  class_file : './data/pingpong_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/pingpong/'
+  energy_filename : 'pingpong_postest_brute_energy.csv'
+  top_rel_filefmt : 'pingpong_postest_brute_{}.csv'
+
+PP_FULLNEG_PGM_ENERGY:
+  query_string : 'player, player, table, net; 0 playing_pingpong_with 1, 0 at 2, 1 at 2, 3 on 2'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'pingpong_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pingpong_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/pingpong_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/pingpong/'
+  energy_filename : 'pingpong_fullneg_brute_energy.csv'
+  top_rel_filefmt : 'pingpong_fullneg_brute_{}.csv'
+
+PP_HARDNEG_PGM_ENERGY:
+  query_string : 'player, player, table, net; 0 playing_pingpong_with 1, 0 at 2, 1 at 2, 3 on 2'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'pingpong_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pingpong_hardneg/'
+  image_dir : './images/PingPongHardNeg'
+  class_file : './data/pingpong_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/pingpong/'
+  energy_filename : 'pingpong_hardneg_brute_energy.csv'
+  top_rel_filefmt : 'pingpong_hardneg_brute_{}.csv'
+
+
+#===============================================================================
+# HANDSHAKE (PGM)
+#===============================================================================
+
+HS_POSTEST_PGM_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'handshake_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
+  imageset_file : 'handshake_fnames_test.txt'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/handshake/'
+  energy_filename : 'handshake_postest_brute_energy.csv'
+  top_rel_filefmt : 'handshake_postest_brute_{}.csv'
+
+HS_FULLNEG_PGM_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'handshake_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/handshake/'
+  energy_filename : 'handshake_fullneg_brute_energy.csv'
+  top_rel_filefmt : 'handshake_fullneg_brute_{}.csv'
+
+HS_HARDNEG_PGM_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'handshake_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_hardneg/'
+  image_dir : './images/HandshakeHardNeg'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/handshake/'
+  energy_filename : 'handshake_hardneg_brute_energy.csv'
+  top_rel_filefmt : 'handshake_hardneg_brute_{}.csv'

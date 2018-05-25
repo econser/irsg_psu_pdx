@@ -1,4 +1,3 @@
-
 from __future__ import print_function
 import matplotlib; matplotlib.use('agg') #when running remotely
 import opengm as ogm
@@ -12,7 +11,7 @@ import irsg_utils as iutl
 
 
 #===============================================================================
-ENERGY_METHODS = ['pgm', 'geo_mean', 'max_rel']
+ENERGY_METHODS = ['pgm', 'geo_mean', 'max_rel', 'brute']
 
 import os
 BASE_DIR = os.path.dirname(__file__)
@@ -577,7 +576,7 @@ def gen_factor_graph(query, model_components, objects_per_class, verbose=False, 
         if objects_per_class[unary_ix] > 1:
             zero_ix = (unary_fn_count[unary_ix]+1) % objects_per_class[unary_ix]
             zero_slices[ix] = np.index_exp[zero_ix:zero_ix+1]
-        if zero_slices[ix] is not None:
+        #if zero_slices[ix] is not None:
             scores[zero_slices[ix]] = 0.0
         unary_fn_count[unary_ix] += 1
         
@@ -713,9 +712,24 @@ def do_inference(gm, n_steps=120, damping=0., convergence_bound=0.001, verbose=F
 
 
 
+from line_profiler import LineProfiler
+def do_profile(follow=[]):
+    def inner(func):
+        def profiled_func(*args, **kwargs):
+            try:
+                profiler = LineProfiler()
+                profiler.add_function(func)
+                for f in follow:
+                    profiler.add_function(f)
+                profiler.enable_by_count()
+                return func(*args, **kwargs)
+            finally:
+                profiler.print_stats()
+        return profiled_func
+    return inner
+#@do_profile()
 def get_exhaustive_energies(query, model_components, objects_per_class, verbose=False):
     # generate all unary ix combinations
-    import pdb; pdb.set_trace()
     unary_objects = model_components.unary_components
     query_objects = query.objects
     
@@ -742,10 +756,23 @@ def get_exhaustive_energies(query, model_components, objects_per_class, verbose=
     else:
         return None
     
-    # TODO: discard bad configurations
-    # bad_ixs = np.where(bbox_ix_combos[:,0] == bbox_ix_combos[:,1])
-    # good_ixs = not(bad_ixs)
-    # bbox_ix_combos = bbox_ix_combos[good_ixs]
+    query_to_unary_map = []
+    for i in range(0, n_objects):
+        query_to_unary_map.append(query_to_unary[i])
+
+    # discard bad configurations
+    for class_ix, obj_count in enumerate(objects_per_class):
+        if obj_count > 1:
+            ix1 = None
+            ix2 = None
+            for query_ix, unary_ix in enumerate(query_to_unary_map):
+                if unary_ix == class_ix:
+                    if ix1 is None:
+                        ix1 = query_ix
+                    elif ix2 is None:
+                        ix2 = query_ix                
+            good_ixs = np.where(bbox_ix_combos[:, ix1] != bbox_ix_combos[:, ix2])
+            bbox_ix_combos = bbox_ix_combos[good_ixs]
     
     # get all unary probs
     u_probs = np.zeros_like(bbox_ix_combos, dtype=np.float)
@@ -754,9 +781,6 @@ def get_exhaustive_energies(query, model_components, objects_per_class, verbose=
         u_probs.T[col_ix] = unary_objects[unary_ix].scores[col]
     
     # get all binary scores
-    query_to_unary_map = []
-    for i in range(0, n_objects):
-        query_to_unary_map.append(query_to_unary[i])
     bin_score_tuples = get_binary_scores(query, query_to_unary_map, rc)
     
     # calc binary probs
@@ -768,7 +792,10 @@ def get_exhaustive_energies(query, model_components, objects_per_class, verbose=
     else:
         relationships.append(bin_relations)
     
-    for rel in relationships:
+    n_relationships = len(relationships)
+    n_configs = len(bbox_ix_combos)
+    bin_probs = np.zeros((n_configs, n_relationships), dtype=np.float)
+    for rel_ix, rel in enumerate(relationships):
         for bin_score_tup in bin_score_tuples:
             subject_ix = bin_score_tup[0]
             object_ix = bin_score_tup[2]
@@ -778,17 +805,22 @@ def get_exhaustive_energies(query, model_components, objects_per_class, verbose=
             
             if rel_subject_ix == subject_ix and rel_object_ix == object_ix:
                 scores = bin_score_tup[5]
-                import pdb; pdb.set_trace()
                 sub_config_ixs = bbox_ix_combos[:,rel.subject]
                 obj_config_ixs = bbox_ix_combos[:,rel.object]
-                bin_probs = scores[sub_config_ixs][obj_config_ixs]
-            break
+                
+                bin_probs[:, rel_ix] = scores[sub_config_ixs, obj_config_ixs]
+                break
     
     # calc config probabilities
+    factor_probs = np.hstack((u_probs, bin_probs))
+    probs = np.product(factor_probs, axis=1)
+    sort_ixs = np.argsort(probs)[::-1]
+
     # calc config energies
+    energy = -np.log(probs+np.finfo(np.float).eps)
     
-    import pdb; pdb.set_trace()
-    return None
+    #return bbox_ix_combos[sort_ixs[0:num_to_return]]
+    return energy[sort_ixs[0]], bbox_ix_combos[sort_ixs[0]], query_to_unary_map
 
 
 
@@ -803,14 +835,16 @@ def save_all_binary_probs(query, query_to_model_map, best_box_ixs, rc, csv_prefi
     
     # get the binary factor scores
     bin_scores = get_binary_scores(query, query_to_model_map, rc)
+    # TODO: bin_scores is a list of tuples at the moment
     return bin_scores
-    # TODO: save overall detail
-    # TODO: save best box & score for each unary, best score for each relationship
 
 
 
 """
-    This is for saving all relationship prob scores to a set of files
+    Get the binary score data from query and image
+    ----------------------------------------------------------------------------
+    Note that this does NOT transpose scores as done for the OpenGM fn generation
+    Scores are the GMM post-calibration probabilities
 """
 def get_binary_scores(query, qry_to_model_map, model_components):
     import itertools
@@ -865,18 +899,17 @@ def get_binary_scores(query, qry_to_model_map, model_components):
         scores = iutl.gmm_pdf(gmm_features, params.gmm_weights, params.gmm_mu, params.gmm_sigma)
         if params.platt_a is not None and params.platt_b is not None:
             scores = 1. / (1. + np.exp(-(params.platt_a * scores + params.platt_b)))
-        scores += np.finfo(np.float).eps # float epsilon so that we don't try ln(0)
-        scores = -np.log(scores)
+        #scores = -np.log(scores)
         
         bin_fns = np.reshape(scores, (n_sub_boxes, n_obj_boxes))
         
         sub_var_ix = qry_to_model_map[rel.subject]
         obj_var_ix = qry_to_model_map[rel.object]
-        var_ixs = [sub_var_ix, obj_var_ix]
+        #var_ixs = [sub_var_ix, obj_var_ix]
         
-        if obj_var_ix < sub_var_ix:
-            bin_fns = bin_fns.T
-            var_ixs = [obj_var_ix, sub_var_ix]
+        #if obj_var_ix < sub_var_ix:
+        #    bin_fns = bin_fns.T
+        #    var_ixs = [obj_var_ix, sub_var_ix]
         
         bin_fn_list.append((sub_var_ix, subject_name, obj_var_ix, object_name, relationship_key, bin_fns))
     
@@ -1183,14 +1216,16 @@ if __name__ == '__main__':
         best_box_ixs = None
         query_to_model_map = None
         objects_per_class = get_objects_per_class(query, rc)
-        if (energy_method == 'pgm') or (energy_method == 'max_rel'):
+        if energy_method in ['pgm', 'max_rel', 'brute']:
             max_rel_dict = None
             if energy_method == 'max_rel':
                 max_rel_dict = get_max_rels(max_rel_dir)
-            # generate factor graph and run inference
-            x = get_exhaustive_energies(query, rc, objects_per_class)
-            pgm, query_to_model_map = gen_factor_graph(query, rc, objects_per_class, max_rels=max_rel_dict)
-            energy, best_box_ixs, marginals = do_inference(pgm)
+
+            if energy_method == 'brute':
+                energy, best_box_ixs, query_to_model_map = get_exhaustive_energies(query, rc, objects_per_class)
+            else:
+                pgm, query_to_model_map = gen_factor_graph(query, rc, objects_per_class, max_rels=max_rel_dict)
+                energy, best_box_ixs, marginals = do_inference(pgm)
             
             if save_top_rel_scores:
                 rel_dict = get_top_rel_scores(best_box_ixs, query_to_model_map, rc, gmms)
