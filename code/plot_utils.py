@@ -581,7 +581,11 @@ def r_at_k_table(k_vals, row_tups):
 p.viz_top_boxes('/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong/pingpong_postest_brute_energy.csv', '/home/econser/research/irsg_psu_pdx/data/PingPong', '/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong/pingpong_postest_brute_{}_bboxes.csv', '/home/econser/research/irsg_psu_pdx/data/pingpong_classes.txt', '/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong/viz_postest_brute/{:06.3f}_{}.jpg')
 """
 def viz_top_boxes(energy_csv, image_dir, bbox_csv_fmt, object_class_file, output_fmt):
+    import os
+    import cv2
     import csv
+    import matplotlib.pyplot as plt
+    
     # get fname,energy pairs
     in_files = []
     with open(energy_csv, 'rb') as f:
@@ -624,6 +628,15 @@ def viz_top_boxes(energy_csv, image_dir, bbox_csv_fmt, object_class_file, output
                 bbox_tup = (x, y, w, h, p)
                 bbox_data[fname][cls].append(bbox_tup)
     
+    # create output dir, if necessary
+    outpath_split = output_fmt.split('/')
+    outpath = os.path.join('', *outpath_split[:-1])
+    outpath += '/'
+    outpath = '/' + outpath
+    
+    if not os.path.exists(outpath):
+        os.makedirs(outpath)
+    
     # viz each file
     for row in in_files:
         # gen out fname
@@ -632,10 +645,31 @@ def viz_top_boxes(energy_csv, image_dir, bbox_csv_fmt, object_class_file, output
         out_fname = output_fmt.format(energy, img_name)
         
         # prep plot
-        # gen and save the viz
-    
-    import pdb; pdb.set_trace()
-    return bbox_data
+        image_filename = os.path.join(image_dir, img_name + '.jpg')
+        im = cv2.imread(image_filename)
+        im = im[:, :, (2, 1, 0)]
+        fig, ax = plt.subplots(figsize=(12, 12))
+        ax.imshow(im, aspect='equal')
+        
+        for cls in class_list:
+            bbox_tups = bbox_data[img_name][cls]
+            for tup in bbox_tups:
+                x = tup[0]
+                y = tup[1]
+                w = tup[2]
+                h = tup[3]
+                score = tup[4]
+                
+                rect = plt.Rectangle((x, y), w, h, fill=False, edgecolor='red', linewidth=3.5)
+                ax.add_patch(rect)
+                
+                ax.text(x, y-2, '{:s} {:.3f}'.format(cls, score), bbox=dict(facecolor='blue', alpha=0.5), fontsize=14, color='white')
+            
+        plt.axis('off')
+        plt.tight_layout()
+        plt.draw()
+        plt.savefig(out_fname)
+        plt.close()
 
 
 
