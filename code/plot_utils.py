@@ -1,5 +1,5 @@
 from __future__ import print_function
-#import matplotlib; matplotlib.use('agg') #when running remotely
+import matplotlib; matplotlib.use('agg') #when running remotely
 import numpy as np
 
 
@@ -337,9 +337,6 @@ def r_at_k_table(k_vals, row_tups):
 #-------------------------------------------------------------------------------
 # VIZ PLOT SECTION
 #
-"""
-p.viz_top_boxes('/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong/pingpong_postest_brute_energy.csv', '/home/econser/research/irsg_psu_pdx/data/PingPong', '/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong/pingpong_postest_brute_{}_bboxes.csv', '/home/econser/research/irsg_psu_pdx/data/pingpong_classes.txt', '/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong/viz_postest_brute/{:06.3f}_{}.jpg')
-"""
 def viz_top_boxes(energy_csv, image_dir, bbox_csv_fmt, object_class_file, output_fmt):
     import os
     import cv2
@@ -354,7 +351,8 @@ def viz_top_boxes(energy_csv, image_dir, bbox_csv_fmt, object_class_file, output
             # ignore header
             if row_ix == 0:
                 continue
-            # trim off extension?
+            
+            # trim off extension
             fname = row[0].split('.')[0]
             energy = float(row[1])
             in_files.append((fname, energy))
@@ -431,6 +429,57 @@ def viz_top_boxes(energy_csv, image_dir, bbox_csv_fmt, object_class_file, output
         plt.savefig(out_fname)
         plt.close()
 
+def viz_pingpong(dataset, energy_method):
+    import os
+    base_dir = '/home/econser/research/irsg_psu_pdx/'
+    image_dirs = {
+        'postest': os.path.join(base_dir, 'data/PingPong'),
+        'fullneg': os.path.join(base_dir, 'images/Negatives'),
+        'hardneg': os.path.join(base_dir, 'images/PingPongHardNeg')
+    }
+    energy_dir = os.path.join(base_dir, 'output/full_runs/pingpong/')
+    energy_csv = energy_dir + 'pingpong_{}_{}_energy.csv'.format(dataset, energy_method)
+    image_dir  = image_dirs[dataset]
+    bbox_csv_format = energy_dir + 'pingpong_{}_{}_{{}}_bboxes.csv'.format(dataset, energy_method)
+    object_class_file = os.path.join(base_dir, 'data/pingpong_classes.txt')
+    output_format = energy_dir + 'viz_{}_{}/{{:06.3f}}_{{}}.jpg'.format(dataset, energy_method)
+    
+    viz_top_boxes(energy_csv, image_dir, bbox_csv_format, object_class_file, output_format)
+
+def viz_handshake(dataset, energy_method):
+    import os
+    base_dir = '/home/econser/research/irsg_psu_pdx/'
+    image_dirs = {
+        'postest': os.path.join(base_dir, 'data/Handshake'),
+        'fullneg': os.path.join(base_dir, 'images/Negatives'),
+        'hardneg': os.path.join(base_dir, 'images/HandshakeHardNeg')
+    }
+    energy_dir = os.path.join(base_dir, 'output/full_runs/handshake/')
+    energy_csv = energy_dir + 'handshake_{}_{}_energy.csv'.format(dataset, energy_method)
+    image_dir  = image_dirs[dataset]
+    bbox_csv_format = energy_dir + 'handshake_{}_{}_{{}}_bboxes.csv'.format(dataset, energy_method)
+    object_class_file = os.path.join(base_dir, 'data/handshake_classes.txt')
+    output_format = energy_dir + 'viz_{}_{}/{{:06.3f}}_{{}}.jpg'.format(dataset, energy_method)
+    
+    viz_top_boxes(energy_csv, image_dir, bbox_csv_format, object_class_file, output_format)
+
+def viz_dogwalking(dataset, energy_method):
+    import os
+    base_dir = '/home/econser/research/irsg_psu_pdx/'
+    image_dirs = {
+        'postest': os.path.join(base_dir, 'data/dog_walking'),
+        'fullneg': os.path.join(base_dir, 'images/Negatives'),
+        'hardneg': os.path.join(base_dir, 'images/DogWalkingHardNeg')
+    }
+    energy_dir = os.path.join(base_dir, 'output/full_runs/dog_walking/')
+    energy_csv = energy_dir + 'dw_cycle_{}_{}_energy.csv'.format(dataset, energy_method)
+    image_dir  = image_dirs[dataset]
+    bbox_csv_format = energy_dir + 'dw_cycle_{}_{}_{{}}_bboxes.csv'.format(dataset, energy_method)
+    object_class_file = os.path.join(base_dir, 'data/dog_walking_classes.txt')
+    output_format = energy_dir + 'viz_{}_{}/{{:06.3f}}_{{}}.jpg'.format(dataset, energy_method)
+    
+    viz_top_boxes(energy_csv, image_dir, bbox_csv_format, object_class_file, output_format)
+
 
 
 def draw_best_objects(image_dir, comps, best_box_ixs, energy, out_dir="", out_filename="", image_size=[]):
@@ -463,6 +512,7 @@ def draw_best_objects(image_dir, comps, best_box_ixs, energy, out_dir="", out_fi
     image_filename = '{}.jpg'.format(comps.image_filename.split('.')[0])
     out_filename = 'en:{:06.3f} -- {}.jpg'.format(energy, comps.image_filename.split('.')[0])
     draw_image_box(image_dir, image_filename, box_list, legend_list, title, out_dir + out_filename, size=image_size)
+
 
 
 
