@@ -70,6 +70,7 @@ def get_cfg():
     
     if model_type == 'dog_walking':
         best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/dog_walking/')
+        bbox_file_prefix = 'dw_cycle_postest'
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/dog_walking/')
         anno_dir = os.path.join(BASE_DIR, 'data/dog_walking')
         imageset_file = os.path.join(BASE_DIR, 'data/dogwalkingtest_fnames_test.txt')
@@ -78,6 +79,7 @@ def get_cfg():
         cls_counts = [1, 1, 1]
     elif model_type == 'stanford_dw':
         best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/stanford_dog_walking/')
+        bbox_file_prefix = 'stanford_dw_cycle_postest'
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/stanford_dog_walking/')
         anno_dir = os.path.join(BASE_DIR, 'data/StanfordSimpleDogWalking/')
         imageset_file = os.path.join(BASE_DIR, 'data/stanford_fnames_test.txt')
@@ -86,6 +88,7 @@ def get_cfg():
         cls_counts = [1, 1, 1]
     elif model_type == 'pingpong':
         best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/pingpong/')
+        bbox_file_prefix = 'pingpong_postest'
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/pingpong/')
         anno_dir = os.path.join(BASE_DIR, 'data/PingPong')
         imageset_file = os.path.join(BASE_DIR, 'data/pingpong_fnames_test.txt')
@@ -94,6 +97,7 @@ def get_cfg():
         cls_counts = [2, 1, 1]
     elif model_type == 'handshake':
         best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/handshake/')
+        bbox_file_prefix = 'handshake_postest'
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/handshake/')
         anno_dir = os.path.join(BASE_DIR, 'data/Handshake')
         imageset_file = os.path.join(BASE_DIR, 'data/handshake_fnames_test.txt')
@@ -103,7 +107,7 @@ def get_cfg():
     else:
         pass
     
-    return model_type, energy_method, best_bbox_dir, output_dir, anno_dir, imageset_file, anno_fn, cls_names, cls_counts
+    return model_type, energy_method, best_bbox_dir, bbox_file_prefix, output_dir, anno_dir, imageset_file, anno_fn, cls_names, cls_counts
 
 
 
@@ -122,12 +126,13 @@ if __name__ == '__main__':
     model_type = cfg[0]
     energy_method = cfg[1]
     best_bbox_dir = cfg[2]
-    output_dir = cfg[3]
-    anno_dir = cfg[4]
-    imageset_file = cfg[5]
-    anno_fn = cfg[6]
-    cls_names = cfg[7]
-    cls_counts = cfg[8]
+    bbox_file_prefix = cfg[3]
+    output_dir = cfg[4]
+    anno_dir = cfg[5]
+    imageset_file = cfg[6]
+    anno_fn = cfg[7]
+    cls_names = cfg[8]
+    cls_counts = cfg[9]
     
     # create output dir, if necessary
     if not os.path.exists(output_dir):
@@ -162,16 +167,16 @@ if __name__ == '__main__':
     #   best_bboxes[object_class] => bbox_dict[image_filename] => bbox
     best_bboxes = {}
     for cls_name in cls_names:
-        fname = os.path.join(best_bbox_dir, '{}_{}_bboxes.csv'.format(cls_name, energy_method))
+        fname = os.path.join(best_bbox_dir, '{}_{}_{}_bboxes.csv'.format(bbox_file_prefix, energy_method, cls_name))
         f = open(fname, 'rb')
         for line in f.readlines():
             line = line.rstrip('\n')
             csv = line.split(', ')
             src_fname = csv[0].split('.')[0]
-            x = int(csv[1])
-            y = int(csv[2])
-            w = int(csv[3])
-            h = int(csv[4])
+            x = int(csv[2])
+            y = int(csv[3])
+            w = int(csv[4])
+            h = int(csv[5])
             bbox = np.array((x, y, w, h))
             
             if src_fname not in best_bboxes:
