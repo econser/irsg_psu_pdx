@@ -121,3 +121,33 @@ HS_FULLNEG:
   weights : './models/model_weights/handshake_50k.caffemodel'
   class_file : './data/handshake_classes.txt'
   box_and_score_output_dir : './run_results/hs_fullneg/'
+
+
+
+#===============================================================================
+# LEADING HORSE (BOXES ONLY)
+#===============================================================================
+
+LH_FULLPOS:
+  data_dir : './data/'
+  image_dir : './data/LeadingHorse/'
+  model_file : '/home/econser/research/irsg_psu_pdx/models/model_definitions/leadinghorse/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/research/irsg_psu_pdx/models/model_weights/leadinghorse_50k.caffemodel'
+  class_file : 'leadinghorse_classes.txt'
+  box_and_score_output_dir : './run_results/lh_fullpos/'
+
+LH_HARDNEG:
+  data_dir : './data/'
+  image_dir : './data/LeadingHorseHardNegative/'
+  model_file : '/home/econser/research/irsg_psu_pdx/models/model_definitions/leadinghorse/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/research/irsg_psu_pdx/models/model_weights/leadinghorse_50k.caffemodel'
+  class_file : 'leadinghorse_classes.txt'
+  box_and_score_output_dir : './run_results/lh_hardneg/'
+
+LH_FULLNEG:
+  data_dir : './data/'
+  image_dir : './images/Negatives'
+  model_file : '/home/econser/research/irsg_psu_pdx/models/model_definitions/leadinghorse/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/research/irsg_psu_pdx/models/model_weights/leadinghorse_50k.caffemodel'
+  class_file : 'leadinghorse_classes.txt'
+  box_and_score_output_dir : './run_results/lh_fullneg/'

@@ -522,6 +522,9 @@ p.draw_best_pregen_boxes(base_dir+'run_results/dogwalking, negative, nodognopers
 p.draw_best_pregen_boxes(base_dir+'run_results/dogwalking, negative, dognoperson/', base_dir+'images/psu_dw/DogWalkingSituationNegativeExamples/DogNoPerson/', base_dir+'output/viz_neg_rcnn/', 'dog_no_person_')
 p.draw_best_pregen_boxes(base_dir+'run_results/dogwalking, negative, dogandperson/', base_dir+'images/psu_dw/DogWalkingSituationNegativeExamples/DogAndPerson/', base_dir+'output/viz_neg_rcnn/', 'dog_and_person_')
 p.draw_best_pregen_boxes(base_dir+'run_results/dogwalking, negative, personnodog/', base_dir+'images/psu_dw/DogWalkingSituationNegativeExamples/PersonNoDog/', base_dir+'output/viz_neg_rcnn/', 'person_no_dog_')
+
+p.draw_best_pregen_boxes('/home/econser/research/irsg_psu_pdx/run_results/lh_fullpos/', '/home/econser/research/irsg_psu_pdx/data/LeadingHorse/', '/home/econser/research/irsg_psu_pdx/output/viz_lh_fullpos/', 'viz_')
+p.draw_best_pregen_boxes('/home/econser/research/irsg_psu_pdx/run_results/lh_hardneg/', '/home/econser/research/irsg_psu_pdx/data/LeadingHorseHardNegative/', '/home/econser/research/irsg_psu_pdx/output/viz_lh_hardneg/', 'viz_')
 """
 def draw_best_pregen_boxes(csv_dir, image_dir, out_dir, out_file_prefix):
     import randomcolor
