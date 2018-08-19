@@ -315,8 +315,8 @@ if __name__ == '__main__':
     image_filename = args.image_filename
     n_samples = args.n_samples
     # TODO: read cfg_file
-    image_dir = '/home/econser/School/research/data/PingPong/' #cfg['image_dir']
-    gmm_filepath = '/home/econser/School/research/data/pingpong_gmms.pkl' #cfg['gmm_filepath']
+    image_dir = '/home/econser/research/irsg_psu_pdx/data/LeadingHorse/' #cfg['image_dir']
+    gmm_filepath = '/home/econser/research/irsg_psu_pdx/data/lh_gmms.pkl' #cfg['gmm_filepath']
     
     # unpickle the GMMs
     f = open(gmm_filepath, 'rb')
