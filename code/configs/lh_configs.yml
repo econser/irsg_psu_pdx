@@ -6,7 +6,7 @@
 # IRSG PGM METHOD
 #===============================================================================
 LH_POSTEST_PGM_ENERGY:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
@@ -22,13 +22,13 @@ LH_POSTEST_PGM_ENERGY:
   top_rel_filefmt : 'lh_postest_pgm_{}.csv'
 
 LH_HARDNEG_PGM_ENERGY:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_hardneg/'
+  precalc_dir : './run_results/lh_hardneg/'
   image_dir : './images/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -37,13 +37,13 @@ LH_HARDNEG_PGM_ENERGY:
   top_rel_filefmt : 'lh_hardneg_pgm_{}.csv'
 
 LH_FULLNEG_PGM_ENERGY:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_fullneg/'
+  precalc_dir : './run_results/lh_fullneg/'
   image_dir : './images/Negatives'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -54,7 +54,7 @@ LH_FULLNEG_PGM_ENERGY:
 
 
 LH_POSTEST_PGM_VIZ:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
@@ -69,13 +69,13 @@ LH_POSTEST_PGM_VIZ:
   viz_file_format : '{}.jpg'
 
 LH_HARDNEG_PGM_VIZ:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_hardneg/'
+  precalc_dir : './run_results/lh_hardneg/'
   image_dir : './images/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -83,13 +83,13 @@ LH_HARDNEG_PGM_VIZ:
   viz_file_format : '{}.jpg'
 
 LH_FULLNEG_PGM_VIZ:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_fullneg/'
+  precalc_dir : './run_results/lh_fullneg/'
   image_dir : './images/Negatives'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -103,7 +103,7 @@ LH_FULLNEG_PGM_VIZ:
 #===============================================================================
 
 LH_POSTEST_GEO_ENERGY:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
@@ -119,13 +119,13 @@ LH_POSTEST_GEO_ENERGY:
   energy_filename : 'lh_postest_geo_energy.csv'
 
 LH_HARDNEG_GEO_ENERGY:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_hardneg/'
+  precalc_dir : './run_results/lh_hardneg/'
   image_dir : './images/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -134,13 +134,13 @@ LH_HARDNEG_GEO_ENERGY:
   energy_filename : 'lh_hardneg_geo_energy.csv'
 
 LH_FULLNEG_GEO_ENERGY:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_fullneg/'
+  precalc_dir : './run_results/lh_fullneg/'
   image_dir : './images/Negatives'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -151,7 +151,7 @@ LH_FULLNEG_GEO_ENERGY:
 
 
 LH_POSTEST_GEO_VIZ:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
@@ -167,13 +167,13 @@ LH_POSTEST_GEO_VIZ:
   viz_file_format : '{}.jpg'
 
 LH_HARDNEG_GEO_VIZ:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_hardneg/'
+  precalc_dir : './run_results/lh_hardneg/'
   image_dir : './images/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -182,13 +182,13 @@ LH_HARDNEG_GEO_VIZ:
   viz_file_format : '{}.jpg'
 
 LH_FULLNEG_GEO_VIZ:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_fullneg/'
+  precalc_dir : './run_results/lh_fullneg/'
   image_dir : './images/Negatives'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -202,14 +202,14 @@ LH_FULLNEG_GEO_VIZ:
 # BRUTE FORCE METHOD
 #===============================================================================
 LH_POSTEST_BF_ENERGY:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data'
   #
   image_dir : './data/LeadingHorse/'
-  precalc_dir : './run_results/dw_fullpos/'
+  precalc_dir : './run_results/lh_fullpos/'
   imageset_file : 'leadinghorse_fnames_test.txt'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -219,13 +219,13 @@ LH_POSTEST_BF_ENERGY:
   top_rel_filefmt : 'lh_postest_brute_{}.csv'
 
 LH_HARDNEG_BF_ENERGY:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_hardneg/'
+  precalc_dir : './run_results/lh_hardneg/'
   image_dir : './images/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
@@ -235,13 +235,13 @@ LH_HARDNEG_BF_ENERGY:
   top_rel_filefmt : 'lh_hardneg_brute_{}.csv'
 
 LH_FULLNEG_BF_ENERGY:
-  query_string : 'leader holding lead attached_to horse lead_by leader'
+  query_string : 'horse-leader holding lead attached_to horse lead_by horse-leader'
   query_function : 'two_rel_loop'
   #
   gmm_filename : 'lh_gmms.pkl'
   data_dir : './data/'
   #
-  precalc_dir : './run_results/dw_fullneg/'
+  precalc_dir : './run_results/lh_fullneg/'
   image_dir : './images/Negatives'
   class_file : './data/leadinghorse_classes.txt'
   #

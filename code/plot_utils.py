@@ -132,6 +132,9 @@ def run_ratk(base_dir, model_name, energy_method_name, pos_set_name, neg_set_nam
 
 
 
+def leadinghorse_ratk(energy_method, ratk_zoom=None):
+    run_ratk('/home/econser/research/irsg_psu_pdx/output/full_runs/leadinghorse', 'lh', energy_method, 'postest', ['fullneg', 'hardneg'], '/home/econser/research/irsg_psu_pdx/data/leadinghorse_fnames_test.txt', ratk_zoom)
+
 def pingpong_ratk(energy_method, ratk_zoom=None):
     run_ratk('/home/econser/research/irsg_psu_pdx/output/full_runs/pingpong', 'pingpong', energy_method, 'postest', ['fullneg', 'hardneg'], '/home/econser/research/irsg_psu_pdx/data/pingpong_fnames_test.txt', ratk_zoom)
 
