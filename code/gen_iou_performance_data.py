@@ -77,6 +77,7 @@ def get_cfg():
         anno_fn = anno_fn_map['dog_walking']
         cls_names = ['dog_walker', 'leash', 'dog']
         cls_counts = [1, 1, 1]
+        data_prefix = 'dw_cycle'
     elif model_type == 'stanford_dw':
         best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/stanford_dog_walking/')
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/stanford_dog_walking/')
@@ -85,14 +86,16 @@ def get_cfg():
         anno_fn = anno_fn_map['dog_walking']
         cls_names = ['dog_walker', 'leash', 'dog']
         cls_counts = [1, 1, 1]
+        data_prefix = 'dw_cycle'
     elif model_type == 'leadinghorse':
         best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/leadinghorse/')
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/leadinghorse/')
         anno_dir = os.path.join(BASE_DIR, 'data/LeadingHorse/')
         imageset_file = os.path.join(BASE_DIR, 'data/leadinghorse_fnames_test.txt')
         anno_fn = anno_fn_map['leadinghorse']
-        cls_names = ['leader', 'horse', 'lead']
+        cls_names = ['horse-leader', 'horse', 'lead']
         cls_counts = [1, 1, 1]
+        data_prefix = 'lh'
     elif model_type == 'pingpong':
         best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/pingpong/')
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/pingpong/')
@@ -101,6 +104,7 @@ def get_cfg():
         anno_fn = anno_fn_map['pingpong']
         cls_names = ['player', 'net', 'table']
         cls_counts = [2, 1, 1]
+        data_prefix = 'pingpong'
     elif model_type == 'handshake':
         best_bbox_dir = os.path.join(BASE_DIR, 'output/full_runs/handshake/')
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/handshake/')
@@ -109,10 +113,11 @@ def get_cfg():
         anno_fn = anno_fn_map['handshake']
         cls_names = ['person', 'handshake']
         cls_counts = [2, 1]
+        data_prefix = 'hs'
     else:
         pass
     
-    return model_type, energy_method, best_bbox_dir, output_dir, anno_dir, imageset_file, anno_fn, cls_names, cls_counts
+    return model_type, energy_method, best_bbox_dir, output_dir, anno_dir, imageset_file, anno_fn, cls_names, cls_counts, data_prefix
 
 
 
@@ -137,6 +142,7 @@ if __name__ == '__main__':
     anno_fn = cfg[6]
     cls_names = cfg[7]
     cls_counts = cfg[8]
+    data_prefix = cfg[9]
     
     # create output dir, if necessary
     if not os.path.exists(output_dir):
@@ -171,16 +177,16 @@ if __name__ == '__main__':
     #   best_bboxes[object_class] => bbox_dict[image_filename] => bbox
     best_bboxes = {}
     for cls_name in cls_names:
-        fname = os.path.join(best_bbox_dir, '{}_{}_bboxes.csv'.format(cls_name, energy_method))
+        fname = os.path.join(best_bbox_dir, '{}_postest_{}_{}_bboxes.csv'.format(data_prefix, energy_method, cls_name))
         f = open(fname, 'rb')
         for line in f.readlines():
             line = line.rstrip('\n')
             csv = line.split(', ')
             src_fname = csv[0].split('.')[0]
-            x = int(csv[1])
-            y = int(csv[2])
-            w = int(csv[3])
-            h = int(csv[4])
+            x = int(csv[2])
+            y = int(csv[3])
+            w = int(csv[4])
+            h = int(csv[5])
             bbox = np.array((x, y, w, h))
             
             if src_fname not in best_bboxes:

@@ -29,7 +29,7 @@ LH_HARDNEG_PGM_ENERGY:
   data_dir : './data/'
   #
   precalc_dir : './run_results/lh_hardneg/'
-  image_dir : './images/LeadingHorseHardNegative/'
+  image_dir : './data/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
   energy_output_dir : './output/full_runs/leadinghorse/'
@@ -76,7 +76,7 @@ LH_HARDNEG_PGM_VIZ:
   data_dir : './data/'
   #
   precalc_dir : './run_results/lh_hardneg/'
-  image_dir : './images/LeadingHorseHardNegative/'
+  image_dir : './data/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
   viz_output_dir : './output/full_runs/leadinghorse/viz_hardneg_pgm/'
@@ -126,7 +126,7 @@ LH_HARDNEG_GEO_ENERGY:
   data_dir : './data/'
   #
   precalc_dir : './run_results/lh_hardneg/'
-  image_dir : './images/LeadingHorseHardNegative/'
+  image_dir : './data/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
   energy_method : 'geo_mean'
@@ -174,7 +174,7 @@ LH_HARDNEG_GEO_VIZ:
   data_dir : './data/'
   #
   precalc_dir : './run_results/lh_hardneg/'
-  image_dir : './images/LeadingHorseHardNegative/'
+  image_dir : './data/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
   energy_method : 'geo_mean'
@@ -226,7 +226,7 @@ LH_HARDNEG_BF_ENERGY:
   data_dir : './data/'
   #
   precalc_dir : './run_results/lh_hardneg/'
-  image_dir : './images/LeadingHorseHardNegative/'
+  image_dir : './data/LeadingHorseHardNegative/'
   class_file : './data/leadinghorse_classes.txt'
   #
   energy_method : 'brute'

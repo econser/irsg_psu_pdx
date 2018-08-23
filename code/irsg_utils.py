@@ -196,7 +196,7 @@ def get_hs_bboxes(annotation):
 
 
 
-def get_lh_boxes(annotation):
+def get_lh_bboxes(annotation):
     import numpy as np
     
     tokens = annotation.split('|')
