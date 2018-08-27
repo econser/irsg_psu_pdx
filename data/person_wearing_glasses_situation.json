@@ -1,0 +1,15 @@
+{
+    "object_names" : ["person", "glasses"],
+    "relationships" : [
+	{
+	    "name" : "wearing",
+	    "components" : [
+	        {
+		    "subject" : "person",
+		    "object" : "glasses"
+		}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/images/PersonWearingGlasses/PersonWearingGlassesTrain"
+}

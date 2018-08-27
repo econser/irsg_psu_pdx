@@ -1,0 +1,21 @@
+{
+    "object_names" : ["person__1", "person__2", "handshake"],
+    "relationships" : [
+	{
+	    "name" : "extending",
+	    "components" : [
+		{"subject" : "person__1", "object" : "handshake"},
+		{"subject" : "person__2", "object" : "handshake"}
+	    ]
+	},
+	{
+	    "name" : "handshaking",
+	    "components" : [
+		{"subject" : "person__1", "object" : "person__2"},
+		{"subject" : "person__2", "object" : "person__1"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/images/Handshake",
+    "training_filenames" : "/home/econser/research/irsg_psu_pdx/data/handshake_fnames_train.txt"
+}
