@@ -749,7 +749,9 @@ def get_exhaustive_energies(query, model_components, objects_per_class, verbose=
     n_objects = len(bbox_ix_list)
     b = bbox_ix_list
     bbox_ix_combos = None
-    if n_objects == 3:
+    if n_objects == 2:
+        bbox_ix_combos = np.array(np.meshgrid(b[0], b[1])).T.reshape(-1,2)
+    elif n_objects == 3:
         bbox_ix_combos = np.array(np.meshgrid(b[0], b[1], b[2])).T.reshape(-1,3)
     elif n_objects == 4:
         bbox_ix_combos = np.array(np.meshgrid(b[0], b[1], b[2], b[3])).T.reshape(-1,4)

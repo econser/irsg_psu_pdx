@@ -1,0 +1,280 @@
+#===============================================================================
+# PERSON WEARING GLASSES SITUATION CONFIGURATIONS
+#===============================================================================
+
+#===============================================================================
+# BBOX GENERATION
+#===============================================================================
+PWG_FULLPOS_BOXES:
+  data_dir : './data/'
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesPositiveTest/'
+  model_file : '/home/econser/research/irsg_psu_pdx/models/model_definitions/personwearingglasses/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/research/irsg_psu_pdx/models/model_weights/personwearingglasses_50k.caffemodel'
+  class_file : 'personwearingglasses_classes.txt'
+  box_and_score_output_dir : './run_results/pwg_fullpos/'
+
+PWG_HARDNEG_BOXES:
+  data_dir : './data/'
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesNegativeTest/'
+  model_file : '/home/econser/research/irsg_psu_pdx/models/model_definitions/personwearingglasses/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/research/irsg_psu_pdx/models/model_weights/personwearingglasses_50k.caffemodel'
+  class_file : 'personwearingglasses_classes.txt'
+  box_and_score_output_dir : './run_results/pwg_hardneg/'
+
+PWG_FULLNEG_BOXES:
+  data_dir : './data/'
+  image_dir : './images/Negatives'
+  model_file : '/home/econser/research/irsg_psu_pdx/models/model_definitions/personwearingglasses/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/research/irsg_psu_pdx/models/model_weights/personwearingglasses_50k.caffemodel'
+  class_file : 'personwearingglasses_classes.txt'
+  box_and_score_output_dir : './run_results/pwg_fullneg/'
+
+
+
+#===============================================================================
+# IRSG PGM METHOD
+#===============================================================================
+PWG_POSTEST_PGM_ENERGY:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data'
+  #
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesPositiveTest/'
+  precalc_dir : './run_results/pwg_fullpos/'
+  imageset_file : 'pwg_fnames_test.txt'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/person_wearing_glasses/'
+  energy_filename : 'pwg_postest_pgm_energy.csv'
+  top_rel_filefmt : 'pwg_postest_pgm_{}.csv'
+
+PWG_HARDNEG_PGM_ENERGY:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_hardneg/'
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesNegativeTest/'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/person_wearing_glasses/'
+  energy_filename : 'pwg_hardneg_pgm_energy.csv'
+  top_rel_filefmt : 'pwg_hardneg_pgm_{}.csv'
+
+PWG_FULLNEG_PGM_ENERGY:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/person_wearing_glasses/'
+  energy_filename : 'pwg_fullneg_pgm_energy.csv'
+  top_rel_filefmt : 'pwg_fullneg_pgm_{}.csv'
+
+
+
+PWG_POSTEST_PGM_VIZ:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesPositiveTest/'
+  precalc_dir : './run_results/pwg_fullpos/'
+  imageset_file : 'personwearingglasses_fnames_test.txt'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/person_wearing_glasses/viz_postest_pgm/'
+  viz_file_format : '{}.jpg'
+
+PWG_HARDNEG_PGM_VIZ:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_hardneg/'
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesNegativeTest/'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/person_wearing_glasses/viz_hardneg_pgm/'
+  viz_file_format : '{}.jpg'
+
+PWG_FULLNEG_PGM_VIZ:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/person_wearing_glasses/viz_fullneg_pgm/'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# GEOMETRIC MEAN METHOD
+#===============================================================================
+
+PWG_POSTEST_GEO_ENERGY:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesPositiveTest/'
+  precalc_dir : './run_results/pwg_fullpos/'
+  imageset_file : 'personwearingglasses_fnames_test.txt'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/person_wearing_glasses/'
+  energy_filename : 'pwg_postest_geo_energy.csv'
+
+PWG_HARDNEG_GEO_ENERGY:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_hardneg/'
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesNegativeTest/'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/person_wearing_glasses/'
+  energy_filename : 'pwg_hardneg_geo_energy.csv'
+
+PWG_FULLNEG_GEO_ENERGY:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/person_wearing_glasses/'
+  energy_filename : 'pwg_fullneg_geo_energy.csv'
+
+
+
+PWG_POSTEST_GEO_VIZ:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesPositiveTest/'
+  precalc_dir : './run_results/pwg_fullpos/'
+  imageset_file : 'personwearingglasses_fnames_test.txt'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/person_wearing_glasses/viz_postest_geo/'
+  viz_file_format : '{}.jpg'
+
+PWG_HARDNEG_GEO_VIZ:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_hardneg/'
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesNegativeTest/'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/person_wearing_glasses/viz_hardneg_geo/'
+  viz_file_format : '{}.jpg'
+
+PWG_FULLNEG_GEO_VIZ:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/person_wearing_glasses/viz_fullneg_geo/'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# BRUTE FORCE METHOD
+#===============================================================================
+PWG_POSTEST_BF_ENERGY:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesPositiveTest/'
+  precalc_dir : './run_results/pwg_fullpos/'
+  imageset_file : 'personwearingglasses_fnames_test.txt'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/person_wearing_glasses/'
+  energy_filename : 'pwg_postest_brute_energy.csv'
+  top_rel_filefmt : 'pwg_postest_brute_{}.csv'
+
+PWG_HARDNEG_BF_ENERGY:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_hardneg/'
+  image_dir : './data/PersonWearingGlasses/PersonWearingGlassesNegativeTest/'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/person_wearing_glasses/'
+  energy_filename : 'pwg_hardneg_brute_energy.csv'
+  top_rel_filefmt : 'pwg_hardneg_brute_{}.csv'
+
+PWG_FULLNEG_BF_ENERGY:
+  query_string : 'person wearing glasses'
+  query_function : 'sro'
+  #
+  gmm_filename : 'pwg_gmms.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/pwg_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/personwearingglasses_classes.txt'
+  #
+  energy_method : 'brute'
+  energy_output_dir : './output/full_runs/person_wearing_glasses/'
+  energy_filename : 'pwg_fullneg_brute_energy.csv'
+  top_rel_filefmt : 'pwg_fullneg_brute_{}.csv'

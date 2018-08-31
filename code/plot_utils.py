@@ -132,6 +132,9 @@ def run_ratk(base_dir, model_name, energy_method_name, pos_set_name, neg_set_nam
 
 
 
+def personwearingglasses_ratk(energy_method, ratk_zoom=None):
+    run_ratk('/home/econser/research/irsg_psu_pdx/output/full_runs/person_wearing_glasses', 'pwg', energy_method, 'postest', ['fullneg', 'hardneg'], '/home/econser/research/irsg_psu_pdx/data/personwearingglasses_fnames_test.txt', ratk_zoom)
+
 def leadinghorse_ratk(energy_method, ratk_zoom=None):
     run_ratk('/home/econser/research/irsg_psu_pdx/output/full_runs/leadinghorse', 'lh', energy_method, 'postest', ['fullneg', 'hardneg'], '/home/econser/research/irsg_psu_pdx/data/leadinghorse_fnames_test.txt', ratk_zoom)
 
