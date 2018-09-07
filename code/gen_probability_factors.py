@@ -72,7 +72,7 @@ class ImageData (object):
 def get_cfg():
     import argparse
     parser = argparse.ArgumentParser(description='Binary Relation generation')
-    parser.add_argument('--model', dest='model_type', choices=['dog_walking', 'stanford_dw', 'pingpong', 'handshake'])
+    parser.add_argument('--model', dest='model_type', choices=['dog_walking', 'stanford_dw', 'pingpong', 'handshake', 'leadinghorse'])
     parser.add_argument('--dataset', dest='dataset', choices=['postest', 'hardneg', 'fullneg'])
     parser.add_argument('--gmm', dest='gmm_fname')
     args = parser.parse_args()
@@ -205,6 +205,35 @@ def get_cfg():
             'extending' : [('person__1', 'handshake'), ('person__2', 'handshake')],
             'handshaking' : [('person__1', 'person__2'), ('person__2', 'person__1')]
         }
+    elif model_type == 'leadinghorse':
+        csv_dir_map = {
+            'postest' : os.path.join(BASE_DIR, 'run_results/lh_fullpos/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/lh_hardneg/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/lh_fullneg/')
+        }
+        image_dir_map = {
+            'postest' : os.path.join(BASE_DIR, 'run_results/lh_fullpos/horse/'),
+            'hardneg' : os.path.join(BASE_DIR, 'run_results/lh_hardneg/horse/'),
+            'fullneg' : os.path.join(BASE_DIR, 'run_results/lh_fullneg/horse/')
+        }
+        best_bbox_map = {
+            'postest' : os.path.join(BASE_DIR, 'output/full_runs/leadinghorse/lh_postest_pgm_{}_bboxes.csv'),
+            'hardneg': os.path.join(BASE_DIR, 'output/full_runs/leadinghorse/lh_hardneg_pgm_{}_bboxes.csv'),
+            'fullneg': os.path.join(BASE_DIR, 'output/full_runs/leadinghorse/lh_fullneg_pgm_{}_bboxes.csv')
+        }
+        output_dir = os.path.join(BASE_DIR, 'output/full_runs/leadinghorse/')
+        imageset_files = {
+            'postest': os.path.join(BASE_DIR, 'data/leadinghorse_fnames_test.txt'),
+            'hardneg': None,
+            'fullneg': None
+        }
+        cls_names = ['horse', 'horse-leader', 'lead']
+        cls_counts = [1, 1, 1]
+        rel_map = {
+            'holding' : [('horse-leader', 'lead')],
+            'attached_to' : [('lead', 'horse')],
+            'is_leading' : [('horse-leader', 'horse')]
+        }
     else:
         pass
     
@@ -219,6 +248,7 @@ def get_cfg():
 python gen_probability_factors.py --model dog_walking --dataset postest --gmm dw_gmms_revised.pkl
 python gen_probability_factors.py --model handshake --dataset pos --gmm handshake_gmms.pkl
 python gen_probability_factors.py --model pingpong --dataset pos --gmm pingpong_gmms.pkl
+python gen_probability_factors.py --model leadinghorse --dataset postest --gmm lh_gmms.pkl
 """
 if __name__ == '__main__':
     # read config
@@ -271,10 +301,10 @@ if __name__ == '__main__':
             csv = line.split(', ')
             src_fname = csv[0].split('.')[0]
             
-            x = int(csv[1])
-            y = int(csv[2])
-            w = int(csv[3])
-            h = int(csv[4])
+            x = int(csv[2])
+            y = int(csv[3])
+            w = int(csv[4])
+            h = int(csv[5])
             bbox = np.array((x, y, w, h))
             
             if src_fname not in best_bboxes:

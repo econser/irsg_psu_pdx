@@ -1,8 +1,21 @@
+from __future__ import print_function
+
+import os
+import sys
+import cPickle
 import numpy as np
+import itertools as it
 import irsg_utils as iu
 
+from PIL import Image
+import matplotlib.pyplot as plt
+import matplotlib.lines as mlines
+import matplotlib.patches as patches
+import matplotlib.patheffects as path_effects
+
+
+
 #===============================================================================
-import os
 BASE_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.join(BASE_DIR, os.pardir)
 BASE_DIR = os.path.abspath(BASE_DIR)
@@ -53,6 +66,52 @@ def get_iou(gt_bbox, obj_bbox):
 
 
 
+class BinaryRelation (object):
+    def __init__(self, sub_bboxes, obj_bboxes, gmm):
+        box_pairs = np.array([x for x in it.product(sub_bboxes, obj_bboxes)])
+        box_vec = iu.get_gmm_features(box_pairs, in_format='xywh')
+        density = iu.gmm_pdf(box_vec, gmm.gmm_weights, gmm.gmm_mu, gmm.gmm_sigma)
+        density = np.reshape(density, (len(sub_bboxes), len(obj_bboxes)))
+        self.prob = 1. / (1. + np.exp(-(gmm.platt_a * density + gmm.platt_b)))
+        #self.box_pairs = np.array([x for x in it.product(sub_bboxes, obj_bboxes)])
+        #self.box_vec = iu.get_gmm_features(self.box_pairs, in_format='xywh')
+        #self.density = iu.gmm_pdf(self.box_vec, gmm.gmm_weights, gmm.gmm_mu, gmm.gmm_sigma)
+        #self.density = np.reshape(self.density, (len(sub_bboxes), len(obj_bboxes)))
+        #self.prob = 1. / (1. + np.exp(-(gmm.platt_a * self.density + gmm.platt_b)))
+        #self.sort_ixs = np.argsort(self.prob)[::-1]
+
+
+
+class ImageData (object):
+    def __init__(self, csv_dir, cls_names, rel_map, gmms):
+        self.unary = {}
+        for cls in cls_names:
+            fname = os.path.join(csv_dir, cls, image + '.csv')
+            unary_data = np.genfromtxt(fname, delimiter=',')
+            boxes = unary_data[:, 0:4]
+            scores = unary_data[:, 4]
+            self.unary[cls] = (boxes, scores)
+        
+        self.binary = {}
+        for rel in gmms.keys():
+            if rel not in rel_map:
+                continue
+            
+            self.binary[rel] = {}
+            for instance in rel_map[rel]:
+                sub_cls = instance[0]
+                sub_tuple = self.unary[sub_cls]
+                sub_bboxes = sub_tuple[0]
+                
+                obj_cls = instance[1]
+                obj_tuple = self.unary[obj_cls]
+                obj_bboxes = obj_tuple[0]
+                
+                self.binary[rel] = BinaryRelation(sub_bboxes, obj_bboxes, gmms[rel])
+
+
+
+#===============================================================================
 def get_cfg():
     import argparse
     parser = argparse.ArgumentParser(description='Binary Relation generation')
@@ -122,13 +181,21 @@ def get_cfg():
 
 
 """
-    best_bbox_dir: base directory for the best bboxes
-    anno_dir: directory for annotation files
-    imageset_file: list of filenames to generate output for (fq) (optional)
-    
-    model_type: which model to process
-    
-    output_dir: directory for storing IoU data and plots
+    model: which model to process
+    gmm: the .pkl gmm for sampling
+
+python gen_situation_detection.py --model 'leadinghorse' --method 'pgm'
+python gen_situation_detection.py --model 'leadinghorse' --method 'geo'
+python gen_situation_detection.py --model 'leadinghorse' --method 'brute'
+python gen_situation_detection.py --model 'handshake' --method 'pgm'
+python gen_situation_detection.py --model 'handshake' --method 'geo'
+python gen_situation_detection.py --model 'handshake' --method 'brute'
+python gen_situation_detection.py --model 'pingpong' --method 'pgm'
+python gen_situation_detection.py --model 'pingpong' --method 'geo'
+python gen_situation_detection.py --model 'pingpong' --method 'brute'
+python gen_situation_detection.py --model 'dog_walking' --method 'pgm'
+python gen_situation_detection.py --model 'dog_walking' --method 'geo'
+python gen_situation_detection.py --model 'dog_walking' --method 'brute'
 """
 if __name__ == '__main__':
     # read config
@@ -198,12 +265,10 @@ if __name__ == '__main__':
             best_bboxes[src_fname][cls_name].append(bbox)
     
     # calculate IoU for the object classes
-    iou_by_class = {}
-    image_fnames = annotations.keys()
-    for cls_ix, cls_name in enumerate(cls_names):
-        iou_results = []
-        for image_fname in image_fnames:
-            # get the ground truth bboxes for this image
+    iou_tracker = {}
+    for image_fname in annotations.keys():
+        iou_tracker[image_fname] = []
+        for cls_ix, cls_name in enumerate(cls_names):
             gt_bboxes = []
             cls_count = cls_counts[cls_ix]
             if cls_count > 1:
@@ -222,7 +287,7 @@ if __name__ == '__main__':
             iou = None
             if cls_count == 1:
                 iou = get_iou(gt_bboxes[0], img_bboxes[0])
-                iou_results.append((image_fname, iou))
+                iou_tracker[image_fname].append(iou)
             elif cls_count == 2:
                 # if there are 2 class objects, find configuration of bboxes
                 # that gives the highest IoU
@@ -240,31 +305,22 @@ if __name__ == '__main__':
                     iou = iou_swap
                 
                 for i in iou:
-                    iou_results.append((image_fname, i))
-        
-        iou_results = np.array(iou_results, dtype=np.object)
-        iou_fname = os.path.join(output_dir, '{}_{}_iou.csv'.format(cls_name, energy_method))
-        
-        np.savetxt(iou_fname, iou_results, fmt='%s, %0.3f')
-        iou_by_class[cls_name] = iou_results
+                    iou_tracker[image_fname].append(i)
     
     # calculate detection threshold counts
+    #print('situation success rates for "{}", {} method'.format(model_type, energy_method))
     thresh_list = np.linspace(0., 1., num=11) #TODO: parameterize
     n_images = len(imageset)
-    for cls_ix, cls_name in enumerate(cls_names):
-        ious = iou_by_class[cls_name]
-        max_hits = cls_counts[cls_ix] * n_images
-        detections = []
-        for thresh_val in thresh_list:
-            hits = np.where(ious[:,1] >= thresh_val)
-            n_hits = len(hits[0])
-            hit_rate = n_hits / (max_hits * 1.)
-            detections.append((thresh_val, hit_rate))
-        detections = np.array(detections)
-        detection_fname = os.path.join(output_dir, '{}_{}_detections.csv'.format(cls_name, energy_method))
-        np.savetxt(detection_fname, detections, header='threshold, hit_rate', comments='', fmt='%0.2f, %0.3f')
-    
-    # plot the detections data
-    # for plot in plots:
-    #    setup plot
-    #    save plot
+    rates = []
+    for threshold in thresh_list:
+        n_successes = 0
+        for image_fname in annotations.keys():
+            ious = iou_tracker[image_fname]
+            if min(ious) >= threshold:
+                n_successes += 1
+        rates.append((threshold, n_successes / float(n_images)))
+        
+        #print('{}: {:0.3f}'.format(threshold, n_successes / float(n_images)))
+    rates = np.array(rates)
+    out_fname = os.path.join(output_dir, 'sdr_{}_{}.csv'.format(model_type, energy_method))
+    np.savetxt(out_fname, rates, header='threshold, hit_rate', comments='', fmt='%0.2f, %0.3f')

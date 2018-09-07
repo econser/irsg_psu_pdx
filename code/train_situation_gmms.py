@@ -19,8 +19,8 @@ def gen_gmms(base_dir = '/home/econser/research/', train_file = 'handshake_fname
     data_dir = base_dir + 'data/'
     image_dir = data_dir + 'Handshake/'
     
-    tt_split_dict = get_train_test_splits(data_dir, train_file, test_file)
-    relationship_dict = get_annotations(image_dir, tt_split_dict)
+    data_dict = get_training_data(data_dir, train_file)
+    relationship_dict = get_annotations(image_dir, data_dict)
     
     train_rel = []
     train_rel.append(relationship_dict['train'][rel_str[0]])
@@ -81,23 +81,15 @@ def train_gmm(pos_boxes, neg_boxes=None, n_components=3):
 
 
 
-def get_train_test_splits(base_dir, train_filename, test_filename):
-    f = open(base_dir + train_filename, 'rb')
+def get_training_data(base_dir, train_filename):
+    f = open(os.path.join(base_dir, train_filename), 'rb')
     train_files = f.readlines()
-    f.close()
-    
-    f = open(base_dir + test_filename, 'rb')
-    test_files = f.readlines()
     f.close()
     
     file_dict = {}
     for filename in train_files:
         file_prefix = filename.split('.')[0]
         file_dict[file_prefix] = 'train'
-    
-    for filename in test_files:
-        file_prefix = filename.split('.')[0]
-        file_dict[file_prefix] = 'test'
     
     return file_dict
 
