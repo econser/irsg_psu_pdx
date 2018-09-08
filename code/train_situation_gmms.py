@@ -8,20 +8,28 @@ g.save(gmms, '/home/econser/research/data/situation_gmms.pkl')
 
 
 """
-import json
+import json as j
 
 rel_str = ['extending', 'handshaking']
 cls_name = ['person__1', 'person__2', 'handshake']
 
-def gen_gmms(base_dir = '/home/econser/research/', train_file = 'handshake_fnames_train.txt', test_file = 'handshake_fnames_test.txt', n_components=3):
+def gen_gmms(situation_cfg, annotation_dir = '/home/econser/research/data/Handshake', train_file = '/home/econser/research/data/handshake_fnames_train.txt', n_components=3):
     import irsg_utils as iu
-    
-    data_dir = base_dir + 'data/'
-    image_dir = data_dir + 'Handshake/'
-    
-    data_dict = get_training_data(data_dir, train_file)
-    relationship_dict = get_annotations(image_dir, data_dict)
-    
+
+    # pull important info from the situation cfg
+    f_cfg = load(situation_cfg)
+    j_cfg = j.load(f_cfg)
+    f_cfg.close()
+    situation_name = j['situation_name']
+    rel_names = []
+    for n in j['relationships']:
+        rel_names.append(n['name'])
+    object_names = j['object_names']
+
+    # format the training fnames
+    training_fnames = get_training_data(train_file)
+    relationship_dict = get_annotations(situation_name, annotation_dir, training_fnames, relation_names)
+
     train_rel = []
     train_rel.append(relationship_dict['train'][rel_str[0]])
     train_rel.append(relationship_dict['train'][rel_str[1]])
@@ -37,6 +45,32 @@ def gen_gmms(base_dir = '/home/econser/research/', train_file = 'handshake_fname
 
 
 
+def get_annotations_(situation_name, annotation_dir, training_fnames, relationship_names):
+    import os
+    import numpy as np
+    
+    file_list = os.listdir(directory)
+    n_annotations = 0
+    for filename in file_list:
+        if filename.endswith('.labl'):
+            n_annotations += 1
+    
+    relationship_dict = {}
+    for rel_name in relationship_names:
+        relationship_dict[rel_name] = []
+    
+    for filename in file_list:
+        if not filename.endswith('.labl'):
+            continue
+        
+        # parse the annotation
+        # append np.array(subj_bbox, obj_bbox) to the appropriate relationship
+    # convert each relation bbox list to array
+
+    return relationship_dict
+        
+
+        
 def train_gmm(pos_boxes, neg_boxes=None, n_components=3):
     import numpy as np
     import irsg_utils as iutl
@@ -81,8 +115,8 @@ def train_gmm(pos_boxes, neg_boxes=None, n_components=3):
 
 
 
-def get_training_data(base_dir, train_filename):
-    f = open(os.path.join(base_dir, train_filename), 'rb')
+def get_training_data(train_filename):
+    f = open(train_filename, 'rb')
     train_files = f.readlines()
     f.close()
     
@@ -95,7 +129,7 @@ def get_training_data(base_dir, train_filename):
 
 
 
-def get_annotations(directory, test_train_dict):
+def get_annotations_(annotation_dir, training_dict, relationships):
     import os
     import numpy as np
     
@@ -106,48 +140,40 @@ def get_annotations(directory, test_train_dict):
             n_annotations += 1
     
     relationship_dict = {}
-    
-    test_rel_dict = {}
-    relationship_dict['test'] = test_rel_dict
-    test_rel_dict[rel_str[0]] = []
-    test_rel_dict[rel_str[1]] = []
-    
-    train_rel_dict = {}
-    relationship_dict['train'] = train_rel_dict
-    train_rel_dict[rel_str[0]] = []
-    train_rel_dict[rel_str[1]] = []
+    for rel_name in relationship_names:
+        relationship_dict[rel_name] = []
     
     for filename in file_list:
         if not filename.endswith('.labl'):
             continue
         
-        hFile = open(directory + filename, 'rb')
-        lines = hFile.readlines()
+        fname = os.path.join(annotation_dir, filename)
+        f = open(fname, 'rb')
+        lines = f.readlines()
+        anno = lines[0]
         
-        for line in lines:
-            file_prefix = filename.split('.')[0]
-            image_type = test_train_dict[file_prefix]
-            
-            bboxes = get_bboxes(line)
-            
-            # -extending- relation (for p1 & p2)
-            b = (bboxes[cls_name[0]], bboxes[cls_name[2]])
-            b = np.array(b)
-            relationship_dict[image_type][rel_str[0]].append(b)
-            
-            b = (bboxes[cls_name[1]], bboxes[cls_name[2]])
-            b = np.array(b)
-            relationship_dict[image_type][rel_str[0]].append(b)
-            
-            # -handshaking- relation (for p1 and p2)
-            b = (bboxes[cls_name[0]], bboxes[cls_name[1]])
-            b = np.array(b)
-            relationship_dict[image_type][rel_str[1]].append(b)
-            
-            b = (bboxes[cls_name[1]], bboxes[cls_name[0]])
-            b = np.array(b)
-            relationship_dict[image_type][rel_str[1]].append(b)
-        hFile.close()
+        file_prefix = filename.split('.')[0]
+        image_type = test_train_dict[file_prefix]
+        
+        bboxes = get_bboxes(line)
+        
+        # -extending- relation (for p1 & p2)
+        b = (bboxes[cls_name[0]], bboxes[cls_name[2]])
+        b = np.array(b)
+        relationship_dict[image_type][rel_str[0]].append(b)
+        
+        b = (bboxes[cls_name[1]], bboxes[cls_name[2]])
+        b = np.array(b)
+        relationship_dict[image_type][rel_str[0]].append(b)
+        
+        # -handshaking- relation (for p1 and p2)
+        b = (bboxes[cls_name[0]], bboxes[cls_name[1]])
+        b = np.array(b)
+        relationship_dict[image_type][rel_str[1]].append(b)
+        
+        b = (bboxes[cls_name[1]], bboxes[cls_name[0]])
+        b = np.array(b)
+        relationship_dict[image_type][rel_str[1]].append(b)
     
     for batch_type in ['test', 'train']:
         for rel in rel_str:

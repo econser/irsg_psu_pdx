@@ -1,4 +1,5 @@
 {
+    "situation_name": "handshake",
     "object_names" : ["person__1", "person__2", "handshake"],
     "relationships" : [
 	{
