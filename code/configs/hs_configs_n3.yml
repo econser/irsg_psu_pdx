@@ -1,0 +1,190 @@
+#===============================================================================
+# HANDSHAKE (PGM)
+#===============================================================================
+
+HS_POSTEST_PGM_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
+  imageset_file : 'handshake_fnames_test.txt'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/handshake_sn3/'
+  energy_filename : 'handshake_postest_pgm_energy.csv'
+  top_rel_filefmt : 'handshake_postest_pgm_{}.csv'
+
+HS_FULLNEG_PGM_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/handshake_sn3/'
+  energy_filename : 'handshake_fullneg_pgm_energy.csv'
+  top_rel_filefmt : 'handshake_fullneg_pgm_{}.csv'
+
+HS_HARDNEG_PGM_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_hardneg/'
+  image_dir : './images/HandshakeHardNeg'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/handshake_sn3/'
+  energy_filename : 'handshake_hardneg_pgm_energy.csv'
+  top_rel_filefmt : 'handshake_hardneg_pgm_{}.csv'
+
+HS_POSTEST_PGM_VIZ:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
+  imageset_file : 'handshake_fnames_test.txt'
+  class_file : './data/handshake_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/handshake_sn3/viz_postest_pgm/'
+  viz_file_format : '{}.jpg'
+
+HS_FULLNEG_PGM_VIZ:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/handshake_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/handshake_sn3/viz_fullneg_pgm/'
+  viz_file_format : '{}.jpg'
+
+HS_HARDNEG_PGM_VIZ:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_hardneg/'
+  image_dir : './images/HandshakeHardNeg'
+  class_file : './data/handshake_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/handshake_sn3/viz_hardneg_pgm/'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# HANDSHAKE (GEOMETRIC MEAN)
+#===============================================================================
+
+HS_POSTEST_GEO_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
+  imageset_file : 'handshake_fnames_test.txt'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/handshake_sn3/'
+  energy_filename : 'handshake_postest_geo_energy.csv'
+
+HS_FULLNEG_GEO_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/handshake_sn3/'
+  energy_filename : 'handshake_fullneg_geo_energy.csv'
+
+HS_HARDNEG_GEO_ENERGY:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_hardneg/'
+  image_dir : './images/HandshakeHardNeg'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/handshake_sn3/'
+  energy_filename : 'handshake_hardneg_geo_energy.csv'
+
+HS_POSTEST_GEO_VIZ:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullpos/'
+  image_dir : './data/Handshake'
+  imageset_file : 'handshake_fnames_test.txt'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/handshake_sn3/viz_postest_geo'
+  viz_file_format : '{}.jpg'
+
+HS_FULLNEG_GEO_VIZ:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/handshake_sn3/viz_fullneg_geo'
+  viz_file_format : '{}.jpg'
+
+HS_HARDNEG_GEO_VIZ:
+  query_string : 'person, person, handshake; 0 extending 2, 1 extending 2, 0 handshaking 1'
+  query_function : 'split_spec'
+  #
+  gmm_filename : 'hs_sample_n3.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/hs_hardneg/'
+  image_dir : './images/HandshakeHardNeg'
+  class_file : './data/handshake_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/handshake_sn3/viz_hardneg_geo'
+  viz_file_format : '{}.jpg'

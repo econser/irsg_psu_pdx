@@ -1,0 +1,249 @@
+#===============================================================================
+# DOG WALKING CONFIGS (PGM)
+#===============================================================================
+
+DW_POSTEST_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data'
+  #
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
+  imageset_file : 'dogwalkingtest_fnames_test.txt'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/dog_walking_sn1/'
+  energy_filename : 'dw_cycle_postest_pgm_energy.csv'
+  top_rel_filefmt : 'dw_cycle_postest_pgm_{}.csv'
+
+DW_HARDNEG_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/dog_walking_sn1/'
+  energy_filename : 'dw_cycle_hardneg_pgm_energy.csv'
+  top_rel_filefmt : 'dw_cycle_hardneg_pgm_{}.csv'
+
+DW_FULLNEG_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/dog_walking_sn1/'
+  energy_filename : 'dw_cycle_fullneg_pgm_energy.csv'
+  top_rel_filefmt : 'dw_cycle_fullneg_pgm_{}.csv'
+
+DW_ORIGNEG_PGM_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_output_dir : './output/full_runs/dog_walking_sn1/'
+  energy_filename : 'dw_cycle_origneg_pgm_energy.csv'
+  top_rel_filefmt : 'dw_cycle_origneg_pgm_{}.csv'
+
+DW_POSTEST_PGM_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
+  imageset_file : 'dogwalkingtest_fnames_test.txt'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/dog_walking_sn1/viz_postest_pgm/'
+  viz_file_format : '{}.jpg'
+
+DW_HARDNEG_PGM_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/dog_walking_sn1/viz_hardneg_pgm/'
+  viz_file_format : '{}.jpg'
+
+DW_FULLNEG_PGM_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/dog_walking_sn1/viz_fullneg_pgm/'
+  viz_file_format : '{}.jpg'
+
+DW_ORIGNEG_PGM_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  viz_output_dir : './output/full_runs/dog_walking_sn1/viz_origneg_pgm/'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# DOG WALKING CONFIGS (GEOMETRIC MEAN)
+#===============================================================================
+
+DW_POSTEST_GEO_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
+  imageset_file : 'dogwalkingtest_fnames_test.txt'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/dog_walking_sn1/'
+  energy_filename : 'dw_cycle_postest_geo_energy.csv'
+
+DW_HARDNEG_GEO_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/dog_walking_sn1/'
+  energy_filename : 'dw_cycle_hardneg_geo_energy.csv'
+
+DW_FULLNEG_GEO_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/dog_walking_sn1/'
+  energy_filename : 'dw_cycle_fullneg_geo_energy.csv'
+
+DW_ORIGNEG_GEO_ENERGY:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : './output/full_runs/dog_walking_sn1/'
+  energy_filename : 'dw_cycle_origneg_geo_energy.csv'
+
+DW_POSTEST_GEO_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  image_dir : './images/psu_dw/PortlandSimpleDogWalking/'
+  precalc_dir : './run_results/dw_fullpos/'
+  imageset_file : 'dogwalkingtest_fnames_test.txt'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/dog_walking_sn1/viz_postest_geo/'
+  viz_file_format : '{}.jpg'
+
+DW_HARDNEG_GEO_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_hardneg/'
+  image_dir : './images/DogWalkingHardNeg/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/dog_walking_sn1/viz_hardneg_geo/'
+  viz_file_format : '{}.jpg'
+
+DW_FULLNEG_GEO_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_fullneg/'
+  image_dir : './images/Negatives'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/dog_walking_sn1/viz_fullneg_geo/'
+  viz_file_format : '{}.jpg'
+
+DW_ORIGNEG_GEO_VIZ:
+  query_string : 'dog_walker holding leash attached_to dog walked_by dog_walker'
+  query_function : 'two_rel_loop'
+  #
+  gmm_filename : 'dw_sample_n1.pkl'
+  data_dir : './data/'
+  #
+  precalc_dir : './run_results/dw_origneg/'
+  image_dir : './images/psu_dw/orig_negatives/'
+  class_file : './data/dog_walking_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : './output/full_runs/dog_walking_sn1/viz_origneg_geo/'
+  viz_file_format : '{}.jpg'
