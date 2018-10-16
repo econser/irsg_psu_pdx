@@ -1,0 +1,28 @@
+{
+    "situation_name": "ping_pong",
+    "object_names" : ["player", "net", "table"],
+    "relationships" : [
+	{
+	    "name" : "at",
+	    "components" : [
+			{"subject" : "player__1", "object" : "table"},
+			{"subject" : "player__2", "object" : "table"}
+	    ]
+	},
+	{
+	    "name" : "on",
+	    "components" : [
+		{"subject" : "net", "object" : "table"}
+	    ]
+	},
+	{
+	    "name" : "playing_pingpong_with",
+	    "components" : [
+			{"subject" : "player__1", "object" : "player__2"},
+			{"subject" : "player__2", "object" : "player__1"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/dog_walking",
+    "training_filenames" : "/home/econser/research/irsg_psu_pdx/data/dogwalkingtest_fnames_train.txt"
+}

@@ -17,6 +17,6 @@
 	    ]
 	}
     ],
-    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/images/Handshake",
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/Handshake",
     "training_filenames" : "/home/econser/research/irsg_psu_pdx/data/handshake_fnames_train.txt"
 }

@@ -30,7 +30,7 @@ def tokenize(annotation):
 
 
 #===============================================================================
-def get_bbox_fn_(model_name):
+def get_bbox_fn(model_name):
     if model_name == 'dog_walking':
         return (lambda anno: generic_bbox_fn(dw_anno_map, anno))
     elif model_name == 'ping_pong':
