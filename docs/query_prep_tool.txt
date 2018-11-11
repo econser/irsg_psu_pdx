@@ -32,6 +32,8 @@ expected S&R keys:
 <WEIGHT_FNAME>     :: 'LeadingHorse'
 <MODEL_ARCH>       :: 'VGG_CNN_M_1024.v2'
 
+<GMM_CFG_FNAME>    :: '/home/econser/research/data/leadinghorse.json'
+<GMM_SCRIPT_FNAME> :: 'train_situation_gmms.py'
 
 
 --------------------------------------------------------------------------------
@@ -49,6 +51,7 @@ OPERATION:
  * generate situation json file
  - convert config.yml file
  - convert run_all_template.sh file
+ - generate class list file
 
 
 
@@ -57,3 +60,11 @@ OPERATION:
    * e.g. screen -dm "./run_finetuning.sh"
           screen -dm "./run_gmms.sh"
  * run run_all_template.sh
+
+
+
+--------------------------------------------------------------------------------
+MANUAL STEPS:
+ - update frcn factory.py
+ - generate classes file
+ - generate situation's json file
