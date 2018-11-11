@@ -1,0 +1,26 @@
+RELATIONSHIPS:
+--------------------------------------------------------------------------------
+   wearing  : person-> sunglasses, person->helmet
+sitting_on  : person->bench
+        on  : person->horse, bottle->table, sign->building, picture->wall
+attached to : sign->pole
+      under : skateboard->shoes
+next_to     : person->person
+
+
+OBJECTS:
+--------------------------------------------------------------------------------
+person
+sunglasses
+bench
+helmet
+horse
+sign
+pole
+skateboard
+shoes
+bottle
+table
+building
+picture
+wall

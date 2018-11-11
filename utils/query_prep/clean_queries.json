@@ -1,0 +1,82 @@
+{
+    "search_and_replace" : {
+        "MODEL_NAME" : "MiniVG",
+        "MODEL_SHORT_NAME" : "mvg",
+        
+	"CLASS_1_ANNO" : "person",
+	"CLASS_2_ANNO" : "glasses",
+	"CLASS_3_ANNO" : "sunglasses",
+	"CLASS_4_ANNO" : "bench",
+	"CLASS_5_ANNO" : "helmet",
+	"CLASS_6_ANNO" : "monitor",
+	"CLASS_7_ANNO" : "desk",
+	"CLASS_8_ANNO" : "picture",
+	"CLASS_9_ANNO" : "wall",
+	"CLASS_10_ANNO" : "horse",
+	"CLASS_11_ANNO" : "sign",
+	"CLASS_12_ANNO" : "pole",
+	"CLASS_13_ANNO" : "hat",
+	"CLASS_14_ANNO" : "skateboard",
+	"CLASS_15_ANNO" : "shoes",
+	"CLASS_16_ANNO" : "bottle",
+	"CLASS_17_ANNO" : "table",
+	"CLASS_18_ANNO" : "laptop",
+	"CLASS_19_ANNO" : "phone",
+	"CLASS_20_ANNO" : "building",
+
+	"CLASS_1_STR" : "person",
+	"CLASS_2_STR" : "glasses",
+	"CLASS_3_STR" : "sunglasses",
+	"CLASS_4_STR" : "bench",
+	"CLASS_5_STR" : "helmet",
+	"CLASS_6_STR" : "monitor",
+	"CLASS_7_STR" : "desk",
+	"CLASS_8_STR" : "picture",
+	"CLASS_9_STR" : "wall",
+	"CLASS_10_STR" : "horse",
+	"CLASS_11_STR" : "sign",
+	"CLASS_12_STR" : "pole",
+	"CLASS_13_STR" : "hat",
+	"CLASS_14_STR" : "skateboard",
+	"CLASS_15_STR" : "shoes",
+	"CLASS_16_STR" : "bottle",
+	"CLASS_17_STR" : "table",
+	"CLASS_18_STR" : "laptop",
+	"CLASS_19_STR" : "phone",
+	"CLASS_20_STR" : "building",
+        
+        "TRAIN_IMG_DIR" : "mini_vg/train",
+        "TRAIN_IMG_PREFIX" : "LeadingHorse",
+        "TRAIN_IMG_FNAMES" : "leadinghorse_fnames",
+    
+        "ANNO_DIR" : "LeadingHorse",
+        "ANNO_FNAME_FMT" : "LeadingHorse{}",
+        
+        "MODEL_DEF_DIR" : "/home/econser/research/irsg_psu_pdx/models/model_definitions",
+        "FRCNN_DIR" : "/home/econser/usr/py-faster-rcnn",
+        
+        "NUM_CLASSES" : "4",
+        "NUM_CLASSES_X4" : "16",
+    
+        "QUERY_STR" : "horse-leader holding lead attached_to horse lead_by horse-leader",
+        "QUERY_FN" : "two_rel_loop",
+        
+        "PYTHON_ROOT" : "/home/econser/research/irsg_psu_pdx/code",
+        "MODEL_WEIGHT_DIR" : "/home/econser/research/irsg_psu_pdx/models/model_weights",
+        "ITERATIONS" : "50000",
+        "WEIGHT_FNAME" : "LeadingHorse",
+        "MODEL_ARCH" : "VGG_CNN_M_1024.v2",
+    
+        "GMM_CFG_FNAME" : "/home/econser/research/data/leadinghorse.json",
+        "GMM_SCRIPT_FNAME" : "train_situation_gmms.py",
+    
+        "CLASS_STR_FNAME" : "leadinghorse_classes.txt",
+        "CLASS_FILE_DIR" : "/home/econser/research/irsg_psu_pdx/data",
+        
+        "PROJECT_ROOT_DIR" : "/home/econser/research/irsg_psu_pdx/"
+    }
+    "bbox_configs" : {
+	
+    }
+}
+

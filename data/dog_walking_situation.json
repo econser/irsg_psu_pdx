@@ -1,0 +1,26 @@
+{
+    "situation_name": "dog_walking",
+    "object_names" : ["dog", "dog_walker", "leash"],
+    "relationships" : [
+	{
+	    "name" : "holding",
+	    "components" : [
+		{"subject" : "dog_walker", "object" : "leash"}
+	    ]
+	},
+	{
+	    "name" : "attached_to",
+	    "components" : [
+		{"subject" : "leash", "object" : "dog"}
+	    ]
+	},
+	{
+	    "name" : "walked_by",
+	    "components" : [
+		{"subject" : "dog", "object" : "dog_walker"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/dog_walking",
+    "training_filenames" : "/home/econser/research/irsg_psu_pdx/data/dogwalkingtest_fnames_train.txt"
+}

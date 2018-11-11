@@ -1,0 +1,26 @@
+{
+    "situation_name": "leading_horse",
+    "object_names" : ["horse", "horse-leader", "lead"],
+    "relationships" : [
+	{
+	    "name" : "holding",
+	    "components" : [
+		{"subject" : "horse-leader", "object" : "lead"}
+	    ]
+	},
+	{
+	    "name" : "attached_to",
+	    "components" : [
+		{"subject" : "lead", "object" : "horse"}
+	    ]
+	},
+	{
+	    "name" : "lead_by",
+	    "components" : [
+		{"subject" : "horse", "object" : "horse-leader"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/leadinghorse",
+    "training_filenames" : "/home/econser/research/irsg_psu_pdx/data/leadinghorse_fnames_train.txt"
+}

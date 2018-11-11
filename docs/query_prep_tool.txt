@@ -1,0 +1,70 @@
+expected S&R keys:
+<MODEL_NAME>       :: 'LeadingHorse'
+<MODEL_SHORT_NAME> :: 'lh'
+
+<CLASS_1_ANNO>     :: 'horse-leader'
+<CLASS_2_ANNO>     :: 'horse-'
+<CLASS_3_ANNO>     :: 'lead'
+
+<CLASS_1_STR>      :: 'horse-leader'
+<CLASS_2_STR>      :: 'horse'
+<CLASS_3_STR>      :: 'lead'
+
+<TRAIN_IMG_DIR>    :: 'LeadingHorse' (joined to factor.py img path)
+<TRAIN_IMG_PREFIX> :: 'LeadingHorse' (for LeadingHorse1.jpg)
+<TRAIN_IMG_FNAMES> :: 'leadinghorse_fnames_'
+
+<ANNO_DIR>         :: 'LeadingHorse' (joined to factor.py img path)
+<ANNO_FNAME_FMT>   :: 'LeadingHorse{}' (for LeadingHorse1.labl')
+
+<MODEL_DEF_DIR>    :: '/home/econser/research/irsg_psu_pdx/models/model_definitions'
+<FRCNN_DIR>        :: '/home/econser/usr/py-faster-rcnn'
+
+<NUM_CLASSES>      :: 4 (This includes the background class)
+<NUM_CLASSES_X4>   :: 16
+
+<QUERY_STR>        :: 'horse-leader holding lead attached_to horse lead_by horse-leader'
+<QUERY_FN>         :: 'two_rel_loop'
+
+<PYTHON_ROOT>      :: '/home/econser/research/irsg_psu_pdx/code'
+<MODEL_WEIGHT_DIR> :: '/home/econser/research/irsg_psu_pdx/models/model_weights'
+<ITERATIONS>       :: 50000
+<WEIGHT_FNAME>     :: 'LeadingHorse'
+<MODEL_ARCH>       :: 'VGG_CNN_M_1024.v2'
+
+<GMM_CFG_FNAME>    :: '/home/econser/research/data/leadinghorse.json'
+<GMM_SCRIPT_FNAME> :: 'train_situation_gmms.py'
+
+
+--------------------------------------------------------------------------------
+OPERATION:
+ - imdb/template.py used to generate the query's imdb file
+ - query imdb moved to frcnn dataset dir
+ * update factory.py to reflect the new query, <MODEL_NAME>
+ - model_defs/config.yml converted, moved to <MODEL_DEF_DIR>/<MODEL_NAME>
+ - model_defs/faster_rcnn_end2end/solver (init and full) converted, moved to <MODEL_DEF_DIR>/<MODEL_NAME>/faster_rcnn_end2end
+ - model_defs/faster_rcnn_end2end/train (init and full) converted, moved to <MODEL_DEF_DIR>/<MODEL_NAME>/faster_rcnn_end2end
+ - model_defs/faster_rcnn_end2end/test converted, moved to <MODEL_DEF_DIR>/<MODEL_NAME>/faster_rcnn_end2end
+ - scripts/finetune_template_init.sh converted, renamed to ft_<MODEL_NAME>_init.sh
+ - scripts/finetune_template_full.sh converted, renamed to ft_<MODEL_NAME>_full.sh
+ - chmod finetuning scripts
+ * generate situation json file
+ - convert config.yml file
+ - convert run_all_template.sh file
+ - generate class list file
+
+
+
+ - run finetuning and move final model (screen)
+ - run GMM training and move gmm to data dir, save as <MODEL_SHORT_NAME>_gmms.pkl (screen)
+   * e.g. screen -dm "./run_finetuning.sh"
+          screen -dm "./run_gmms.sh"
+ * run run_all_template.sh
+
+
+
+--------------------------------------------------------------------------------
+MANUAL STEPS:
+ - update frcn factory.py
+ - generate classes file
+ - generate situation's json file
