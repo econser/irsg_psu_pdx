@@ -1,0 +1,13 @@
+{
+    "situation_name": "person_on_horse",
+    "object_names" : ["person", "horse"],
+    "relationships" : [
+	{
+	    "name" : "on",
+	    "components" : [
+	        {"subject" : "person", "object" : "horse"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnHorseTrain"
+}

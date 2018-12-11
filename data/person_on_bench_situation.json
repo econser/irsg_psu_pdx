@@ -1,0 +1,13 @@
+{
+    "situation_name": "person_on_bench",
+    "object_names" : ["person", "bench"],
+    "relationships" : [
+	{
+	    "name" : "on",
+	    "components" : [
+	        {"subject" : "person", "object" : "bench"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnBenchTrain"
+}

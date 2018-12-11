@@ -1,0 +1,13 @@
+{
+    "situation_name": "person_wearing_helmet",
+    "object_names" : ["person", "helmet"],
+    "relationships" : [
+	{
+	    "name" : "wearing",
+	    "components" : [
+	        {"subject" : "person", "object" : "helmet"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingHelmetTrain"
+}

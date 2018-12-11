@@ -58,13 +58,65 @@ def get_bbox_fn(model_name, anno_type):
         'ping_pong' : pp_anno_map,
         'handshake' : hs_anno_map,
         'leading_horse' : lh_anno_map,
-        'person_wearing_glasses' : pwg_anno_map
+        'person_wearing_glasses' : pwg_anno_map,
+        'full_minivg' : mvg_anno_map
         }
-    
+
     parse_fn = parse_fn_dict.get(anno_type)
     anno_map_fn = anno_map_fn_dict.get(model_name)
     
+    if model_name == 'full_minivg':
+        return (lambda anno: minivg(anno_map_fn, parse_fn, anno))
+    
     return (lambda anno: generic_bbox_fn(anno_map_fn, parse_fn, anno))
+
+
+
+def minivg(map_fn, parse_fn, annotation):
+    objects, bboxes = parse_fn(annotation)
+    
+    # check to see if we need to pair up objects
+    do_pairing = False
+    for obj_name in objects:
+        if '_' in obj_name:
+            do_pairing = True
+            break
+        
+    if do_pairing:
+        # we're assuming 2 types of objects with '<obj_name>__<index>' format
+        num_pairs = len(objects) / 2
+        # split the objects into obj_name, ix, bbox tuples
+        obj_names = []
+        sit_ixs = []
+        bbox_list = []
+        for anno_ix, obj in enumerate(objects):
+            name, ix = obj.split('_')
+            ix = int(ix)
+            obj_names.append(name.lower())
+            sit_ixs.append(ix)
+            bbox_list.append(bboxes[anno_ix])
+        sit_ixs = np.array(sit_ixs)
+        
+        # now pair up the rel pairs
+        obj_dicts = []
+        for pair_ix in range(num_pairs):
+            ref_ix = np.where(sit_ixs-1 == pair_ix)[0]
+            obj_dict = {}
+            obj_dict[obj_names[ref_ix[0]]] = bbox_list[ref_ix[0]]
+            obj_dict[obj_names[ref_ix[1]]] = bbox_list[ref_ix[1]]
+            
+            obj_dicts.append(obj_dict)
+        
+        return obj_dicts
+    else:
+        for obj_ix, obj_name in enumerate(objects):
+            objects[obj_ix] = map_fn(obj_name)
+
+        objects = deconflict(objects)
+    
+        # zip class names and bboxes
+        obj_dict = dict(zip(objects, bboxes))
+        return [obj_dict]
 
 
 
@@ -146,6 +198,14 @@ def json_parse_fn(annotation):
 #-------------------------------------------------------------------------------
 def generic_anno_map(obj_name):
     return obj_name.split(' ')[0]
+
+
+
+def mvg_anno_map(obj_name):
+    obj = obj_name.split(' ')[0]
+    obj =  obj.split('_')[0]
+    # check for multi
+    return obj.lower()
 
 
 

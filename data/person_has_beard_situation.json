@@ -1,0 +1,13 @@
+{
+    "situation_name": "person_has_beard",
+    "object_names" : ["person", "beard"],
+    "relationships" : [
+	{
+	    "name" : "has",
+	    "components" : [
+	        {"subject" : "person", "object" : "beard"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonHasBeardTrain"
+}

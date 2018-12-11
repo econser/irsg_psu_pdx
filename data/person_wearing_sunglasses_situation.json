@@ -1,0 +1,13 @@
+{
+    "situation_name": "person_wearing_sunglasses",
+    "object_names" : ["person", "sunglasses"],
+    "relationships" : [
+	{
+	    "name" : "wearing",
+	    "components" : [
+	        {"subject" : "person", "object" : "sunglasses"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingSunglassesTrain"
+}
