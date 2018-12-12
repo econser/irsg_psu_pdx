@@ -1,5 +1,5 @@
 {
-	"situation_name": "person_wearing_glasses",
+    "situation_name": "person_wearing_glasses",
     "object_names" : ["person", "glasses"],
     "relationships" : [
 	{

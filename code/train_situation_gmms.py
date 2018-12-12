@@ -27,13 +27,15 @@ def gen_gmms(situation_cfg, annotation_dir, training_fnames, cal_method, n_compo
     f_cfg.close()
     situation_name = j_cfg['situation_name']
     
-    relationships = j_cfg['relationships']
-    relationship_dict = get_annotations(situation_name, annotation_dir, training_fnames, relationships)
-    
     gmms = {}
+    relationships = j_cfg['relationships']
     for rel_data in relationships:
+        import pdb; pdb.set_trace()
         rel_name = rel_data['name']
-        pos_bboxes = relationship_dict[rel_name]
+        training_set = training_fnames[rel_name]
+        relationship_dict = get_annotations(situation_name, annotation_dir, training_set, rel_data)
+        import pdb; pdb.set_trace()
+        pos_bboxes = relationship_dict['pos_bboxes']
         
         print('Creating model for "{}" relationship:'.format(rel_name))
         gmm = train_gmm(pos_bboxes, n_components)
@@ -53,6 +55,50 @@ def gen_gmms(situation_cfg, annotation_dir, training_fnames, cal_method, n_compo
 def get_annotations(situation_name, annotation_dir, training_fnames, relationship_cfg):
     import gen_bboxes as g
     
+    relationship_dict = {}
+    relationship_dict['pos_bboxes'] = []
+
+    bbox_fn = g.get_bbox_fn(situation_name, 'labl')
+    for fname in training_fnames:
+        if not fname.endswith('.labl'):
+            continue
+        
+        # parse the annotation
+        f = open(fname, 'rb')
+        line = f.readlines()[0]
+        bboxes = bbox_fn(line)
+        
+        # append np.array(subj_bbox, obj_bbox) to the appropriate relationship
+        assigned = False
+        rel_name = relationship_cfg['name']
+        for rel in rel_data['components']:
+            sub_class = rel['subject']
+            obj_class = rel['object']
+            
+            if sub_class not in bboxes[0] or obj_class not in bboxes[0]:
+                continue
+            
+            assigned = True
+            for bbox_pair in bboxes:
+                # check for the situation where we need to fix the annotation
+                if sub_class not in bbox_pair or obj_class not in bbox_pair:
+                    print('{} needs fix'.format(fname))
+                    continue
+                box_tup = (bbox_pair[sub_class], bbox_pair[obj_class])
+                relationship_dict['pos_bboxes'].append(np.array(box_tup))
+            
+        if not assigned:
+            import pdb; pdb.set_trace()
+            pass
+    
+    relationship_dict['pos_bboxes'] = np.array(relationship_dict['pos_bboxes'])
+    return relationship_dict
+
+
+
+def get_annotations_(situation_name, annotation_dir, training_fnames, relationship_cfg):
+    import gen_bboxes as g
+    
     #file_list = os.listdir(annotation_dir)
     #n_annotations = 0
     #for filename in file_list:
@@ -64,7 +110,7 @@ def get_annotations(situation_name, annotation_dir, training_fnames, relationshi
         rel_name = rel['name']
         relationship_dict[rel_name] = []
     
-    bbox_fn = g.get_bbox_fn(situation_name)
+    bbox_fn = g.get_bbox_fn(situation_name, 'labl')
     for fname in training_fnames:
         if not fname.endswith('.labl'):
             continue
@@ -75,13 +121,26 @@ def get_annotations(situation_name, annotation_dir, training_fnames, relationshi
         bboxes = bbox_fn(line)
         
         # append np.array(subj_bbox, obj_bbox) to the appropriate relationship
+        assigned = False
         for rel_data in relationship_cfg:
             rel_name = rel_data['name']
             for rel in rel_data['components']:
                 sub_class = rel['subject']
                 obj_class = rel['object']
-                box_tup = (bboxes[sub_class], bboxes[obj_class])
-                relationship_dict[rel_name].append(np.array(box_tup))
+                if sub_class not in bboxes[0] or obj_class not in bboxes[0]:
+                    continue
+                assigned = True
+                for bbox_pair in bboxes:
+                    # check for the situation where we need to fix the annotation
+                    if sub_class not in bbox_pair or obj_class not in bbox_pair:
+                        print('{} needs fix'.format(fname))
+                        continue
+                    box_tup = (bbox_pair[sub_class], bbox_pair[obj_class])
+                    relationship_dict[rel_name].append(np.array(box_tup))
+            break
+        if not assigned:
+            import pdb; pdb.set_trace()
+            pass
     
     # convert each relation bbox list to array
     for rel in relationship_cfg:
@@ -104,7 +163,7 @@ def train_gmm(bboxes, n_components):
 
 
 
-def calibrate(gmm, pos_bboxes, neg_bboxes, title=''):
+def calibrate(gmm, pos_bboxes, neg_bboxes, title='', show_plot=False):
     pos_features = iu.get_gmm_features(pos_bboxes, in_format='xywh')
     pos_scores = iu.gmm_pdf(pos_features, gmm.weights_, gmm.means_, gmm.covariances_)
     n_pos = len(pos_features)
@@ -125,13 +184,14 @@ def calibrate(gmm, pos_bboxes, neg_bboxes, title=''):
     platt_cal.fit(shuff_scores.reshape(-1,1), shuff_labels)
     platt_params = (platt_cal.coef_[0][0], platt_cal.intercept_[0])
     
-    import matplotlib.pyplot as plt
-    plt.scatter(all_scores, all_labels)
-    x_vals = np.linspace(0.0, np.max(all_scores), num=100)
-    y_vals = 1. / (1. + np.exp(-(platt_params[0] * x_vals + platt_params[1])))
-    plt.plot(x_vals, y_vals)
-    plt.title(title)
-    plt.show()
+    if show_plot: # TODO: output plats with fname
+        import matplotlib.pyplot as plt
+        plt.scatter(all_scores, all_labels)
+        x_vals = np.linspace(0.0, np.max(all_scores), num=100)
+        y_vals = 1. / (1. + np.exp(-(platt_params[0] * x_vals + platt_params[1])))
+        plt.plot(x_vals, y_vals)
+        plt.title(title)
+        plt.show()
     
     return platt_params
 
@@ -386,26 +446,31 @@ def get_cfg():
     f.close()
     
     # training images (training_dir or training_files)
-    annotation_dir = j_cfg['annotation_dir']
-    training_fnames = []
-    if 'training_filenames' in j_cfg:
-        with open(j_cfg['training_filenames'], 'rb') as f:
-            training_fnames = f.readlines()
-            training_fnames = [fname.rstrip('\n') for fname in training_fnames]
-            training_fnames = [fname.rstrip('\r') for fname in training_fnames]
-            training_fnames = [fname.replace('.jpg', '.labl') for fname in training_fnames]
-    else:
-        training_fnames = os.listdir(annotation_dir)
-        training_fnames = filter(lambda x: '.labl' in x, training_fnames)
+    rel_training_fnames = {}
+    rel_cfg = j_cfg['relationships']
+    for rel in rel_cfg:
+        annotation_dir = rel['annotation_dir']
+        training_fnames = []
+        if 'training_filenames' in j_cfg:
+            with open(j_cfg['training_filenames'], 'rb') as f:
+                training_fnames = f.readlines()
+                training_fnames = [fname.rstrip('\n') for fname in training_fnames]
+                training_fnames = [fname.rstrip('\r') for fname in training_fnames]
+                training_fnames = [fname.replace('.jpg', '.labl') for fname in training_fnames]
+        else:
+            training_fnames = os.listdir(annotation_dir)
+            training_fnames = filter(lambda x: '.labl' in x, training_fnames)
+        
+        fq_training_fnames = []
+        for fname in training_fnames:
+            fq_training_fnames.append(os.path.join(annotation_dir, fname))
+        rel_training_fnames[rel['name']] = fq_training_fnames
     
-    fq_training_fnames = []
-    for fname in training_fnames:
-        fq_training_fnames.append(os.path.join(annotation_dir, fname))
-    
-    return json_fname, annotation_dir, fq_training_fnames, int(args.n_components), args.out_fname, args.neg_method
+    return json_fname, annotation_dir, rel_training_fnames, int(args.n_components), args.out_fname, args.neg_method
 
 
 
+# python train_situation_gmms.py --c '/home/econser/research/irsg_psu_pdx/data/minivg_situations.json' --o '/home/econser/research/irsg_psu_pdx/data/minivg_gmms.pkl'
 if __name__ == '__main__':
     cfg = get_cfg()
     json_cfg = cfg[0]

@@ -1,0 +1,13 @@
+{
+    "situation_name": "person_on_skateboard",
+    "object_names" : ["person", "skateboard"],
+    "relationships" : [
+	{
+	    "name" : "on",
+	    "components" : [
+	        {"subject" : "person", "object" : "skateboard"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnSkateboardTrain"
+}

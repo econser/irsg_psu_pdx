@@ -1,0 +1,55 @@
+{
+    "situation_name": "full_minivg",
+    "object_names" : ["person", "beard", "bench", "horse", "skateboard", "helmet", "sunglasses", "pillow", "couch"],
+    "relationships" : [
+	{
+	    "name" : "person_has_beard",
+	    "components" : [
+	        {"subject" : "person", "object" : "beard"}
+	    ],
+	    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonHasBeardTrain"
+	},
+	{
+	    "name" : "person_on_bench",
+	    "components" : [
+	        {"subject" : "person", "object" : "bench"}
+	    ],
+	    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnBenchTrain"
+	},
+	{
+	    "name" : "person_on_horse",
+	    "components" : [
+	        {"subject" : "person", "object" : "horse"}
+	    ],
+	    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnHorseTrain"
+	},
+	{
+	    "name" : "person_on_skateboard",
+	    "components" : [
+	        {"subject" : "person", "object" : "skateboard"}
+	    ],
+	    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnSkateboardTrain"
+	},
+	{
+	    "name" : "person_wearing_helmet",
+	    "components" : [
+	        {"subject" : "person", "object" : "helmet"}
+	    ],
+	    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingHelmetTrain"
+	},
+	{
+	    "name" : "person_wearing_sunglasses",
+	    "components" : [
+	        {"subject" : "person", "object" : "sunglasses"}
+	    ],
+	    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingSunglassesTrain"
+	},
+	{
+	    "name" : "pillow_on_couch",
+	    "components" : [
+	        {"subject" : "pillow", "object" : "couch"}
+	    ],
+	    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PillowOnCouchTrain"
+	}
+    ]
+}

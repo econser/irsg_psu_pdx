@@ -1,0 +1,13 @@
+{
+    "situation_name": "pillow_on_couch",
+    "object_names" : ["pillow", "couch"],
+    "relationships" : [
+	{
+	    "name" : "on",
+	    "components" : [
+	        {"subject" : "pillow", "object" : "couch"}
+	    ]
+	}
+    ],
+    "annotation_dir" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PillowOnCouchTrain"
+}
