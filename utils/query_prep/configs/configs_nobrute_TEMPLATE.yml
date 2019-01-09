@@ -1,0 +1,90 @@
+#===============================================================================
+# <MODEL_NAME> SITUATION CONFIGURATIONS
+#===============================================================================
+
+#===============================================================================
+# IRSG PGM METHOD
+#===============================================================================
+
+TEST_PGM_ENERGY:
+  query_string : '<QUERY_STR>'
+  query_function : '<QUERY_FN>'
+  #
+  gmm_filename : '<RELATION_FNAME>'
+  data_dir : './data'
+  #
+  image_dir : '<IMAGE_DIR>'
+  precalc_dir : '<CSV_DIR>'
+  imageset_file : '<IMAGESET_FNAME>'
+  class_file : '<CLASS_FNAME>'
+  #
+  energy_output_dir : '<OUTDIR>/pgm_energy'
+  energy_filename : '<MODEL_SHORT_NAME>_pgm_energy.csv'
+  top_rel_filefmt : '<MODEL_SHORT_NAME>_pgm_{}.csv'
+
+TEST_PGM_VIZ:
+  query_string : '<QUERY_STR>'
+  query_function : '<QUERY_FN>'
+  #
+  gmm_filename : '<RELATION_FNAME>'
+  data_dir : './data/'
+  #
+  image_dir : '<IMAGE_DIR>'
+  precalc_dir : '<CSV_DIR>'
+  imageset_file : '<IMAGESET_FNAME>'
+  class_file : '<CLASS_FNAME>'
+  #
+  viz_output_dir : '<OUTDIR>/pgm_viz'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# GEOMETRIC MEAN METHOD
+#===============================================================================
+
+TEST_GEO_ENERGY:
+  query_string : '<QUERY_STR>'
+  query_function : '<QUERY_FN>'
+  #
+  gmm_filename : '<RELATION_FNAME>'
+  data_dir : './data/'
+  #
+  image_dir : '<IMAGE_DIR>'
+  precalc_dir : '<CSV_DIR>'
+  imageset_file : '<IMAGESET_FNAME>'
+  class_file : '<CLASS_FNAME>'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : '<OUTDIR>/geo_energy'
+  energy_filename : '<MODEL_SHORT_NAME>_geo_energy.csv'
+
+TEST_GEO_VIZ:
+  query_string : '<QUERY_STR>'
+  query_function : '<QUERY_FN>'
+  #
+  gmm_filename : '<RELATION_FNAME>'
+  data_dir : './data/'
+  #
+  image_dir : '<IMAGE_DIR>'
+  precalc_dir : '<CSV_DIR>'
+  imageset_file : '<IMAGESET_FNAME>'
+  class_file : '<CLASS_FNAME>'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : '<OUTDIR>/geo_viz'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# BBOX GENERATION CONFIGS
+#===============================================================================
+
+BBOX_FULLPOS:
+  data_dir : './data/'
+  image_dir : '<IMAGE_DIR>'
+  model_file : '<RCNN_MODEL_DEF>'
+  weights : '<RCNN_MODEL_WEIGHTS>'
+  class_file : '<CLASS_FNAME>'
+  box_and_score_output_dir : '<CSV_OUTDIR>'
