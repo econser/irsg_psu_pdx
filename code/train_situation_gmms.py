@@ -20,7 +20,7 @@ from sklearn.utils import shuffle
 
 
 
-def gen_gmms(situation_cfg, annotation_dir, training_fnames, cal_method, n_components=3):
+def gen_gmms(situation_cfg, training_fnames, cal_method, n_components=3):
     # pull important info from the situation cfg
     f_cfg = open(situation_cfg, 'rb')
     j_cfg = j.load(f_cfg)
@@ -30,14 +30,15 @@ def gen_gmms(situation_cfg, annotation_dir, training_fnames, cal_method, n_compo
     gmms = {}
     relationships = j_cfg['relationships']
     for rel_data in relationships:
-        import pdb; pdb.set_trace()
         rel_name = rel_data['name']
+        annotation_dir = rel_data['annotation_dir']
+        print('Creating model for "{}" relationship:'.format(rel_name))
+        
         training_set = training_fnames[rel_name]
         relationship_dict = get_annotations(situation_name, annotation_dir, training_set, rel_data)
-        import pdb; pdb.set_trace()
         pos_bboxes = relationship_dict['pos_bboxes']
+        print('  Found {} positive annotations'.format(len(pos_bboxes)))
         
-        print('Creating model for "{}" relationship:'.format(rel_name))
         gmm = train_gmm(pos_bboxes, n_components)
         
         if cal_method == 'sample':
@@ -71,7 +72,7 @@ def get_annotations(situation_name, annotation_dir, training_fnames, relationshi
         # append np.array(subj_bbox, obj_bbox) to the appropriate relationship
         assigned = False
         rel_name = relationship_cfg['name']
-        for rel in rel_data['components']:
+        for rel in relationship_cfg['components']:
             sub_class = rel['subject']
             obj_class = rel['object']
             
@@ -79,6 +80,7 @@ def get_annotations(situation_name, annotation_dir, training_fnames, relationshi
                 continue
             
             assigned = True
+            print('    reading {}'.format(fname))
             for bbox_pair in bboxes:
                 # check for the situation where we need to fix the annotation
                 if sub_class not in bbox_pair or obj_class not in bbox_pair:
@@ -466,7 +468,7 @@ def get_cfg():
             fq_training_fnames.append(os.path.join(annotation_dir, fname))
         rel_training_fnames[rel['name']] = fq_training_fnames
     
-    return json_fname, annotation_dir, rel_training_fnames, int(args.n_components), args.out_fname, args.neg_method
+    return json_fname, rel_training_fnames, int(args.n_components), args.out_fname, args.neg_method
 
 
 
@@ -474,13 +476,12 @@ def get_cfg():
 if __name__ == '__main__':
     cfg = get_cfg()
     json_cfg = cfg[0]
-    annotation_dir = cfg[1]
-    training_fnames = cfg[2]
-    n_components = cfg[3]
-    out_fname = cfg[4]
-    neg_method = cfg[5]
+    training_fnames = cfg[1]
+    n_components = cfg[2]
+    out_fname = cfg[3]
+    neg_method = cfg[4]
     
-    gmm = gen_gmms(json_cfg, annotation_dir, training_fnames, neg_method, n_components)
+    gmm = gen_gmms(json_cfg, training_fnames, neg_method, n_components)
     print('GMMs trained and calibrated')
     if out_fname is not None:
         save_gmms(gmm, out_fname)
