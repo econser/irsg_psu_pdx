@@ -42,6 +42,11 @@ f = open('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonHasBeard
 for fname in anno_fnames:
    f.write('{}\n'.format(fname))
 f.close()
+
+
+-- execute
+python gen_configs.py --cfg 'mvg_PersonHasBeard.json'
+python irsg_situation.py --cfg ./configs/configs_MVG_PHB.yml --b GEN_BBOXES
 '''
 #===============================================================================
 def get_cfg():
@@ -52,7 +57,6 @@ def get_cfg():
     
     json_fname = args.json_cfg
     f = open(json_fname, 'rb')
-    import pdb; pdb.set_trace()
     json_cfg = j.load(f)
     
     return [json_cfg]
@@ -63,15 +67,10 @@ if __name__ == '__main__':
     cfg = get_cfg()
     json_cfg = cfg[0]
 
-    # bail out if cfg is not complete
-    import pdb; pdb.set_trace()
-    if not 'MODEL_SHORT_NAME' in json_cfg:
-        sys.exit('Missing MODEL_SHORT_NAME')
-
     # search and replace in template file
-    template_dict = json_cfg['template_vals']
-    
+    template_dict = json_cfg['search_and_replace']
     snr_keys = template_dict.keys()
+    
     srcdir = '/home/econser/research/irsg_psu_pdx/utils/query_prep'
     destdir = '/home/econser/research/irsg_psu_pdx/utils/query_prep/out'
     fname_tup = (os.path.join(srcdir, 'configs'), os.path.join(destdir, 'configs'), 'configs_nobrute_TEMPLATE.yml')

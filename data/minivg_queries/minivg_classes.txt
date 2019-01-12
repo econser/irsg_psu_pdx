@@ -1,0 +1,9 @@
+person
+beard
+bench
+horse
+skateboard
+helmet
+sunglasses
+pillow
+couch

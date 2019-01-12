@@ -14,7 +14,7 @@ TEST_PGM_ENERGY:
   data_dir : './data'
   #
   image_dir : '<IMAGE_DIR>'
-  precalc_dir : '<CSV_DIR>'
+  precalc_dir : '<BBOX_DIR>'
   imageset_file : '<IMAGESET_FNAME>'
   class_file : '<CLASS_FNAME>'
   #
@@ -30,7 +30,7 @@ TEST_PGM_VIZ:
   data_dir : './data/'
   #
   image_dir : '<IMAGE_DIR>'
-  precalc_dir : '<CSV_DIR>'
+  precalc_dir : '<BBOX_DIR>'
   imageset_file : '<IMAGESET_FNAME>'
   class_file : '<CLASS_FNAME>'
   #
@@ -51,7 +51,7 @@ TEST_GEO_ENERGY:
   data_dir : './data/'
   #
   image_dir : '<IMAGE_DIR>'
-  precalc_dir : '<CSV_DIR>'
+  precalc_dir : '<BBOX_DIR>'
   imageset_file : '<IMAGESET_FNAME>'
   class_file : '<CLASS_FNAME>'
   #
@@ -67,7 +67,7 @@ TEST_GEO_VIZ:
   data_dir : './data/'
   #
   image_dir : '<IMAGE_DIR>'
-  precalc_dir : '<CSV_DIR>'
+  precalc_dir : '<BBOX_DIR>'
   imageset_file : '<IMAGESET_FNAME>'
   class_file : '<CLASS_FNAME>'
   #
@@ -87,4 +87,4 @@ BBOX_FULLPOS:
   model_file : '<RCNN_MODEL_DEF>'
   weights : '<RCNN_MODEL_WEIGHTS>'
   class_file : '<CLASS_FNAME>'
-  box_and_score_output_dir : '<CSV_OUTDIR>'
+  box_and_score_output_dir : '<BBOX_DIR>'
