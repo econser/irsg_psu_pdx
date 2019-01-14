@@ -15,7 +15,6 @@ TEST_PGM_ENERGY:
   #
   image_dir : '<IMAGE_DIR>'
   precalc_dir : '<BBOX_DIR>'
-  imageset_file : '<IMAGESET_FNAME>'
   class_file : '<CLASS_FNAME>'
   #
   energy_output_dir : '<OUTDIR>/pgm_energy'
@@ -31,7 +30,6 @@ TEST_PGM_VIZ:
   #
   image_dir : '<IMAGE_DIR>'
   precalc_dir : '<BBOX_DIR>'
-  imageset_file : '<IMAGESET_FNAME>'
   class_file : '<CLASS_FNAME>'
   #
   viz_output_dir : '<OUTDIR>/pgm_viz'
@@ -81,7 +79,7 @@ TEST_GEO_VIZ:
 # BBOX GENERATION CONFIGS
 #===============================================================================
 
-BBOX_FULLPOS:
+GEN_BBOXES:
   data_dir : './data/'
   image_dir : '<IMAGE_DIR>'
   model_file : '<RCNN_MODEL_DEF>'

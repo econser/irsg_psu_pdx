@@ -1,16 +1,16 @@
 {
+    "config_fname" : "configs_mvg_PersonHasBeard.yml",
     "search_and_replace" : {
 	"MODEL_NAME" : "Person Has Beard",
 	"MODEL_SHORT_NAME" : "MVG_PHB",
         "QUERY_STR" : "person has beard",
 	"QUERY_FN" : "sro",
 	"RELATION_FNAME" : "minivg_gmms.pkl",
-	"IMAGE_DIR" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonHasBeardTrain",
-	"IMAGESET_FNAME" : "/home/econser/research/irsg_psu_pdx/minivg_queries/PersonHasBeardTrainSet.txt",
+	"IMAGE_DIR" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet",
 	"CLASS_FNAME" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt",
-	"BBOX_DIR" : "/home/econser/research/irsg_psu_pdx/run_results/minivg_PersonHasBeard",
-	"OUTDIR" : "/home/econser/research/irsg_psu_pdx/output/full_runs/mvg_PersonHasBeard",
-	"RCNN_MODEL_DEF" : "/home/econser/research/irsg_psu_pdx/models/model_definitions/mini_vg",
-	"RCNN_MODEL_WEIGHTS" : "/home/econser/research/irsg_psu_pdx/models/model_weights"
+	"BBOX_DIR" : "/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet",
+	"OUTDIR" : "/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonHasBeard",
+	"RCNN_MODEL_DEF" : "/home/econser/research/irsg_psu_pdx/models/model_definitions/mini_vg/faster_rcnn_end2end/test.prototxt",
+	"RCNN_MODEL_WEIGHTS" : "/home/econser/research/irsg_psu_pdx/models/model_weights/minivg_1M.caffemodel"
     }
 }

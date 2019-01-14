@@ -39,14 +39,67 @@ mvg_PillowOnCouch.json
 import os
 fnames = os.listdir('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonHasBeardTrain')
 f = open('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonHasBeardTrain_fnames.txt', 'wb')
-for fname in anno_fnames:
+for fname in fnames:
    f.write('{}\n'.format(fname))
+
 f.close()
+
+fnames = os.listdir('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnBenchTrain')
+f = open('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnBenchTrain_fnames.txt', 'wb')
+for fname in fnames:
+   f.write('{}\n'.format(fname))
+
+f.close()
+
+fnames = os.listdir('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnHorseTrain')
+f = open('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnHorseTrain_fnames.txt', 'wb')
+for fname in fnames:
+   f.write('{}\n'.format(fname))
+
+f.close()
+
+fnames = os.listdir('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnSkateboardTrain')
+f = open('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnSkateboardTrain_fnames.txt', 'wb')
+for fname in fnames:
+   f.write('{}\n'.format(fname))
+
+f.close()
+
+fnames = os.listdir('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingHelmetTrain')
+f = open('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingHelmetTrain_fnames.txt', 'wb')
+for fname in fnames:
+   f.write('{}\n'.format(fname))
+
+f.close()
+
+fnames = os.listdir('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingSunglassesTrain')
+f = open('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingSunglassesTrain_fnames.txt', 'wb')
+for fname in fnames:
+   f.write('{}\n'.format(fname))
+
+f.close()
+
+fnames = os.listdir('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PillowOnCouchTrain')
+f = open('/home/econser/research/irsg_psu_pdx/data/minivg_queries/PillowOnCouchTrain_fnames.txt', 'wb')
+for fname in fnames:
+   f.write('{}\n'.format(fname))
+
+f.close()
+
 
 
 -- execute
 python gen_configs.py --cfg 'mvg_PersonHasBeard.json'
-python irsg_situation.py --cfg ./configs/configs_MVG_PHB.yml --b GEN_BBOXES
+python gen_configs.py --cfg 'mvg_PersonOnBench.json'
+python gen_configs.py --cfg 'mvg_PersonOnHorse.json'
+python gen_configs.py --cfg 'mvg_PersonOnSkateboard.json'
+python gen_configs.py --cfg 'mvg_PersonWearingHelmet.json'
+python gen_configs.py --cfg 'mvg_PersonWearingSunglasses.json'
+python gen_configs.py --cfg 'mvg_PillowOnCouch.json'
+
+
+
+python irsg_situation.py --cfg /home/econser/research/irsg_psu_pdx/scripts/mini_vg/configs_mvg_PersonHasBeard.yml --b GEN_BBOXES
 '''
 #===============================================================================
 def get_cfg():
@@ -89,7 +142,9 @@ if __name__ == '__main__':
     # create output file
     if not os.path.exists(fname_tup[1]):
         os.makedirs(fname_tup[1])
-    out_fname = fname_tup[2].replace('TEMPLATE', template_dict['MODEL_SHORT_NAME'])
+    default_out_fname = fname_tup[2].replace('TEMPLATE', template_dict['MODEL_SHORT_NAME'])
+    out_fname = json_cfg.get('config_fname', default_out_fname)
+    
     print('Generating {}...'.format(out_fname))
     dest_fname = os.path.join(fname_tup[1], out_fname)
     with open(dest_fname, 'wb') as f:

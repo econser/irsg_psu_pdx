@@ -1,0 +1,88 @@
+#===============================================================================
+# Person Wearing Helmet SITUATION CONFIGURATIONS
+#===============================================================================
+
+#===============================================================================
+# IRSG PGM METHOD
+#===============================================================================
+
+TEST_PGM_ENERGY:
+  query_string : 'person wearing helmet'
+  query_function : 'sro'
+  #
+  gmm_filename : 'minivg_gmms.pkl'
+  data_dir : './data'
+  #
+  image_dir : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet'
+  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'
+  class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
+  #
+  energy_output_dir : '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonWearingHelmet/pgm_energy'
+  energy_filename : 'MVG_PWH_pgm_energy.csv'
+  top_rel_filefmt : 'MVG_PWH_pgm_{}.csv'
+
+TEST_PGM_VIZ:
+  query_string : 'person wearing helmet'
+  query_function : 'sro'
+  #
+  gmm_filename : 'minivg_gmms.pkl'
+  data_dir : './data/'
+  #
+  image_dir : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet'
+  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'
+  class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
+  #
+  viz_output_dir : '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonWearingHelmet/pgm_viz'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# GEOMETRIC MEAN METHOD
+#===============================================================================
+
+TEST_GEO_ENERGY:
+  query_string : 'person wearing helmet'
+  query_function : 'sro'
+  #
+  gmm_filename : 'minivg_gmms.pkl'
+  data_dir : './data/'
+  #
+  image_dir : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet'
+  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'
+  imageset_file : '<IMAGESET_FNAME>'
+  class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  energy_output_dir : '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonWearingHelmet/geo_energy'
+  energy_filename : 'MVG_PWH_geo_energy.csv'
+
+TEST_GEO_VIZ:
+  query_string : 'person wearing helmet'
+  query_function : 'sro'
+  #
+  gmm_filename : 'minivg_gmms.pkl'
+  data_dir : './data/'
+  #
+  image_dir : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet'
+  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'
+  imageset_file : '<IMAGESET_FNAME>'
+  class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
+  #
+  energy_method : 'geo_mean'
+  viz_output_dir : '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonWearingHelmet/geo_viz'
+  viz_file_format : '{}.jpg'
+
+
+
+#===============================================================================
+# BBOX GENERATION CONFIGS
+#===============================================================================
+
+GEN_BBOXES:
+  data_dir : './data/'
+  image_dir : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet'
+  model_file : '/home/econser/research/irsg_psu_pdx/models/model_definitions/mini_vg/faster_rcnn_end2end/test.prototxt'
+  weights : '/home/econser/research/irsg_psu_pdx/models/model_weights/minivg_1M.caffemodel'
+  class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
+  box_and_score_output_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'

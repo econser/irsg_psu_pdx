@@ -205,6 +205,54 @@ def r_at_k(pos_energy_file, neg_energy_file, pos_dataset_file='', render_plot=Fa
 
 
 
+def r_at_k_single(energy_file, pos_dataset_fname, render_plot=False):
+    f_pos_csv = open(pos_energy_file, 'rb')
+    
+    pos_image_list = []
+    pos_energy_list = []
+    
+    for row in f_pos_csv.readlines():
+        items = row.split(',')
+        pos_image_list.append(items[0].strip().split('.')[0])
+        pos_energy_list.append(items[1].strip())
+    pos_image_list = pos_image_list[1:]
+    pos_energy_list = pos_energy_list[1:]
+    
+    keep_ixs = np.arange(len(pos_image_list))
+    if len(pos_dataset_file) != 0:
+        f_dataset = open(pos_dataset_file, 'rb')
+        dataset = f_dataset.readlines()
+        dataset = [item.split('.')[0] for item in dataset]
+        
+        keep_ixs = []
+        for ix, pos_img in enumerate(pos_image_list):
+            if pos_img in dataset:
+                keep_ixs.append(ix)
+    
+    pos_energies = np.array(pos_energy_list, dtype=np.float)[keep_ixs]
+    pos_energies.sort()
+    
+    neg_energies = np.genfromtxt(neg_energy_file, skip_header=True)
+    neg_energies = neg_energies[:,1]
+    neg_energies.sort()
+    n_negatives = len(neg_energies)
+    
+    #import pdb; pdb.set_trace()
+    ranks = np.searchsorted(neg_energies, pos_energies)
+    ranks = ranks + 1 # searchsorted returns a 0-based value
+    
+    recalls = get_recalls(ranks, n_negatives)
+    avg_recall = np.average(recalls, axis=0)
+    if render_plot:
+        r_at_k_plot(avg_recall)
+    
+    k = np.arange(n_negatives)+1
+    k = k[:, np.newaxis]
+    ratk_out = np.hstack((k , avg_recall[:, np.newaxis]))
+    return ratk_out
+
+
+
 """
 import plot_utils as p
 import numpy as np

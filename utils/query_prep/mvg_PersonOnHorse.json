@@ -1,0 +1,16 @@
+{
+    "config_fname" : "configs_mvg_PersonOnHorse.yml",
+    "search_and_replace" : {
+	"MODEL_NAME" : "Person On Horse",
+	"MODEL_SHORT_NAME" : "MVG_POH",
+        "QUERY_STR" : "person on horse",
+	"OUTDIR" : "/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonOnHorse",
+	"QUERY_FN" : "sro",
+	"RELATION_FNAME" : "minivg_gmms.pkl",
+	"IMAGE_DIR" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet",
+	"CLASS_FNAME" : "/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt",
+	"BBOX_DIR" : "/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet",
+	"RCNN_MODEL_DEF" : "/home/econser/research/irsg_psu_pdx/models/model_definitions/mini_vg/faster_rcnn_end2end/test.prototxt",
+	"RCNN_MODEL_WEIGHTS" : "/home/econser/research/irsg_psu_pdx/models/model_weights/minivg_1M.caffemodel"
+    }
+}
