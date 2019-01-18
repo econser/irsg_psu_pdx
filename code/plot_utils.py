@@ -205,47 +205,156 @@ def r_at_k(pos_energy_file, neg_energy_file, pos_dataset_file='', render_plot=Fa
 
 
 
-def r_at_k_single(energy_file, pos_dataset_fname, render_plot=False):
-    f_pos_csv = open(pos_energy_file, 'rb')
+"""
+ep = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonHasBeard/pgm_energy/MVG_PHB_pgm_energy.csv'
+eg = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonHasBeard/geo_energy/MVG_PHB_geo_energy.csv'
+d = '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonHasBeardTest'
+ratk_p = pu.r_at_k_single(ep, d, plot_fname='/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/phb_pgm.png')
+ratk_p = pu.r_at_k_single(eg, d, plot_fname='/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/phb_geo.png')
+"""
+def run_minivg_data():
+    import os
     
-    pos_image_list = []
-    pos_energy_list = []
+    labels = [
+        ('PersonHasBeard', 'phb'),
+        ('PersonOnBench' , 'pob'),
+        ('PersonOnHorse', 'poh'),
+        ('PersonOnSkateboard', 'pos'),
+        ('PersonWearingHelmet', 'pwh'),
+        ('PersonWearingSunglasses', 'pws'),
+        ('PillowOnCouch', 'poc')
+    ]
     
-    for row in f_pos_csv.readlines():
-        items = row.split(',')
-        pos_image_list.append(items[0].strip().split('.')[0])
-        pos_energy_list.append(items[1].strip())
-    pos_image_list = pos_image_list[1:]
-    pos_energy_list = pos_energy_list[1:]
-    
-    keep_ixs = np.arange(len(pos_image_list))
-    if len(pos_dataset_file) != 0:
-        f_dataset = open(pos_dataset_file, 'rb')
-        dataset = f_dataset.readlines()
-        dataset = [item.split('.')[0] for item in dataset]
+    datasets = [
+        '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonHasBeardTest',
+        '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnBenchTest',
+        '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnHorseTest',
+        '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonOnSkateboardTest',
+        '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingHelmetTest',
+        '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonWearingSunglassesTest',
+        '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PillowOnCouchTest'
+    ]
+
+    es_pgm = [
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonHasBeard/pgm_energy/MVG_PHB_pgm_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonOnBench/pgm_energy/MVG_POB_pgm_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonOnHorse/pgm_energy/MVG_POH_pgm_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonOnSkateboard/pgm_energy/MVG_POS_pgm_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonWearingHelmet/pgm_energy/MVG_PWH_pgm_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonWearingSunglasses/pgm_energy/MVG_PWS_pgm_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PillowOnCouch/pgm_energy/MVG_POC_pgm_energy.csv'
+    ]
+
+    es_geo = [
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonHasBeard/geo_energy/MVG_PHB_geo_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonOnBench/geo_energy/MVG_POB_geo_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonOnHorse/geo_energy/MVG_POH_geo_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonOnSkateboard/geo_energy/MVG_POS_geo_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonWearingHelmet/geo_energy/MVG_PWH_geo_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonWearingSunglasses/geo_energy/MVG_PWS_geo_energy.csv',
+        '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PillowOnCouch/geo_energy/MVG_POC_geo_energy.csv'
+    ]
+
+    ratks = []
+    for i in range(len(datasets)):
+        long_label = labels[i][0]
+        short_label = labels[i][1]
         
-        keep_ixs = []
-        for ix, pos_img in enumerate(pos_image_list):
-            if pos_img in dataset:
-                keep_ixs.append(ix)
+        plotname = '{}_pgm.png'.format(short_label)
+        basedir = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg'
+        plotname = os.path.join(basedir, plotname)
+        
+        ratk = r_at_k_single(es_pgm[i], datasets[i], plot_fname=plotname)
+        ratks.append(('pgm', long_label, ratk))
+
+    for i in range(len(datasets)):
+        long_label = labels[i][0]
+        short_label = labels[i][1]
+        
+        plotname = '{}_geo.png'.format(short_label)
+        basedir = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg'
+        plotname = os.path.join(basedir, plotname)
+        
+        ratk = r_at_k_single(es_geo[i], datasets[i], plot_fname=plotname)
+        ratks.append(('geo', long_label, ratk))
+
+    return ratks
+
+
+
+def gen_ratk_chart(ratks, k_vals=[1, 2, 5, 10, 25, 100]):
+    out_lines = []
+
+    max_query_len = 0
+    for ratk in ratks:
+        q_len = len(ratk[1])
+        if q_len > max_query_len:
+            max_query_len = q_len
+    modelname_fmt = '{:>' + '{}'.format(max_query_len) + '}'
+    method_fmt = '{:>6}'
     
-    pos_energies = np.array(pos_energy_list, dtype=np.float)[keep_ixs]
+    line = [modelname_fmt.format('Model')]
+    line += [method_fmt.format('Method')]
+    line += map(lambda x:'{:5d}'.format(x), k_vals)
+    out_lines.append(line)
+    
+    for ratk in ratks:
+        line = [modelname_fmt.format(ratk[1])]
+        line += [method_fmt.format(ratk[0])]
+        line +=  map(lambda x:'{:0.3f}'.format(x), ratk[2][k_vals][:,1])
+        out_lines.append(line)
+
+    #import pdb; pdb.set_trace()
+    out_lines = map(lambda x : ', '.join(x), out_lines)
+    out_lines = '\n'.join(out_lines)
+    return out_lines
+
+
+def r_at_k_single(energy_file, pos_dataset_fname, render_plot=False, plot_fname=None):
+    energy_csv = open(energy_file, 'rb')
+    with open(pos_dataset_fname, 'rb') as f:
+        pos_fnames = f.readlines()
+        pos_fnames = [x.rstrip() for x in pos_fnames]
+        pos_fnames = [x.split('.')[0] for x in pos_fnames]
+    
+    image_list = []
+    energy_list = []
+    pos_ixs = []
+    neg_ixs = []
+    
+    for ix, row in enumerate(energy_csv.readlines()):
+        if ix == 0:
+            continue
+        
+        items = row.split(',')
+        img_fname = items[0].strip().split('.')[0]
+        
+        image_list.append(img_fname)
+        energy_list.append(items[1].strip())
+        
+        if img_fname in pos_fnames:
+            pos_ixs.append(ix-1)
+        else:
+            neg_ixs.append(ix-1)
+            
+    energy_vals = np.array(energy_list, dtype=np.float)
+    pos_energies = energy_vals[pos_ixs]
     pos_energies.sort()
     
-    neg_energies = np.genfromtxt(neg_energy_file, skip_header=True)
-    neg_energies = neg_energies[:,1]
+    neg_energies = energy_vals[neg_ixs]
     neg_energies.sort()
     n_negatives = len(neg_energies)
     
-    #import pdb; pdb.set_trace()
     ranks = np.searchsorted(neg_energies, pos_energies)
     ranks = ranks + 1 # searchsorted returns a 0-based value
     
     recalls = get_recalls(ranks, n_negatives)
     avg_recall = np.average(recalls, axis=0)
     if render_plot:
+        import pdb; pdb.set_trace()
         r_at_k_plot(avg_recall)
-    
+    if plot_fname is not None:
+        r_at_k_plot(avg_recall, plot_fname, x_limit=100)
     k = np.arange(n_negatives)+1
     k = k[:, np.newaxis]
     ratk_out = np.hstack((k , avg_recall[:, np.newaxis]))
