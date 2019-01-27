@@ -260,22 +260,24 @@ def run_minivg_data():
         long_label = labels[i][0]
         short_label = labels[i][1]
         
-        plotname = '{}_pgm.png'.format(short_label)
         basedir = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg'
-        plotname = os.path.join(basedir, plotname)
+        plotname = os.path.join(basedir, '{}_pgm.png'.format(short_label))
+        ratkcsv_fname = os.path.join(basedir, '{}_pgm.csv'.format(short_label))
         
         ratk = r_at_k_single(es_pgm[i], datasets[i], plot_fname=plotname)
+        np.savetxt(ratkcsv_fname, ratk, fmt='%d, %03f')
         ratks.append(('pgm', long_label, ratk))
 
     for i in range(len(datasets)):
         long_label = labels[i][0]
         short_label = labels[i][1]
         
-        plotname = '{}_geo.png'.format(short_label)
         basedir = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg'
-        plotname = os.path.join(basedir, plotname)
+        plotname = os.path.join(basedir, '{}_geo.png'.format(short_label))
+        ratkcsv_fname = os.path.join(basedir, '{}_geo.csv'.format(short_label))
         
         ratk = r_at_k_single(es_geo[i], datasets[i], plot_fname=plotname)
+        np.savetxt(ratkcsv_fname, ratk, fmt='%d, %03f')
         ratks.append(('geo', long_label, ratk))
 
     return ratks

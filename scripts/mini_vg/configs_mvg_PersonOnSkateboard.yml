@@ -14,7 +14,7 @@ TEST_PGM_ENERGY:
   data_dir : './data'
   #
   image_dir : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet'
-  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'
+  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/mvg_test'
   class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
   #
   energy_output_dir : '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonOnSkateboard/pgm_energy'
@@ -29,7 +29,7 @@ TEST_PGM_VIZ:
   data_dir : './data/'
   #
   image_dir : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet'
-  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'
+  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/mvg_test'
   class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
   #
   viz_output_dir : '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonOnSkateboard/pgm_viz'
@@ -49,7 +49,7 @@ TEST_GEO_ENERGY:
   data_dir : './data/'
   #
   image_dir : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet'
-  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'
+  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/mvg_test'
   imageset_file : '<IMAGESET_FNAME>'
   class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
   #
@@ -65,7 +65,7 @@ TEST_GEO_VIZ:
   data_dir : './data/'
   #
   image_dir : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/TestSet'
-  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'
+  precalc_dir : '/home/econser/research/irsg_psu_pdx/run_results/mvg_test'
   imageset_file : '<IMAGESET_FNAME>'
   class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
   #
@@ -85,4 +85,4 @@ GEN_BBOXES:
   model_file : '/home/econser/research/irsg_psu_pdx/models/model_definitions/mini_vg/faster_rcnn_end2end/test.prototxt'
   weights : '/home/econser/research/irsg_psu_pdx/models/model_weights/minivg_1M.caffemodel'
   class_file : '/home/econser/research/irsg_psu_pdx/data/minivg_queries/minivg_classes.txt'
-  box_and_score_output_dir : '/home/econser/research/irsg_psu_pdx/run_results/minivg/TestSet'
+  box_and_score_output_dir : '/home/econser/research/irsg_psu_pdx/run_results/mvg_test'
