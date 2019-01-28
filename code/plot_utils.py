@@ -205,13 +205,6 @@ def r_at_k(pos_energy_file, neg_energy_file, pos_dataset_file='', render_plot=Fa
 
 
 
-"""
-ep = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonHasBeard/pgm_energy/MVG_PHB_pgm_energy.csv'
-eg = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PersonHasBeard/geo_energy/MVG_PHB_geo_energy.csv'
-d = '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PersonHasBeardTest'
-ratk_p = pu.r_at_k_single(ep, d, plot_fname='/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/phb_pgm.png')
-ratk_p = pu.r_at_k_single(eg, d, plot_fname='/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/phb_geo.png')
-"""
 def run_minivg_data():
     import os
     

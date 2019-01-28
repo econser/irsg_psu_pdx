@@ -181,6 +181,32 @@ def get_handshake_scores(box_fn, annotation_file, gmms):
 
 
 
+def get_PillowOnCouch_scores(box_fn, annotation_file, gmms):
+    f = open(annotation_file, 'rb')
+    anno_line = f.readline()
+    f.close()
+    
+    obj_dict = box_fn(anno_line)
+    
+    pillow_bbox = obj_dict['Pillow_1']
+    couch_bbox = obj_dict['Couch_1']
+    
+    ret_dict = {}
+    
+    # get 'pillow on couch' score
+    relation_key = 'on'
+    
+    ret_dict[relation_key] = []
+    gmm_params = gmms[relation_key]
+    
+    input_vec, pdf, prob = get_relationship_score(gmm_params, pillow_bbox, couch_bbox)
+    rs = RelationScores(relation_key, p1_bbox, handshake_bbox, prob[0], pdf[0], input_vec[0])
+    ret_dict[relation_key].append(rs)
+    
+    return ret_dict
+
+
+
 #===============================================================================
 def parse_args():
     import argparse
@@ -213,6 +239,9 @@ python relation_check.py --model pingpong --gmm_file '/home/econser/School/resea
     
 HANDSHAKE:
 python relation_check.py --model handshake --gmm_file '/home/econser/School/research/data/handshake_gmms.pkl' --anno_dir '/home/econser/School/research/data/Handshake' --output_dir '/home/econser/School/research/output'
+
+PILLOW_ON_COUCH:
+python relation_check.py --model mvg_poc --gmm_file '/home/econser/School/research/data/minivg_gmms.pkl' --anno_dir '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PillowOnCouchTrain' --output_dir '/home/econser/research/irsg_psu_pdx/output/minivg'
 """
 if __name__ == '__main__':
     import irsg_utils as iutl
@@ -222,19 +251,22 @@ if __name__ == '__main__':
     box_fn_map = {
         'dog_walking' : iu.get_dw_boxes,
         'handshake'   : iu.get_hs_bboxes,
-        'pingpong'    : iu.get_pp_bboxes
+        'pingpong'    : iu.get_pp_bboxes,
+        'mvg_poc'     : iu.get_mvg_poc_bboxes
     }
     
     score_fn_map = {
         'dog_walking' : get_dog_walking_scores,
         'handshake'   : get_handshake_scores,
-        'pingpong'    : get_pingpong_scores
+        'pingpong'    : get_pingpong_scores,
+        'mvg_poc'     : get_mvg_PillowOnCouch_scores
     }
     
     rel_map = {
         'dog_walking' : ['holding', 'attached_to', 'walked_by'],
         'handshake'   : ['extending', 'handshaking'],
-        'pingpong'    : ['at', 'on', 'playing_pingpong_with']
+        'pingpong'    : ['at', 'on', 'playing_pingpong_with'],
+        'mvg_poc'     : ['on']
     }
     
     args = parse_args()

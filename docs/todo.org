@@ -1,0 +1,7 @@
+PAPER TODO -*- mode: org -*-
+#+TODO: TODO IN-PROGRESS WAITING DONE
+
+** TODO write paper
+*** TODO check PillowOnCouch
+**** TODO update data from stash
+
