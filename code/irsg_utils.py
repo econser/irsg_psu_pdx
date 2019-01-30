@@ -232,6 +232,13 @@ def get_lh_bboxes(annotation):
 
 
 
+def get_mvg_bboxes(anno):
+    import gen_bboxes as b
+    anno_fn = b.get_bbox_fn('full_minivg', 'labl')
+    return anno_fn(anno)
+
+
+
 """Convert the mat file binary model storage to a more convienent structure for python
     Input:
         binary model mat file name

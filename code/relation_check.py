@@ -186,31 +186,31 @@ def get_PillowOnCouch_scores(box_fn, annotation_file, gmms):
     anno_line = f.readline()
     f.close()
     
-    obj_dict = box_fn(anno_line)
-    
-    pillow_bbox = obj_dict['Pillow_1']
-    couch_bbox = obj_dict['Couch_1']
-    
+    obj_pairs = box_fn(anno_line)
+
     ret_dict = {}
     
-    # get 'pillow on couch' score
-    relation_key = 'on'
-    
+    relation_key = 'pillow_on_couch'
     ret_dict[relation_key] = []
     gmm_params = gmms[relation_key]
     
-    input_vec, pdf, prob = get_relationship_score(gmm_params, pillow_bbox, couch_bbox)
-    rs = RelationScores(relation_key, p1_bbox, handshake_bbox, prob[0], pdf[0], input_vec[0])
-    ret_dict[relation_key].append(rs)
+    for obj_pair in obj_pairs:
+        pillow_bbox = obj_pair['pillow']
+        couch_bbox = obj_pair['couch']
+        
+        # get 'pillow on couch' score
+        input_vec, pdf, prob = get_relationship_score(gmm_params, pillow_bbox, couch_bbox)
+        rs = RelationScores(relation_key, pillow_bbox, couch_bbox, prob[0], pdf[0], input_vec[0])
+        ret_dict[relation_key].append(rs)
     
-    return ret_dict
+    return [ret_dict]
 
 
 
 #===============================================================================
 def parse_args():
     import argparse
-    model_choices = ['dog_walking', 'handshake', 'pingpong']
+    model_choices = ['dog_walking', 'handshake', 'pingpong', 'mvg_poc']
     parser = argparse.ArgumentParser(description='ground truth relation calculation')
     
     parser.add_argument('--model', dest='model', help='which modelset to run', default='dog_walking', choices=model_choices)
@@ -241,7 +241,7 @@ HANDSHAKE:
 python relation_check.py --model handshake --gmm_file '/home/econser/School/research/data/handshake_gmms.pkl' --anno_dir '/home/econser/School/research/data/Handshake' --output_dir '/home/econser/School/research/output'
 
 PILLOW_ON_COUCH:
-python relation_check.py --model mvg_poc --gmm_file '/home/econser/School/research/data/minivg_gmms.pkl' --anno_dir '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PillowOnCouchTrain' --output_dir '/home/econser/research/irsg_psu_pdx/output/minivg'
+python relation_check.py --model mvg_poc --gmm_file '/home/econser/research/irsg_psu_pdx/data/minivg_gmms.pkl' --anno_dir '/home/econser/research/irsg_psu_pdx/data/minivg_queries/PillowOnCouchTrain' --output_dir '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg/PillowOnCouch'
 """
 if __name__ == '__main__':
     import irsg_utils as iutl
@@ -252,21 +252,21 @@ if __name__ == '__main__':
         'dog_walking' : iu.get_dw_boxes,
         'handshake'   : iu.get_hs_bboxes,
         'pingpong'    : iu.get_pp_bboxes,
-        'mvg_poc'     : iu.get_mvg_poc_bboxes
+        'mvg_poc'     : iu.get_mvg_bboxes
     }
     
     score_fn_map = {
         'dog_walking' : get_dog_walking_scores,
         'handshake'   : get_handshake_scores,
         'pingpong'    : get_pingpong_scores,
-        'mvg_poc'     : get_mvg_PillowOnCouch_scores
+        'mvg_poc'     : get_PillowOnCouch_scores
     }
     
     rel_map = {
         'dog_walking' : ['holding', 'attached_to', 'walked_by'],
         'handshake'   : ['extending', 'handshaking'],
         'pingpong'    : ['at', 'on', 'playing_pingpong_with'],
-        'mvg_poc'     : ['on']
+        'mvg_poc'     : ['pillow_on_couch']
     }
     
     args = parse_args()
@@ -308,14 +308,16 @@ if __name__ == '__main__':
     
     for anno_file in anno_files:
         print('running {}'.format(anno_file))
-        score_dict = score_fn(bbox_fn, anno_file, gmms)
-        for key in rel_keys:
-            base_fname = os.path.basename(anno_file)
-            rel_scores = score_dict[key]
-            for score in rel_scores:
-                output_dict[key].append((base_fname, score))
+        score_dicts = score_fn(bbox_fn, anno_file, gmms)
+        for score_dict in score_dicts:
+            for key in rel_keys:
+                base_fname = os.path.basename(anno_file)
+                rel_scores = score_dict[key]
+                for score in rel_scores:
+                    output_dict[key].append((base_fname, score))
     
     # store output
+    import pdb; pdb.set_trace()
     for key in rel_keys:
         outfile = os.path.join(args.output_dir, '{}_{}.csv'.format(model_name, key))
         f = open(outfile, 'wb')

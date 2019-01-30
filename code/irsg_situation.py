@@ -1050,7 +1050,7 @@ if __name__ == '__main__':
     import cPickle
     import irsg_querygen as iqg
     
-    save_pgm_data = False # expermiental feature, needs to be parameterized
+    save_pgm_data = True # expermiental feature, needs to be parameterized
     save_bboxes = False # currently linked to energy generation, paramaterize?
     
     args = parse_args()

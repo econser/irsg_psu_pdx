@@ -72,8 +72,8 @@ class ImageData (object):
 def get_cfg():
     import argparse
     parser = argparse.ArgumentParser(description='Binary Relation generation')
-    parser.add_argument('--model', dest='model_type', choices=['dog_walking', 'stanford_dw', 'pingpong', 'handshake', 'leadinghorse'])
-    parser.add_argument('--dataset', dest='dataset', choices=['postest', 'hardneg', 'fullneg'])
+    parser.add_argument('--model', dest='model_type', choices=['dog_walking', 'stanford_dw', 'pingpong', 'handshake', 'leadinghorse', 'mvg_PillowOnCouch'])
+    parser.add_argument('--dataset', dest='dataset') #, choices=['postest', 'hardneg', 'fullneg'])
     parser.add_argument('--gmm', dest='gmm_fname')
     args = parser.parse_args()
     
@@ -94,52 +94,52 @@ def get_cfg():
             'postest' : os.path.join(BASE_DIR, 'run_results/dw_fullpos/'),
             'hardneg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/'),
             'fullneg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/')
-        }
+            }
         image_dir_map = {
             'postest' : os.path.join(BASE_DIR, 'run_results/dw_fullpos/dog/'),
             'hardneg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/dog/'),
             'fullneg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/dog/')
-        }
+            }
         best_bbox_map = {
             'postest' : os.path.join(BASE_DIR, 'output/full_runs/dog_walking/dw_cycle_postest_pgm_{}_bboxes.csv'),
             'hardneg': os.path.join(BASE_DIR, 'output/full_runs/dog_walking/dw_cycle_hardneg_pgm_{}_bboxes.csv'),
             'fullneg': os.path.join(BASE_DIR, 'output/full_runs/dog_walking/dw_cycle_fullneg_pgm_{}_bboxes.csv')
-        }
+            }
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/dog_walking/')
         imageset_files = {
             'postest': os.path.join(BASE_DIR, 'data/dogwalkingtest_fnames_test.txt'),
             'hardneg': None,
             'fullneg': None
-        }
+            }
         cls_names = ['dog_walker', 'leash', 'dog']
         cls_counts = [1, 1, 1]
         rel_map = {
             'holding' : [('dog_walker', 'leash')],
             'attached_to' : [('leash', 'dog')],
             'walked_by' : [('dog', 'dog_walker')]#, 'is_walking' : [('dog_walker', 'dog')]
-        }
+            }
     elif model_type == 'stanford_dw':
         csv_dir_map = {
             'postest' : os.path.join(BASE_DIR, 'run_results/stanford_dog_walking/'),
             'hardneg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/'),
             'fullneg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/')
-        }
+            }
         image_dir_map = {
             'postest' : os.path.join(BASE_DIR, 'run_results/stanford_dog_walking/dog/'),
             'hardneg' : os.path.join(BASE_DIR, 'run_results/dw_hardneg/dog/'),
             'fullneg' : os.path.join(BASE_DIR, 'run_results/dw_fullneg/dog/')
-        }
+            }
         best_bbox_map = {
             'postest' : os.path.join(BASE_DIR, 'full_runs/stanford_dog_walking/dw_cycle_postest_pgm_{}_bboxes.csv'),
             'hardneg': os.path_join(BASE_DIR, 'full_runs/stanford_dog_walking/dw_cycle_hardneg_pgm_{}_bboxes.csv'),
             'fullneg': os.path_join(BASE_DIR, 'full_runs/stanford_dog_walking/dw_cycle_fullneg_pgm_{}_bboxes.csv')
-        }
+            }
         output_dir = os.path.join(BASE_DIR, 'output/full_runs/stanford_dog_walking/')
         imageset_files = {
             'postest': os.path.join(BASE_DIR, 'data/stanford_fnames_test.txt'),
             'hardneg': None,
             'fullneg': None
-        }
+            }
         cls_names = ['dog_walker', 'leash', 'dog']
         cls_counts = [1, 1, 1]
         rel_map = {
@@ -147,7 +147,7 @@ def get_cfg():
             'attached_to' : [('leash', 'dog')],
             'walked_by' : [('dog', 'dog_walker')],
             'is_walking' : [('dog_walker', 'dog')]
-        }
+            }
     elif model_type == 'pingpong':
         csv_dir_map = {
             'postest' : os.path.join(BASE_DIR, 'run_results/pingpong/'),
@@ -234,6 +234,168 @@ def get_cfg():
             'attached_to' : [('lead', 'horse')],
             'is_leading' : [('horse-leader', 'horse')]
         }
+    #===========================================================================
+    elif model_type == 'mvg_PersonHasBeard':
+        csv_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/')
+        }
+        image_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/pillow/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/pillow/')
+        }
+        best_bbox_map = {
+            'train' : os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonHasBeard/pgm_energy/MVG_PHB_pgm_{}_bboxes.csv'),
+            'test': os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonHasBeard/pgm_energy/MVG_PHB_pgm_{}_bboxes.csv')
+        }
+        output_dir = os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonHasBeard/')
+        imageset_files = {
+            'mixed': 'data/minivg_queries/PersonHasBeardTest'
+        }
+        cls_names = ['person', 'beard']
+        cls_counts = [1, 1]
+        rel_map = {
+            'person_has_beard' : [('person', 'beard')]
+        }
+    #===========================================================================
+    elif model_type == 'mvg_PersonOnBench':
+        csv_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/')
+            }
+        image_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/pillow/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/pillow/')
+            }
+        best_bbox_map = {
+            'train' : os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonOnBench/pgm_energy/MVG_POB_pgm_{}_bboxes.csv'),
+            'test': os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonHasBeard/pgm_energy/MVG_POB_pgm_{}_bboxes.csv')
+            }
+        output_dir = os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonOnBench/')
+        imageset_files = {
+            'mixed': 'data/minivg_queries/PersonOnBenchTest'
+            }
+        cls_names = ['person', 'bench']
+        cls_counts = [1, 1]
+        rel_map = {
+            'person_on_bench' : [('person', 'bench')]
+            }
+    #===========================================================================
+    elif model_type == 'mvg_PersonOnHorse':
+        csv_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/')
+            }
+        image_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/pillow/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/pillow/')
+            }
+        best_bbox_map = {
+            'train' : os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonOnHorse/pgm_energy/MVG_POH_pgm_{}_bboxes.csv'),
+            'test': os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonHasBeard/pgm_energy/MVG_POH_pgm_{}_bboxes.csv')
+            }
+        output_dir = os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonOnHorse/')
+        imageset_files = {
+            'mixed': 'data/minivg_queries/PersonOnHorseTest'
+            }
+        cls_names = ['person', 'horse']
+        cls_counts = [1, 1]
+        rel_map = {
+            'person_on_horse' : [('person', 'horse')]
+            }
+    #===========================================================================
+    elif model_type == 'mvg_PersonOnSkateboard':
+        csv_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/')
+            }
+        image_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/pillow/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/pillow/')
+            }
+        best_bbox_map = {
+            'train' : os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonOnSkateboard/pgm_energy/MVG_POS_pgm_{}_bboxes.csv'),
+            'test': os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonHasBeard/pgm_energy/MVG_POS_pgm_{}_bboxes.csv')
+            }
+        output_dir = os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonOnSkateboard/')
+        imageset_files = {
+            'mixed': 'data/minivg_queries/PersonOnSkateboardTest'
+            }
+        cls_names = ['person', 'skateboard']
+        cls_counts = [1, 1]
+        rel_map = {
+            'person_on_skateboard' : [('person', 'skateboard')]
+            }
+    #===========================================================================
+    elif model_type == 'mvg_PersonWearingHelmet':
+        csv_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/')
+            }
+        image_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/pillow/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/pillow/')
+            }
+        best_bbox_map = {
+            'train' : os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonWearingHelmet/pgm_energy/MVG_PWH_pgm_{}_bboxes.csv'),
+            'test': os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonWearingHelmet/pgm_energy/MVG_PWH_pgm_{}_bboxes.csv')
+            }
+        output_dir = os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonWearingHelmet/')
+        imageset_files = {
+            'mixed': 'data/minivg_queries/PersonWearingHelmetTest'
+            }
+        cls_names = ['person', 'helmet']
+        cls_counts = [1, 1]
+        rel_map = {
+            'person_wearing_helmet' : [('person', 'helmet')]
+            }
+    #===========================================================================
+    elif model_type == 'mvg_PersonWearingSunglasses':
+        csv_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/')
+            }
+        image_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/pillow/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/pillow/')
+            }
+        best_bbox_map = {
+            'train' : os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonWearingSunglasses/pgm_energy/MVG_PWS_pgm_{}_bboxes.csv'),
+            'test': os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonWearingSunglasses/pgm_energy/MVG_PWS_pgm_{}_bboxes.csv')
+            }
+        output_dir = os.path.join(BASE_DIR, 'output/full_runs/minivg/PersonWearingSunglasses/')
+        imageset_files = {
+            'mixed': 'data/minivg_queries/PersonWearingSunglassesTest'
+            }
+        cls_names = ['person', 'sunglasses']
+        cls_counts = [1, 1]
+        rel_map = {
+            'person_wearing_sunglasses' : [('person', 'sunglasses')]
+            }
+    #===========================================================================
+    elif model_type == 'mvg_PillowOnCouch':
+        csv_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/')
+        }
+        image_dir_map = {
+            'train' : os.path.join(BASE_DIR, 'run_results/mvg_train/pillow/'),
+            'test' : os.path.join(BASE_DIR, 'run_results/mvg_test/pillow/')
+        }
+        best_bbox_map = {
+            'train' : os.path.join(BASE_DIR, 'output/full_runs/minivg/PillowOnCouch/pgm_energy/MVG_POC_pgm_{}_bboxes.csv'),
+            'test': os.path.join(BASE_DIR, 'output/full_runs/minivg/PillowOnCouch/pgm_energy/MVG_POC_pgm_{}_bboxes.csv')
+        }
+        output_dir = os.path.join(BASE_DIR, 'output/full_runs/minivg/PillowOnCouch/')
+        imageset_files = {
+            'mixed': 'data/minivg_queries/PillowOnCouchTest'
+        }
+        cls_names = ['pillow', 'couch']
+        cls_counts = [1, 1]
+        rel_map = {
+            'pillow_on_couch' : [('pillow', 'couch')]
+        }
+    #===========================================================================
     else:
         pass
     
@@ -282,8 +444,6 @@ if __name__ == '__main__':
         imageset = os.listdir(image_dir)
         imageset = filter(lambda x: '.csv' in x, imageset)
     imageset = [fname.split('.')[0] for fname in imageset]
-    #imageset = ['dog-walking394']
-    #imageset = ['5462007065_b94d86008a_b']
     n_images = len(imageset)
     
     # get the gmms
