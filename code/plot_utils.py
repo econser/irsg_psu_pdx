@@ -252,24 +252,22 @@ def run_minivg_data():
     for i in range(len(datasets)):
         long_label = labels[i][0]
         short_label = labels[i][1]
-        
         basedir = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg'
-        plotname = os.path.join(basedir, '{}_pgm.png'.format(short_label))
+        #plotname = os.path.join(basedir, '{}_pgm.png'.format(short_label))
         ratkcsv_fname = os.path.join(basedir, '{}_pgm.csv'.format(short_label))
         
-        ratk = r_at_k_single(es_pgm[i], datasets[i], plot_fname=plotname)
+        ratk = r_at_k_single(es_pgm[i], datasets[i])
         np.savetxt(ratkcsv_fname, ratk, fmt='%d, %03f')
         ratks.append(('pgm', long_label, ratk))
 
     for i in range(len(datasets)):
         long_label = labels[i][0]
         short_label = labels[i][1]
-        
         basedir = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg'
-        plotname = os.path.join(basedir, '{}_geo.png'.format(short_label))
+        #plotname = os.path.join(basedir, '{}_geo.png'.format(short_label))
         ratkcsv_fname = os.path.join(basedir, '{}_geo.csv'.format(short_label))
         
-        ratk = r_at_k_single(es_geo[i], datasets[i], plot_fname=plotname)
+        ratk = r_at_k_single(es_geo[i], datasets[i])
         np.savetxt(ratkcsv_fname, ratk, fmt='%d, %03f')
         ratks.append(('geo', long_label, ratk))
 
@@ -278,8 +276,16 @@ def run_minivg_data():
 
 
 def gen_minivg_ratk_plots(ratks, outdir):
+    import os
+    
+    if len(ratks) == 1:
+        r_at_k_plot(ratks[0], filename=plot_fname)
+        return
+
     querynames = ['PersonHasBeard', 'PersonOnBench', 'PersonOnHorse', 'PersonOnSkateboard', 'PersonWearingHelmet', 'PersonWearingSunglasses', 'PillowOnCouch']
     methodnames = ['pgm', 'geo']
+
+    # TODO: plot each singl series (query, method)
     
     # gen the query plots (each query with both methods)
     for queryname in querynames:
@@ -290,7 +296,7 @@ def gen_minivg_ratk_plots(ratks, outdir):
                     tup = (dset[0],dset[2])
                     series.append(tup)
             # gen plotname
-            plot_fname = ''.format()
+            plot_fname = '{}_ratk.png'.format(methodname)
             plot_fname = os.path.join(outdir, plot_fname)
             
             # plot the list of data
@@ -305,7 +311,11 @@ def gen_minivg_ratk_plots(ratks, outdir):
                     tup = (dset[1], dset[2])
                     series.append(tup)
             # gen plotname
+            plot_fname = '{}_ratk.png'.format(methodname)
+            plot_fname = os.path.join(outdir, plot_fname)
+            
             # plot the list of data
+            r_at_k_plots(series, plot_fname)
 
     # plot everything
     for methodname in methodnames:
@@ -313,14 +323,14 @@ def gen_minivg_ratk_plots(ratks, outdir):
         for queryname in querynames:
             for set in ratks:
                 if dset[0] == methodname and dset[1] == queryname:
-                    label = '{}_{}'.format(dset[0], dest[1])
+                    label = '{}_{}'.format(dset[0], dset[1])
                     tup = (label, dset[2])
                     series.append(tup)
-    
-    if len(ratks) == 1:
-        r_at_k_plot(ratks[0][:,1], filename=plot_fname)
-    else:
-        r_at_k_plots(
+        plot_fname = 'all.png'
+        plot_fname = os.path.join(outdir, plot_fname)
+
+        # plot the list of data
+        r_at_k_plots(series, plot_fname)
     
     
 
@@ -352,62 +362,8 @@ def gen_ratk_chart(ratks, k_vals=[1, 2, 5, 10, 25, 100]):
     return out_lines
 
 
-"""
-each dataset: (energy_csv_fname, series_name)
-"""
-def r_at_k_single(datasets, plot_fname=None):
-    energy_csv = open(energy_file, 'rb')
-    with open(pos_dataset_fname, 'rb') as f:
-        pos_fnames = f.readlines()
-        pos_fnames = [x.rstrip() for x in pos_fnames]
-        pos_fnames = [x.split('.')[0] for x in pos_fnames]
-    
-    image_list = []
-    energy_list = []
-    pos_ixs = []
-    neg_ixs = []
-    
-    for ix, row in enumerate(energy_csv.readlines()):
-        if ix == 0:
-            continue
-        
-        items = row.split(',')
-        img_fname = items[0].strip().split('.')[0]
-        
-        image_list.append(img_fname)
-        energy_list.append(items[1].strip())
-        
-        if img_fname in pos_fnames:
-            pos_ixs.append(ix-1)
-        else:
-            neg_ixs.append(ix-1)
-            
-    energy_vals = np.array(energy_list, dtype=np.float)
-    pos_energies = energy_vals[pos_ixs]
-    pos_energies.sort()
-    
-    neg_energies = energy_vals[neg_ixs]
-    neg_energies.sort()
-    n_negatives = len(neg_energies)
-    
-    ranks = np.searchsorted(neg_energies, pos_energies)
-    ranks = ranks + 1 # searchsorted returns a 0-based value
-    
-    recalls = get_recalls(ranks, n_negatives)
-    avg_recall = np.average(recalls, axis=0)
-    if render_plot:
-        import pdb; pdb.set_trace()
-        r_at_k_plot(avg_recall)
-    if plot_fname is not None:
-        r_at_k_plot(avg_recall, plot_fname, x_limit=100)
-    k = np.arange(n_negatives)+1
-    k = k[:, np.newaxis]
-    ratk_out = np.hstack((k , avg_recall[:, np.newaxis]))
-    return ratk_out
 
-
-
-def r_at_k_single_(energy_file, pos_dataset_fname, render_plot=False, plot_fname=None):
+def r_at_k_single(energy_file, pos_dataset_fname):
     energy_csv = open(energy_file, 'rb')
     with open(pos_dataset_fname, 'rb') as f:
         pos_fnames = f.readlines()
