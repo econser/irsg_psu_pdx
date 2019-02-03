@@ -252,7 +252,6 @@ def run_minivg_data():
     for i in range(len(datasets)):
         long_label = labels[i][0]
         short_label = labels[i][1]
-        
         basedir = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg'
         #plotname = os.path.join(basedir, '{}_pgm.png'.format(short_label))
         ratkcsv_fname = os.path.join(basedir, '{}_pgm.csv'.format(short_label))
@@ -264,7 +263,6 @@ def run_minivg_data():
     for i in range(len(datasets)):
         long_label = labels[i][0]
         short_label = labels[i][1]
-        
         basedir = '/home/econser/research/irsg_psu_pdx/output/full_runs/minivg'
         #plotname = os.path.join(basedir, '{}_geo.png'.format(short_label))
         ratkcsv_fname = os.path.join(basedir, '{}_geo.csv'.format(short_label))
@@ -281,7 +279,7 @@ def gen_minivg_ratk_plots(ratks, outdir):
     import os
     querynames = ['PersonHasBeard', 'PersonOnBench', 'PersonOnHorse', 'PersonOnSkateboard', 'PersonWearingHelmet', 'PersonWearingSunglasses', 'PillowOnCouch']
     methodnames = ['pgm', 'geo']
-    
+
     # gen the query plots (each query with both methods)
     for queryname in querynames:
         series = []
@@ -329,6 +327,11 @@ def gen_minivg_ratk_plots(ratks, outdir):
         r_at_k_plot(ratks[0][:,1], filename=plot_fname)
     else:
         r_at_k_plots(series, filename=plot_fname)
+        plot_fname = 'all.png'
+        plot_fname = os.path.join(outdir, plot_fname)
+
+        # plot the list of data
+        r_at_k_plots(series, plot_fname)
     
     
 
@@ -363,7 +366,7 @@ def gen_ratk_chart(ratks, k_vals=[1, 2, 5, 10, 25, 100]):
 """
 each dataset: (energy_csv_fname, series_name)
 """
-def r_at_k_single(energy_file, pos_dataset_fname, render_plot=False, plot_fname=None):
+def r_at_k_single(energy_file, pos_dataset_fname):
     energy_csv = open(energy_file, 'rb')
     with open(pos_dataset_fname, 'rb') as f:
         pos_fnames = f.readlines()
